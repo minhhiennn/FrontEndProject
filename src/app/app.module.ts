@@ -1,22 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
-import { HomeComponent } from './home/home.component';
-import { ShopComponent } from './shop/shop.component';
-import { LoginComponent } from './login/login.component';
-import { BlogListComponent } from './blog-list/blog-list.component';
-import { BlogSingleComponent } from './blog-single/blog-single.component';
-import { ContactComponent } from './contact/contact.component';
-import { Page404Component } from './page404/page404.component';
-import { CartComponent } from './cart/cart.component';
-import { CheckoutComponent } from './checkout/checkout.component';
+import { HeaderComponent } from './component/share/header/header.component';
+import { FooterComponent } from './component/share/footer/footer.component';
+import { LeftSidebarComponent } from './component/share/left-sidebar/left-sidebar.component';
+import { ProductDetailsComponent } from './component/product-details/product-details.component';
+import { HomeComponent } from './component/home/home.component';
+import { ShopComponent } from './component/shop/shop.component';
+import { LoginComponent } from './component/login/login.component';
+import { BlogListComponent } from './component/blog-list/blog-list.component';
+import { BlogSingleComponent } from './component/blog-single/blog-single.component';
+import { ContactComponent } from './component/contact/contact.component';
+import { Page404Component } from './component/page404/page404.component';
+import { CartComponent } from './component/cart/cart.component';
+import { CheckoutComponent } from './component/checkout/checkout.component';
+import { ShopListProductComponent } from './component/shop-list-product/shop-list-product.component';
 
 @NgModule({
   declarations: [
@@ -33,11 +36,14 @@ import { CheckoutComponent } from './checkout/checkout.component';
     ContactComponent,
     Page404Component,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ShopListProductComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'products/:productId', component: ProductDetailsComponent },
