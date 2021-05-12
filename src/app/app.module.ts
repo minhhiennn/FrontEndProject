@@ -20,6 +20,7 @@ import { Page404Component } from './component/page404/page404.component';
 import { CartComponent } from './component/cart/cart.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { ShopListProductComponent } from './component/shop-list-product/shop-list-product.component';
+import { AccountComponent } from './component/account/account.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ShopListProductComponent } from './component/shop-list-product/shop-lis
     Page404Component,
     CartComponent,
     CheckoutComponent,
-    ShopListProductComponent
+    ShopListProductComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,7 @@ import { ShopListProductComponent } from './component/shop-list-product/shop-lis
       { path: '', component: HomeComponent },
       { path: 'products/:productId', component: ProductDetailsComponent },
       { path: 'shop', component: ShopComponent },
+      { path: 'shop/:stringSearch', component: ShopComponent },
       { path: 'login', component: LoginComponent },
       { path: 'blog/blog-list', component: BlogListComponent },
       { path: 'blog/blog-single', component: BlogSingleComponent },

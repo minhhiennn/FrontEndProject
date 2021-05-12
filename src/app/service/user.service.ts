@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/user';
-import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,7 +27,7 @@ export class UserService {
   getCurrentUser() {
     return this.currentUser;
   }
-  setCurrentUser(user: User) {
+  setCurrentUser(user: User | null) {
     this.currentUser = user;
   }
 }
