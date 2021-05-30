@@ -12,6 +12,7 @@ import { LoginComponent } from './Component/login/login.component';
 import { ShopComponent } from './Component/shop/shop.component';
 import { ProductdetailComponent } from './Component/productdetail/productdetail.component';
 import { BlogSingComponent } from './Component/blog-sing/blog-sing.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -26,9 +27,21 @@ import { BlogSingComponent } from './Component/blog-sing/blog-sing.component';
     ProductdetailComponent,
     BlogSingComponent
   ],
+  
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot([
+      { path: '', component:IndexComponent },
+      { path: 'blog', component: BlogComponent },
+      { path: 'blog-sing', component:BlogSingComponent },
+      { path: 'cart', component: CartComponent },
+      { path: 'checkout', component:CheckoutComponent },
+      { path: 'contact', component: ContactUsComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'productdetail', component:ProductdetailComponent },
+      { path: 'shop', component: ShopComponent },
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
