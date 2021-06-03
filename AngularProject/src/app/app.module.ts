@@ -13,6 +13,8 @@ import { ShopComponent } from './Component/shop/shop.component';
 import { ProductdetailComponent } from './Component/productdetail/productdetail.component';
 import { BlogSingComponent } from './Component/blog-sing/blog-sing.component';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './Component/H-F-web/header/header.component';
+import { FooterComponent } from './Component/H-F-web/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { RouterModule } from '@angular/router';
     LoginComponent,
     ShopComponent,
     ProductdetailComponent,
-    BlogSingComponent
+    BlogSingComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   
   imports: [
