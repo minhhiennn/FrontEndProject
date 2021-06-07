@@ -1,39 +1,62 @@
 <!--header-->
 <app-header></app-header>
 <!--/header-->
-<section id="form"><!--form-->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4 col-sm-offset-1">
-                <div class="login-form"><!--login form-->
-                    <h2>Login to your account</h2>
-                    <form action="#">
-                        <input type="text" placeholder="Name" />
-                        <input type="email" placeholder="Email Address" />
-                        <span>
-                            <input type="checkbox" class="checkbox"> 
-                            Keep me signed in
-                        </span>
-                        <button type="submit" class="btn btn-default">Login</button>
-                    </form>
-                </div><!--/login form-->
+<section id="form">
+  <!--form-->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1">
+        <div class="login-form">
+          <!--login form-->
+          <h2>Login to your account</h2>
+          <form action="#" [formGroup]="myForm">
+            <input type="email" placeholder="Email Address" required name="email" formControlName="email" id="email" />
+            <div *ngIf="this.myForm.get('email')?.invalid == true && this.myForm.get('email')?.touched == true"
+                 class="alert alert-danger">
+              Email invalid
             </div>
-            <div class="col-sm-1">
-                <h2 class="or">OR</h2>
+            <input type="password" placeholder="Password" required name="password" formControlName="password" id="password" />
+            <div *ngIf="this.myForm.get('password')?.invalid == true && this.myForm.get('password')?.touched == true"
+                 class="alert alert-danger">
+              Password must contain at least 9 characters
             </div>
-            <div class="col-sm-4">
-                <div class="signup-form"><!--sign up form-->
-                    <h2>New User Signup!</h2>
-                    <form action="#">
-                        <input type="text" placeholder="Name"/>
-                        <input type="email" placeholder="Email Address"/>
-                        <input type="password" placeholder="Password"/>
-                        <button type="submit" class="btn btn-default">Signup</button>
-                    </form>
-                </div><!--/sign up form-->
+            <span>
+              <input type="checkbox" class="checkbox">
+              Keep me signed in
+            </span>
+            <button type="button" class="btn btn-default" (click)="submit()">Login</button>
+          </form>
+        </div><!--/login form-->
+      </div>
+      <div class="col-sm-1">
+        <h2 class="or">OR</h2>
+      </div>
+      <div class="col-sm-4">
+        <div class="signup-form">
+          <!--sign up form-->
+          <h2>New User Signup!</h2>
+          <form action="#" [formGroup]="myForm2">
+            <input type="text" placeholder="Name" required name="name" formControlName="name" />
+            <div *ngIf="this.myForm2.get('name')?.invalid == true && this.myForm2.get('name')?.touched == true"
+                 class="alert alert-danger">
+              Name must contain at least 6 characters
             </div>
-        </div>
+            <input type="email" placeholder="Email Address" required name="email" formControlName="email" />
+            <div *ngIf="this.myForm2.get('email')?.invalid == true && this.myForm2.get('email')?.touched == true"
+                 class="alert alert-danger">
+              Email invalid
+            </div>
+            <input type="password" placeholder="Password" required name="password" formControlName="password" />
+            <div *ngIf="this.myForm2.get('password')?.invalid == true && this.myForm2.get('password')?.touched == true"
+                 class="alert alert-danger">
+              Password must contain at least 9 characters
+            </div>
+            <button type="button" class="btn btn-default" (click)="signUp()">Signup</button>
+          </form>
+        </div><!--/sign up form-->
+      </div>
     </div>
+  </div>
 </section><!--/form-->
 <!--Footer-->
 <app-footer></app-footer>

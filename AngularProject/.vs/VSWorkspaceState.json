@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    "\\src\\app"
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\component",
+    "\\src\\app\\component\\share",
+    "\\src\\app\\component\\share\\left-sidebar"
   ],
+  "SelectedNode": "\\src\\app\\component\\share\\left-sidebar\\left-sidebar.component.ts",
   "PreviewInSolutionExplorer": false
 }
