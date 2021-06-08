@@ -9,7 +9,7 @@
     <div class="product-overlay">
       <div class="overlay-content">
         <h2>{{productItem.price}}</h2>
-        <p [routerLink]="['/products',productItem.id]">{{productItem.name}}</p>
+        <p [routerLink]="['/products']" [queryParams]="{productId:productItem.id}">{{productItem.name}}</p>
         <a [routerLink]="['/cart']" class="btn btn-default add-to-cart" (click)="handleAddToCart()"><i class="fa fa-shopping-cart"></i>Add to cart</a>
       </div>
     </div>
