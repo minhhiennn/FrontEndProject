@@ -60,7 +60,7 @@ import { AgmCoreModule } from '@agm/core';
       { path: '', component: HomeComponent },
       { path: 'products/:productId', component: ProductDetailsComponent },
       { path: 'shop', component: ShopComponent },
-      { path: 'shop/:stringSearch', component: ShopComponent },
+      /*{ path: 'shop/:stringSearch', component: ShopComponent },*/
       { path: 'login', component: LoginComponent },
       { path: 'blog/blog-list', component: BlogListComponent },
       { path: 'blog/blog-single', component: BlogSingleComponent },

@@ -3,10 +3,8 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\component",
-    "\\src\\app\\component\\share",
-    "\\src\\app\\component\\share\\left-sidebar"
+    "\\src\\app\\component"
   ],
-  "SelectedNode": "\\src\\app\\component\\share\\left-sidebar\\left-sidebar.component.ts",
+  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }

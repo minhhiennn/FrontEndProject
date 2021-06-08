@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   Search(stringSearch: string) {
     if (stringSearch != '') {
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/shop/', stringSearch]));
+        this.router.navigate(['/shop'], { queryParams: { search: stringSearch } }));
     }
   }
 }

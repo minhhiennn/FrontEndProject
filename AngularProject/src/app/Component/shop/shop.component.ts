@@ -20,8 +20,8 @@ export class ShopComponent implements OnInit {
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const routeParams = this.route.snapshot.paramMap;
-    const stringSearch = routeParams.get('stringSearch');
+    const routeParams = this.route.snapshot.queryParamMap;
+    const stringSearch = routeParams.get('search');
     if (stringSearch == null) {
       this.products = this.productService.getProducts();
     } else {

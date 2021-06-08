@@ -10,7 +10,7 @@ import { CartItem } from '../../models/cart-item';
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   cartTotal = 0;
-
+    
   constructor(private messageService: MessageService, private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -20,6 +20,7 @@ export class CartComponent implements OnInit {
     //}
     this.cartItems = this.messageService.getItem();
     this.caculateCartTotal();
+    
   }
   increaseByOne(productId: number) {
     for (let i = 0; i < this.cartItems.length; i++) {
