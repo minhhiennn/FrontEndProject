@@ -44,4 +44,16 @@ export class ProductService {
     }
     return productList;
   }
+  getProductsByPriceRange(priceRange: string): Product[] {
+    let productList: Product[] = [];
+    let stringSlipt: string[] = priceRange.split('-');
+    let min: number = Number(stringSlipt[0]);
+    let max: number = Number(stringSlipt[1]);
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].getPrice() >= min && this.products[i].getPrice() <= max) {
+        productList.push(this.products[i]);
+      }
+    }
+    return productList;
+  }
 }

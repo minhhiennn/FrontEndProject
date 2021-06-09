@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Options } from 'ng5-slider';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-left-sidebar',
   templateUrl: './left-sidebar.component.html',
@@ -12,10 +13,15 @@ export class LeftSidebarComponent implements OnInit {
     floor: 0,
     ceil: 100
   };
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
 
   }
 
+  SearchByPrice() {
+    let priceRange: string = this.value + "-" + this.highValue;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/shop'], { queryParams: { priceRange: priceRange } }));
+  }
 }
