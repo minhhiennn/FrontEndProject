@@ -18,10 +18,14 @@
             <app-shop-list-product [productItem]="product"></app-shop-list-product>
           </div>
 
-          <ul class="pagination">
-            <li *ngFor="let i of sizeS" [class.active]="isActive(i)" (click)="onClick(i)" style="cursor:pointer"><a>{{i}}</a></li>
-            <li *ngIf="this.products.length > 0" style="cursor:pointer" (click)="onClick2()"><a>&raquo;</a></li>
+         
+        <ul class="pagination">
+            <li *ngFor="let item of this.products | paginate: { itemsPerPage: 5, currentPage: p }">  </li>
           </ul>
+          
+          
+          <pagination-controls (pageChange)="onClick2($event)"></pagination-controls>
+          
         </div><!--features_items-->
       </div>
     </div>

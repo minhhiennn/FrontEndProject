@@ -12,6 +12,7 @@ export class ProductService {
     //  let product = new Product(products[i].id, products[i].price, products[i].name, products[i].img)
     //  this.products.push(product);
     //}
+    
     this.http.get(this.url).subscribe(((data) => {
       let x: number = Object.values(data).length;
       console.log(x);

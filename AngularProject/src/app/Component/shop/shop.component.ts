@@ -9,14 +9,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
-  pageActive: number = 1;
-  i2: number = 1;
-  sizeS: number[] = [];
-  size: number = 0;
   pageNumber: number = 9;
   start: number = 0;
-  end: number = 9;
+  end: number = 5;
   products: Product[] = [];
+  p: number = 1;
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -30,51 +27,15 @@ export class ShopComponent implements OnInit {
     } else if (stringSearch == null && priceRange == null){
         this.products = this.productService.getProducts();
     }
-    this.size = this.caculatePage();
-    this.getSizeS();
+    
   }
 
-  countAllProduct(): number {
-    return this.products.length;
-  }
-  caculatePage(): number {
-    if (this.countAllProduct() % this.pageNumber == 0) {
-      return Math.floor(this.countAllProduct() / this.pageNumber);
-    } else {
-      return Math.floor(this.countAllProduct() / this.pageNumber) + 1;
-    }
-  }
-  getSizeS() {
-    for (let i = 1; i <= this.size; i++) {
-      this.sizeS.push(i);
-    }
-  }
-  onClick(i: number) {
-    if (i == 1) {
-      this.start = 0;
-      this.end = 9;
-      this.pageActive = 1;
-      this.i2 = 1;
-    } else {
-      this.start = ((this.pageNumber + 1) * i) - 10;
-      this.end = ((this.pageNumber + 1) * i) - 1;
-      this.pageActive = i;
-      this.i2 = i;
-    }
-  }
-  isActive(i: number) {
-    if (this.pageActive === i) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  onClick2() {
-    this.i2++;
-    if (this.i2 <= this.caculatePage()) {
-      this.start = ((this.pageNumber + 1) * this.i2) - 10;
-      this.end = ((this.pageNumber + 1) * this.i2) - 1;
-      this.pageActive = this.i2;
-    }
+  onClick2(p : number) {
+    
+    this.p = p;
+    console.log(p)
+    this.start = (p -1) *5 
+    this.end = this.start + 5;
+    this.ngOnInit()
   }
 }

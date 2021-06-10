@@ -24,6 +24,7 @@ import { ShopListProductComponent } from './component/shop-list-product/shop-lis
 import { AccountComponent } from './component/account/account.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { AgmCoreModule } from '@agm/core';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AgmCoreModule } from '@agm/core';
 
   ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
