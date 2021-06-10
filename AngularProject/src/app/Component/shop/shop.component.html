@@ -14,19 +14,23 @@
         <div class="features_items">
           <!--features_items-->
           <h2 class="title text-center">Features Items</h2>
-          <div class="col-sm-4" *ngFor="let product of products | slice:start:end">
-            <app-shop-list-product [productItem]="product"></app-shop-list-product>
+          <div style=" margin: auto; width: 15%; margin-top: 100px;height:120px" *ngIf="showSpinner == true">
+            <app-loading-spinners></app-loading-spinners>
           </div>
-
-         
-        <ul class="pagination">
-            <li *ngFor="let item of this.products | paginate: { itemsPerPage: 5, currentPage: p }">  </li>
-          </ul>
-          
-          
-          <pagination-controls (pageChange)="onClick2($event)"></pagination-controls>
-          
-        </div><!--features_items-->
+          <div *ngIf="showSpinner == false" style="display:block">
+            <div>
+              <div class="col-sm-4" *ngFor="let product of products | slice:start:end">
+                <app-shop-list-product [productItem]="product"></app-shop-list-product>
+              </div>
+            </div><!--features_items-->
+            <div>
+              <ul class="pagination">
+                <li *ngFor="let item of this.products | paginate: { itemsPerPage: 10, currentPage: p }">  </li>
+              </ul>
+              <pagination-controls (pageChange)="onClick2($event)" class="my-pagination"></pagination-controls>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

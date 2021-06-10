@@ -4,6 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Ng5SliderModule } from 'ng5-slider';
+import { AgmCoreModule } from '@agm/core';
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,9 +25,7 @@ import { CartComponent } from './component/cart/cart.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { ShopListProductComponent } from './component/shop-list-product/shop-list-product.component';
 import { AccountComponent } from './component/account/account.component';
-import { Ng5SliderModule } from 'ng5-slider';
-import { AgmCoreModule } from '@agm/core';
-import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { LoadingSpinnersComponent } from './ui/loading-spinners/loading-spinners.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
     CartComponent,
     CheckoutComponent,
     ShopListProductComponent,
-    AccountComponent
+    AccountComponent,
+    LoadingSpinnersComponent
 
   ],
   imports: [

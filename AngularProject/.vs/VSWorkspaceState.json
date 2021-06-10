@@ -4,10 +4,9 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\component",
-    "\\src\\app\\component\\home",
-    "\\src\\app\\component\\share",
-    "\\src\\app\\component\\share\\left-sidebar"
+    "\\src\\app\\models",
+    "\\src\\app\\service"
   ],
-  "SelectedNode": "\\src\\app\\component\\share\\left-sidebar\\left-sidebar.component.ts",
+  "SelectedNode": "\\src\\app\\service\\message.service.ts",
   "PreviewInSolutionExplorer": false
 }

@@ -8,11 +8,6 @@ export class ProductService {
   products: Product[] = [];
   url = 'https://first-fucking-app-angular.herokuapp.com/products';
   constructor(private http: HttpClient) {
-    //for (let i = 0; i < products.length; i++) {
-    //  let product = new Product(products[i].id, products[i].price, products[i].name, products[i].img)
-    //  this.products.push(product);
-    //}
-    
     this.http.get(this.url).subscribe(((data) => {
       let x: number = Object.values(data).length;
       console.log(x);
@@ -27,34 +22,7 @@ export class ProductService {
   getProducts(): Product[] {
     return this.products;
   }
-  //getProductById(productId: number): Product | null {
-  //  let product: Product | null = null;
-  //  for (let i = 0; i < this.products.length; i++) {
-  //    if (this.products[i].id === productId) {
-  //      product = this.products[i];
-  //    }
-  //  }
-  //  return product;
-  //}
-  getProductsByName(name: string): Product[] {
-    let productList: Product[] = [];
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].getName().toLowerCase().includes(name.toLowerCase())) {
-        productList.push(this.products[i]);
-      }
-    }
-    return productList;
-  }
-  getProductsByPriceRange(priceRange: string): Product[] {
-    let productList: Product[] = [];
-    let stringSlipt: string[] = priceRange.split('-');
-    let min: number = Number(stringSlipt[0]);
-    let max: number = Number(stringSlipt[1]);
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].getPrice() >= min && this.products[i].getPrice() <= max) {
-        productList.push(this.products[i]);
-      }
-    }
-    return productList;
+  getData() {
+    return this.http.get(this.url);
   }
 }
