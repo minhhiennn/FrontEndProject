@@ -1,7 +1,7 @@
 <div class="product-image-wrapper">
   <div class="single-products">
     <div class="productinfo text-center">
-      <img [src]="productItem.img" alt="" />
+      <img [src]="productItem.img" alt="" style="max-height:200px"/>
       <h2>{{productItem.price | currency: 'USD'}}</h2>
       <p>{{productItem.name}}</p>
       <a class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>

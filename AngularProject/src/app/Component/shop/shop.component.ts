@@ -38,8 +38,8 @@ export class ShopComponent implements OnInit {
       this.end = 9;
     } else {
       this.p = p;
-      this.start = ((this.pageNumber + 1) * this.p) - 10;
-      this.end = ((this.pageNumber + 1) * this.p) - 1;
+      this.start = (this.p - 1) * this.pageNumber;
+      this.end = this.start + 9;
     }
   }
   getListProduct() {
