@@ -53,16 +53,18 @@ export class ProductListCommentComponent implements OnInit {
     let text: string = this.myForm1.get('txt')?.value;
     let star: number = this.myForm1.get('star')?.value;
     this.commentService.getLastIndexInProductId(this.productId).subscribe((result) => {
+      let comment : Comment ;
       if (result[0] != null) {
-        this.commentService.postComment(new Comment('aasd', this.productId, star, text, new Date(), result[0]['index'] + 1));
+        comment = (new Comment('aasd', this.productId, star, text, new Date(), result[0]['index'] + 1));
       } else {
-        this.commentService.postComment(new Comment('aasd', this.productId, star, text, new Date(), 0)
-        );
+        comment = (new Comment('aasd', this.productId, star, text, new Date(), 0));
       }
+      console.log(comment.$idProduct)
+      this.commentService.postComment(comment).subscribe(data => {
+        this.myForm1.get('txt')?.setValue("")
+        this.myForm1.get('star')?.setValue(0);
+        this.pagination(this.p)})
     });
-    this.myForm1.get('txt')?.setValue("")
-    this.myForm1.get('star')?.setValue(0);
-    this.pagination(this.p);
   }
   setStar(numberStar: number) {
     this.startGet = numberStar;
