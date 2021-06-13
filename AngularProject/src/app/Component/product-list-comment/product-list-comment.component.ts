@@ -72,47 +72,13 @@ export class ProductListCommentComponent implements OnInit {
   }
   pagination(pageNow: number) {
     this.p = pageNow;
-<<<<<<< HEAD
-    this.comments = [];
-=======
     this.isLoading = true;
->>>>>>> 0e942fdefaa5fd91efb744157757bba6a01fbb5e
     this.commentDisplay = [];
     this.ngOnInit();
   }
   submitC() {
     let text: string = this.myForm1.get('txt')?.value;
     let star: number = this.myForm1.get('star')?.value;
-<<<<<<< HEAD
-    const productIdFromRoute = this.productId;
-    this.commentService
-      .getLastIndexInProductId(productIdFromRoute)
-      .subscribe((result) => {
-        if (result[0] != null) {
-          let index = result[0]['index'];
-          this.commentService.postComment(
-            new Comment(
-              'aasd',
-              productIdFromRoute,
-              star,
-              text,
-              new Date(),
-              result[0]['index'] + 1
-            )
-          );
-        } else {
-          this.commentService.postComment(
-            new Comment('aasd', productIdFromRoute, star, text, new Date(), 0)
-          );
-        }
-      });
-    let navigationExtras: NavigationExtras = {
-      queryParams: { productId: productIdFromRoute },
-    };
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/products'], navigationExtras);
-=======
     this.commentService.getLastIndexInProductId(this.productId).subscribe((result) => {
       if (result[0] != null) {
         this.commentService.postComment(new Comment('aasd', this.productId, star, text, new Date(), result[0]['index'] + 1));
@@ -124,7 +90,6 @@ export class ProductListCommentComponent implements OnInit {
     this.myForm1.get('txt')?.setValue("")
     this.myForm1.get('star')?.setValue(0);
     this.pagination(this.p);
->>>>>>> 0e942fdefaa5fd91efb744157757bba6a01fbb5e
   }
   setStar(numberStar: number) {
     this.startGet = numberStar;

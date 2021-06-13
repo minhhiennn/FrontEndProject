@@ -26,6 +26,6 @@ export class ProductDetailsComponent implements OnInit {
   getProductAndQuantity(input: any, product: Product) {
     let quantity: number = Number(input.value);
     this.cartService.getProductAndQuantity(quantity, product);
-    this.router.navigate(['/cart']);
+    setTimeout(() => { this.router.navigate(['/cart']); }, 500)
   }
 }
