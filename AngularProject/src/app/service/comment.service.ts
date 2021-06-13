@@ -27,6 +27,6 @@ export class CommentService {
   }
 
   postComment(comment: Comment) {
-    return this.http.post(this.urlComment, comment).subscribe();
+    return this.http.post(this.urlComment, comment);
   }
 }
