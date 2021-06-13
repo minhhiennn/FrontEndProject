@@ -34,23 +34,20 @@ export class ProductListCommentComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private commentService: CommentService,
-    private userService: UserService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.productId = params['productId'];
     });
-      const productIdFromRoute = this.productId;
-      this.commentService
+    const productIdFromRoute = this.productId;
+    this.commentService
       .getLastIndexInProductId(productIdFromRoute)
-      .subscribe((result) => {this.total = result[0]['index'] +1});
-     console.log(this.p);
+      .subscribe((result) => { this.total = result[0]['index'] + 1 });
     this.commentService
       .getCommentByIDProduct(productIdFromRoute, (this.p - 1) * 5)
       .subscribe((countries) => {
-        console.log(countries.length)
         this.commentsFake = countries;
         if (countries == null) {
           this.isLoading = false;
@@ -67,7 +64,6 @@ export class ProductListCommentComponent implements OnInit {
           this.commentDisplay.push(comment);
         });
         this.isLoading = false;
-       
       });
   }
   pagination(pageNow: number) {
@@ -103,7 +99,7 @@ export class ProductListCommentComponent implements OnInit {
       });
     let navigationExtras: NavigationExtras = {
       queryParams: { productId: productIdFromRoute },
-    };
+    };  
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/products'], navigationExtras);

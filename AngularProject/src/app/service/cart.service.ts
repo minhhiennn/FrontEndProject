@@ -18,6 +18,7 @@ export class CartService {
     // nếu tìm thấy cartItem chứa product đó
     // tăng price vs quantity lên
     if (this.checkExistProduct(product) === true) {
+      console.log();
       let num = this.getIndexExistProduct(product);
       let id: number = this.items[num].id;
       let quantity: number = this.items[num].quantity + 1;
