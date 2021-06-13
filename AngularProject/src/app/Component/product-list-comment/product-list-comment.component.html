@@ -1,0 +1,80 @@
+<app-loading-spinners *ngIf="isLoading;else asd"></app-loading-spinners>
+<ng-template #asd>
+
+    <div class="col-sm-12" e>
+
+
+        <p><b>Write Your Review</b></p>
+        <form action="#" [formGroup]="myForm1" (ngSubmit)="submitC()">
+
+            <textarea name="txt" id="txt" formControlName="txt"></textarea>
+            <fieldset class="rating">
+                <input type="radio" id="star5" name="rating" value="5" (click)="setStar(5)" /><label class="full" for="star5" title="Awesome - 5 stars"></label>
+
+                <input type="radio" id="star4" name="rating" value="4" (click)="setStar(4)" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+
+                <input type="radio" id="star3" name="rating" value="3" (click)="setStar(3)" /><label class="full" for="star3" title="Meh - 3 stars"></label>
+
+                <input type="radio" id="star2" name="rating" value="2" (click)="setStar(2)" /><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+
+                <input type="radio" id="star1" name="rating" value="1" (click)="setStar(1)" /><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+            </fieldset>
+            <input type="hidden" name="star" id="star" formControlName="star" [(ngModel)]="startGet">
+            <button type="submit" class="btn btn-default pull-right">
+      Submit
+    </button>
+
+        </form>
+
+    </div>
+
+    
+
+    <h3>User Comment Example</h3>
+    <div class="container" *ngFor="let comment of commentDisplay">
+        <div class="row">
+            <div class="col-sm-12">
+            </div>
+            <!-- /col-sm-12 -->
+        </div>
+        <!-- /row -->
+        <div class="row">
+            <div class="col-sm-1">
+                <div class="thumbnail">
+                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                </div>
+                <!-- /thumbnail -->
+            </div>
+            <!-- /col-sm-1 -->
+
+            <div class="col-sm-7">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>{{comment.$nameUser}}</strong> <span class="text-muted"> commented at {{comment.$date}} </span>
+                        <span *ngFor="let a of fakeArray; let index = index">
+
+              <span class="fa fa-star " *ngIf=" index >= comment.$star;else other_content"></span>
+
+                        </span>
+                        <ng-template #other_content> <span class="fa fa-star checked"></span></ng-template>
+                    </div>
+                    <div class="panel-body">
+                        {{comment.$text}}
+                    </div>
+                    <!-- /panel-body -->
+                </div>
+                <!-- /panel panel-default -->
+            </div>
+            <!-- /col-sm-5 -->
+        </div>
+        <!-- /row -->
+
+    </div>
+    <!-- /container -->
+    <ul>
+        <li *ngFor="let item of commentDisplay | paginate: { itemsPerPage: 5, currentPage: p ,totalItems: total }"> </li>
+    </ul>
+
+    <pagination-controls (pageChange)="pagination($event)"></pagination-controls>
+
+</ng-template>
