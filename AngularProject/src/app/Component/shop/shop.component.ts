@@ -44,26 +44,15 @@ export class ShopComponent implements OnInit {
   }
   getListProduct() {
     this.productService.getData().subscribe((data) => {
-      let x: number = Object.values(data).length;
-      for (let i = 0; i < Object.values(data).length; i++) {
-        let x1: any = Object.values(data)[i];
-        let product: Product = new Product(x1.id, x1.price, x1.name, x1.img);
-        this.products.push(product);
-      }
+      this.products = data;
       this.showSpinner = false;
     });
   }
   getListProductByName(name: string) {
     this.productService.getData().subscribe((data) => {
-      let productList: Product[] = [];
-      for (let i = 0; i < Object.values(data).length; i++) {
-        let x1: any = Object.values(data)[i];
-        let product: Product = new Product(x1.id, x1.price, x1.name, x1.img);
-        productList.push(product);
-      }
-      for (let i = 0; i < productList.length; i++) {
-        if (productList[i].getName().toLowerCase().includes(name.toLowerCase())) {
-          this.products.push(productList[i]);
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].name.toLowerCase().includes(name.toLowerCase())) {
+          this.products.push(data[i]);
         }
       }
       this.showSpinner = false;
@@ -71,18 +60,12 @@ export class ShopComponent implements OnInit {
   }
   getListProductByPriceRange(priceRange: string) {
     this.productService.getData().subscribe((data) => {
-      let productList: Product[] = [];
       let stringSlipt: string[] = priceRange.split('-');
       let min: number = Number(stringSlipt[0]);
       let max: number = Number(stringSlipt[1]);
-      for (let i = 0; i < Object.values(data).length; i++) {
-        let x1: any = Object.values(data)[i];
-        let product: Product = new Product(x1.id, x1.price, x1.name, x1.img);
-        productList.push(product);
-      }
-      for (let i = 0; i < productList.length; i++) {
-        if (productList[i].getPrice() >= min && productList[i].getPrice() <= max) {
-          this.products.push(productList[i]);
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].price >= min && data[i].price <= max) {
+          this.products.push(data[i]);
         }
       }
       this.showSpinner = false;

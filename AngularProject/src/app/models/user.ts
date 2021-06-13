@@ -1,8 +1,8 @@
 export class User {
-  private id: number;
-  private name: string;
-  private email: string;
-  private password: string;
+  id: number;
+  name: string;
+  email: string;
+  password: string;
   constructor(id: number, name: string, email: string, password: string) {
     this.id = id;
     this.name = name;

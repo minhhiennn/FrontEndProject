@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,21 +9,15 @@ export class ProductService {
   products: Product[] = [];
   url = 'https://first-fucking-app-angular.herokuapp.com/products';
   constructor(private http: HttpClient) {
-    this.http.get(this.url).subscribe(((data) => {
-      let x: number = Object.values(data).length;
-      console.log(x);
-      for (let i = 0; i < Object.values(data).length; i++) {
-        let x1: any = Object.values(data)[i];
-        let product: Product = new Product(x1.id, x1.price, x1.name, x1.img);
-        this.products.push(product);
-      }
+    this.http.get<Product[]>(this.url).subscribe(((data) => {
+      this.products = data;
     }));
   }
   // TODO: GET ALL LIST PRODUCT
   getProducts(): Product[] {
     return this.products;
   }
-  getData() {
-    return this.http.get(this.url);
+  getData(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.url);
   }
 }

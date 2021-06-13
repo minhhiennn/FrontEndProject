@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MessageService } from 'src/app/service/message.service';
+import { CartService } from 'src/app/service/cart.service';
 
 @Component({
   selector: 'app-shop-list-product',
@@ -9,11 +9,11 @@ import { MessageService } from 'src/app/service/message.service';
 export class ShopListProductComponent implements OnInit {
 
   @Input() productItem: any;
-  constructor(private messageService: MessageService) { }
+  constructor(private cartService: CartService) { }
   handleAddToCart() {
     //this.messageService.sendMessage(this.productItem);
     console.log(this.productItem);
-    this.messageService.addToCart(this.productItem);
+    this.cartService.addToCart(this.productItem);
   }
   ngOnInit(): void {
   }

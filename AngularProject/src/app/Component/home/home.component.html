@@ -79,15 +79,15 @@
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
-                  <img [src]="product.getImg()" alt="" />
-                  <h2>{{product.getPrice()}}</h2>
-                  <p>{{product.getName()}}</p>
+                  <img [src]="product.img" alt="" />
+                  <h2>{{product.price}}</h2>
+                  <p>{{product.name}}</p>
                   <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                 </div>
                 <div class="product-overlay">
                   <div class="overlay-content">
-                    <h2>{{product.getPrice()}}</h2>
-                    <p [routerLink]="['/products',product.getId()]">{{product.getName()}}</p>
+                    <h2>{{product.price}}</h2>
+                    <p [routerLink]="['/products',product.id]">{{product.name}}</p>
                     <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                   </div>
                 </div>
@@ -119,9 +119,9 @@
                 <div class="product-image-wrapper">
                   <div class="single-products">
                     <div class="productinfo text-center">
-                      <img [src]="product.getImg()" alt="" [routerLink]="['/products',product.getId()]" />
-                      <h2>{{product.getPrice()}}</h2>
-                      <p>{{product.getName()}}</p>
+                      <img [src]="product.img" alt="" [routerLink]="['/products',product.id]" />
+                      <h2>{{product.price}}</h2>
+                      <p>{{product.name}}</p>
                       <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
 
@@ -134,9 +134,9 @@
                 <div class="product-image-wrapper">
                   <div class="single-products">
                     <div class="productinfo text-center">
-                      <img [src]="product.getImg()" alt="" [routerLink]="['/products',product.getId()]" />
-                      <h2>{{product.getPrice()}}</h2>
-                      <p>{{product.getName()}}</p>
+                      <img [src]="product.img" alt="" [routerLink]="['/products',product.id]" />
+                      <h2>{{product.price}}</h2>
+                      <p>{{product.name}}</p>
                       <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
 
@@ -149,12 +149,11 @@
                 <div class="product-image-wrapper">
                   <div class="single-products">
                     <div class="productinfo text-center">
-                      <img [src]="product.getImg()" alt="" [routerLink]="['/products',product.getId()]" />
-                      <h2>{{product.getPrice()}}</h2>
-                      <p>{{product.getName()}}</p>
+                      <img [src]="product.img" alt="" [routerLink]="['/products',product.id]" />
+                      <h2>{{product.price}}</h2>
+                      <p>{{product.name}}</p>
                       <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -164,9 +163,9 @@
                 <div class="product-image-wrapper">
                   <div class="single-products">
                     <div class="productinfo text-center">
-                      <img [src]="product.getImg()" alt="" [routerLink]="['/products',product.getId()]" />
-                      <h2>{{product.getPrice()}}</h2>
-                      <p>{{product.getName()}}</p>
+                      <img [src]="product.img" alt="" [routerLink]="['/products',product.id]" />
+                      <h2>{{product.price}}</h2>
+                      <p>{{product.name}}</p>
                       <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
                   </div>
@@ -178,9 +177,9 @@
                 <div class="product-image-wrapper">
                   <div class="single-products">
                     <div class="productinfo text-center">
-                      <img [src]="product.getImg()" alt="" [routerLink]="['/products',product.getId()]" />
-                      <h2>{{product.getPrice()}}</h2>
-                      <p>{{product.getName()}}</p>
+                      <img [src]="product.img" alt="" [routerLink]="['/products',product.id]" />
+                      <h2>{{product.price}}</h2>
+                      <p>{{product.name}}</p>
                       <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
                   </div>

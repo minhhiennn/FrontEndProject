@@ -24,27 +24,27 @@
         <tbody>
           <tr *ngFor="let cartItem of cartItems">
             <td class="cart_product">
-              <a href=""><img [src]="cartItem.getProduct().getImg()" alt="" style="width:110px;height:110px"></a>
+              <a href=""><img [src]="cartItem.product.img" alt="" style="width:110px;height:110px"></a>
             </td>
             <td class="cart_description">
-              <h4><a href="">{{cartItem.getProduct().getName()}}</a></h4>
+              <h4><a href="">{{cartItem.product.name}}</a></h4>
               <p>Web ID: 1089772</p>
             </td>
             <td class="cart_price">
-              <p>{{cartItem.getProduct().getPrice() | currency: 'USD'}}</p>
+              <p>{{cartItem.product.price | currency: 'USD'}}</p>
             </td>
             <td class="cart_quantity">
               <div class="cart_quantity_button">
-                <a class="cart_quantity_up" (click)="increaseByOne(cartItem.getProduct().getId())" style="cursor:pointer"> + </a>
-                <input class="cart_quantity_input" type="text" [id]="cartItem.getProduct().getId()" name="quantity" [value]="cartItem.getQuantity()" autocomplete="off" size="2" (change)="change(cartItem.getProduct().getId())">
-                <a class="cart_quantity_down" (click)="decreaseByOne(cartItem.getProduct().getId())" style="cursor:pointer"> - </a>
+                <a class="cart_quantity_up" (click)="increaseByOne(cartItem)" style="cursor:pointer"> + </a>
+                <input class="cart_quantity_input" type="text" [id]="cartItem.product.id" name="quantity" [value]="cartItem.quantity" autocomplete="off" size="2" (change)="change(cartItem)">
+                <a class="cart_quantity_down" (click)="decreaseByOne(cartItem)" style="cursor:pointer"> - </a>
               </div>
             </td>
             <td class="cart_total">
-              <p class="cart_total_price">{{cartItem.getPriceTotal() | currency: 'USD'}}</p>
+              <p class="cart_total_price">{{cartItem.price_total | currency: 'USD'}}</p>
             </td>
             <td class="cart_delete">
-              <a class="cart_quantity_delete" (click)="remove(cartItem.getProduct().getId())"><i class="fa fa-times"></i></a>
+              <a class="cart_quantity_delete" (click)="remove(cartItem)"><i class="fa fa-times"></i></a>
             </td>
           </tr>
 

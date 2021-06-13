@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'src/app/service/message.service';
+import { CartService } from 'src/app/service/cart.service';
 import { ProductService } from 'src/app/service/product.service';
 import { CartItem } from '../../models/cart-item';
 @Component({
@@ -10,74 +10,107 @@ import { CartItem } from '../../models/cart-item';
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   cartTotal = 0;
-    
-  constructor(private messageService: MessageService, private productService: ProductService) { }
+  showSpinner: boolean = true;    
+  constructor(private cartService: CartService, private productService: ProductService) { }
 
   ngOnInit(): void {
     //this.messageService.getMessage().subscribe((product: any) => {
     //  console.log(product);
     //  this.cartItems.push({ id: product.id, name: product.name });
     //}
-    this.cartItems = this.messageService.getItem();
-    this.caculateCartTotal();
+    this.cartService.getData().subscribe((data: CartItem[]) => {
+      this.cartItems = data;
+      this.caculateCartTotal();
+    });
     
   }
-  increaseByOne(productId: number) {
+  increaseByOne(cartItem: CartItem) {
     for (let i = 0; i < this.cartItems.length; i++) {
-      if (this.cartItems[i].getProduct().getId() == productId) {
-        this.cartItems[i].setQuantity(this.cartItems[i].getQuantity() + 1);
-        this.cartItems[i].setPriceTotal(this.cartItems[i].getQuantity() * this.cartItems[i].getProduct().getPrice());
+      if (this.cartItems[i].product.id == cartItem.product.id) {
+        let quantity: number = this.cartItems[i].quantity + 1;
+        let price_total: number = quantity * this.cartItems[i].product.price;
+        this.cartService.putData(this.cartItems[i].id,
+        new CartItem(this.cartItems[i].id, this.cartItems[i].product, quantity, price_total)).subscribe(response => {
+          this.cartService.getData().subscribe((data: CartItem[]) => {
+            this.cartItems = data;
+            this.caculateCartTotal();
+            this.cartService.getData1();
+          });
+        });
         break;
       }
     }
-    this.caculateCartTotal();
   }
-  decreaseByOne(productId: number) {
+  decreaseByOne(cartItem: CartItem) {
     for (let i = 0; i < this.cartItems.length; i++) {
-      if (this.cartItems[i].getProduct().getId() == productId) {
-        if (this.cartItems[i].getQuantity() > 1) {          
-          this.cartItems[i].setQuantity(this.cartItems[i].getQuantity() - 1);
-          this.cartItems[i].setPriceTotal(this.cartItems[i].getQuantity() * this.cartItems[i].getProduct().getPrice());
+      if (this.cartItems[i].product.id == cartItem.product.id) {
+        if (this.cartItems[i].quantity > 1) {
+          let quantity: number = this.cartItems[i].quantity - 1;
+          let price_total: number = quantity * this.cartItems[i].product.price;
+          this.cartService.putData(this.cartItems[i].id,
+            new CartItem(this.cartItems[i].id, this.cartItems[i].product, quantity, price_total)).subscribe(response => {
+              this.cartService.getData().subscribe((data: CartItem[]) => {
+                this.cartItems = data;
+                this.caculateCartTotal();
+                this.cartService.getData1();
+              });
+            });
           break;
         } else {
           break;
         }
       }
     }
-    this.caculateCartTotal();
   }
   caculateCartTotal() {
     let sum: number = 0;
     this.cartItems.forEach((item: CartItem) => {
-      sum += item.getPriceTotal();
+      sum += item.price_total;
     })
     this.cartTotal = sum;
   }
-  change(productId: number) {
-    let inputElement = document.getElementById(productId.toString()) as HTMLInputElement;
+  change(cartItem: CartItem) {
+    let inputElement = document.getElementById(cartItem.product.id.toString()) as HTMLInputElement;
     let x = inputElement.value;
     for (let i = 0; i < this.cartItems.length; i++) {
-      if (this.cartItems[i].getProduct().getId() == productId) {
+      if (this.cartItems[i].product.id == cartItem.product.id) {
         let numberX:number = parseInt(x);
         if (numberX >= 1) {
-          this.cartItems[i].setQuantity(numberX);
-          this.cartItems[i].setPriceTotal(this.cartItems[i].getQuantity() * this.cartItems[i].getProduct().getPrice());
+          let quantity: number = numberX;
+          let price_total = quantity * this.cartItems[i].product.price;
+          this.cartService.putData(this.cartItems[i].id,
+            new CartItem(this.cartItems[i].id, this.cartItems[i].product, quantity, price_total)).subscribe(response => {
+              this.cartService.getData().subscribe((data: CartItem[]) => {
+                this.cartItems = data;
+                this.caculateCartTotal();
+                this.cartService.getData1();
+              });
+            });
           break;
         } else {
-          this.cartItems[i].setQuantity(1);
-          inputElement.value = this.cartItems[i].getQuantity().toString();
-          this.cartItems[i].setPriceTotal(this.cartItems[i].getQuantity() * this.cartItems[i].getProduct().getPrice());
+          let quantity: number = 1;
+          let price_total = quantity * this.cartItems[i].product.price;
+          this.cartService.putData(this.cartItems[i].id,
+            new CartItem(this.cartItems[i].id, this.cartItems[i].product, quantity, price_total)).subscribe(response => {
+              this.cartService.getData().subscribe((data: CartItem[]) => {
+                this.cartItems = data;
+                this.caculateCartTotal();
+                this.cartService.getData1();
+              });
+            });
           break;
         }
       }
     }
     this.caculateCartTotal();
   }
-  remove(productId: number) {
-    let index: number = this.cartItems.findIndex((cartItem: CartItem) => cartItem.getProduct().getId() === productId);
-    if (index > -1) {
-      this.cartItems.splice(index, 1);
-    }
-    this.caculateCartTotal();
+  remove(cartItem: CartItem) {
+    this.cartService.deleteData(cartItem.id).subscribe(response => {
+      this.cartService.getData().subscribe((data: CartItem[]) => {
+        this.cartItems = data;
+        this.caculateCartTotal();
+        this.cartService.getData1();
+      });
+    });
   }
 }
