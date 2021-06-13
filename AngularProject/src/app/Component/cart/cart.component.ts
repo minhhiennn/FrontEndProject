@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
     this.cartService.getData().subscribe((data: CartItem[]) => {
       this.cartItems = data;
       this.caculateCartTotal();
+      this.showSpinner = false;
     });
     
   }
