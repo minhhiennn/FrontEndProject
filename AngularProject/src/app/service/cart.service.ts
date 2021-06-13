@@ -72,7 +72,7 @@ export class CartService {
       let num = this.getIndexExistProduct(product);
       let id: number = this.items[num].id;
       let quantityy: number = this.items[num].quantity + quantity;
-      let price_total: number = this.items[num].price_total * quantityy;
+      let price_total: number = product.price * quantityy;
       this.putData(id, new CartItem(id, product, quantityy, price_total)).subscribe(response => {
         this.getData().subscribe((data: CartItem[]) => {
           this.items = data;
