@@ -44,6 +44,7 @@ export class ProductListCommentComponent implements OnInit {
 
   pagination(pageNow: number) {
     this.p = pageNow;
+    this.isLoading = true;
     this.commentDisplay = [];
     this.ngOnInit();
   }
@@ -59,7 +60,8 @@ export class ProductListCommentComponent implements OnInit {
         );
       }
     });
-
+    this.myForm1.get('txt')?.setValue("")
+    this.myForm1.get('star')?.setValue(0);
     this.pagination(this.p);
   }
   setStar(numberStar: number) {
