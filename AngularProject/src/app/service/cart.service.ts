@@ -3,13 +3,14 @@ import { CartItem } from '../models/cart-item';
 import { Product } from '../models/product';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   items: CartItem[] = [];
   urlCart = "https://first-fucking-app-angular.herokuapp.com/cart";
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.getData().subscribe((data: CartItem[]) => {
       this.items = data;
     });
@@ -26,6 +27,7 @@ export class CartService {
       this.putData(id, new CartItem(id, product, quantity, price_total)).subscribe(response => {
         this.getData().subscribe((data: CartItem[]) => {
           this.items = data;
+          this.router.navigate(['/cart']);
         });
       });
     } else {
@@ -34,6 +36,7 @@ export class CartService {
       this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price)).subscribe(response => {
         this.getData().subscribe((data: CartItem[]) => {
           this.items = data;
+          this.router.navigate(['/cart']);
         });
       });
     }
@@ -76,6 +79,7 @@ export class CartService {
       this.putData(id, new CartItem(id, product, quantityy, price_total)).subscribe(response => {
         this.getData().subscribe((data: CartItem[]) => {
           this.items = data;
+          this.router.navigate(['/cart']);
         });
       });
     } else {
@@ -85,6 +89,7 @@ export class CartService {
       this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, quantity, price_total)).subscribe(response => {
         this.getData().subscribe((data: CartItem[]) => {
           this.items = data;
+          this.router.navigate(['/cart']);
         });
       });
     }

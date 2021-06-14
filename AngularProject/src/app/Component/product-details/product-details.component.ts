@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/service/product.service';
 import { Product } from '../../models/product';
 import { CartService } from 'src/app/service/cart.service';
@@ -10,7 +10,7 @@ import { CartService } from 'src/app/service/cart.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: any;
-  constructor(private route: ActivatedRoute, private productService: ProductService, private cartService: CartService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService, private cartService: CartService) { }
   ngOnInit(): void {
     const routeParams = this.route.snapshot.queryParamMap;
     const productIdFromRoute = Number(routeParams.get('productId'));
@@ -26,6 +26,5 @@ export class ProductDetailsComponent implements OnInit {
   getProductAndQuantity(input: any, product: Product) {
     let quantity: number = Number(input.value);
     this.cartService.getProductAndQuantity(quantity, product);
-    setTimeout(() => { this.router.navigate(['/cart']); }, 500)
   }
 }
