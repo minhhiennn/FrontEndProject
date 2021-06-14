@@ -2439,3 +2439,7 @@ textarea {
 .contact-info .social-networks ul li a:hover {
     color: #FE980F;
 }
+
+.mat-progress-spinner circle, .mat-spinner circle {
+stroke: #FE980F;
+}

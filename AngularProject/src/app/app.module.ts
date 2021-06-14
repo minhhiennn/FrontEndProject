@@ -26,7 +26,8 @@ import { CheckoutComponent } from './Component/checkout/checkout.component';
 import { ShopListProductComponent } from './Component/shop-list-product/shop-list-product.component';
 import { ProductListCommentComponent } from './Component/product-list-comment/product-list-comment.component';
 import { AccountComponent } from './Component/account/account.component';
-import { LoadingSpinnersComponent } from './ui/loading-spinners/loading-spinners.component';
+
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -50,11 +51,12 @@ import { LoadingSpinnersComponent } from './ui/loading-spinners/loading-spinners
     CheckoutComponent,
     ShopListProductComponent,
     AccountComponent,
-    LoadingSpinnersComponent,
+    
     
 
   ],
   imports: [
+    MatProgressSpinnerModule,
     NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,

@@ -2,7 +2,6 @@ import { Comment } from '../../models/comment';
 import { Component, OnInit } from '@angular/core';
 import { CommentService } from 'src/app/service/comment.service';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/service/user.service';
 import { FormBuilder } from '@angular/forms';
 
@@ -36,39 +35,26 @@ export class ProductListCommentComponent implements OnInit {
     private commentService: CommentService,
     private userService: UserService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.productId = params['productId'];
     });
-      const productIdFromRoute = this.productId;
-      this.commentService
-      .getLastIndexInProductId(productIdFromRoute)
-      .subscribe((result) => {this.total = result[0]['index'] +1});
-     console.log(this.p);
-    this.commentService
-      .getCommentByIDProduct(productIdFromRoute, (this.p - 1) * 5)
-      .subscribe((countries) => {
-        console.log(countries.length)
-        this.commentsFake = countries;
-        if (countries == null) {
-          this.isLoading = false;
-        }
-        this.commentsFake.forEach((element) => {
-          let comment = new Comment(
-            element.nameUser,
-            element.idProduct,
-            element.star,
-            element.text,
-            element.date,
-            element.index
-          );
-          this.commentDisplay.push(comment);
-        });
+    const productIdFromRoute = this.productId;
+    this.commentService.getLastIndexInProductId(productIdFromRoute).subscribe((result) => { this.total = result[0]['index'] + 1 });
+
+    this.commentService.getCommentByIDProduct(productIdFromRoute, (this.p - 1) * 5).subscribe((countries) => {
+      this.commentsFake = countries;
+      if (countries == null) {
         this.isLoading = false;
-       
+      }
+      this.commentsFake.forEach((element) => {
+        let comment = new Comment(element.nameUser, element.idProduct, element.star, element.text, element.date, element.index);
+        this.commentDisplay.push(comment);
       });
+      this.isLoading = false;
+    });
   }
   pagination(pageNow: number) {
     this.p = pageNow;
@@ -80,7 +66,7 @@ export class ProductListCommentComponent implements OnInit {
     let text: string = this.myForm1.get('txt')?.value;
     let star: number = this.myForm1.get('star')?.value;
     this.commentService.getLastIndexInProductId(this.productId).subscribe((result) => {
-      let comment : Comment ;
+      let comment: Comment;
       if (result[0] != null) {
         comment = (new Comment('aasd', this.productId, star, text, new Date(), result[0]['index'] + 1));
       } else {
@@ -90,7 +76,8 @@ export class ProductListCommentComponent implements OnInit {
       this.commentService.postComment(comment).subscribe(data => {
         this.myForm1.get('txt')?.setValue("")
         this.myForm1.get('star')?.setValue(0);
-        this.pagination(this.p)})
+        this.pagination(this.p)
+      })
     });
   }
   setStar(numberStar: number) {
