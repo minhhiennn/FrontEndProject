@@ -7,8 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng5SliderModule } from 'ng5-slider';
 import { AgmCoreModule } from '@agm/core';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/share/header/header.component';
 import { FooterComponent } from './component/share/footer/footer.component';
@@ -27,7 +28,7 @@ import { ShopListProductComponent } from './component/shop-list-product/shop-lis
 import { ProductListCommentComponent } from './component/product-list-comment/product-list-comment.component';
 import { AccountComponent } from './component/account/account.component';
 
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 
 

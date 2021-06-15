@@ -9,14 +9,16 @@ import { CartService } from 'src/app/service/cart.service';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  product: any;
+  product: Product | undefined;
   constructor(private route: ActivatedRoute, private productService: ProductService, private cartService: CartService) { }
   ngOnInit(): void {
     const routeParams = this.route.snapshot.queryParamMap;
     const productIdFromRoute = Number(routeParams.get('productId'));
+    console.log(productIdFromRoute);
     // Find the product that correspond with the id provided in route.
-    this.product = this.productService.products.find(product => product.id === productIdFromRoute);
-  }
+    setTimeout(() => { this.product = this.productService.products.find((product) => product.id === productIdFromRoute);}, 300);
+    console.log(this.product);
+  } 
   change(input: any) {
     let num = Number(input.value);
     if (num < 1) {
