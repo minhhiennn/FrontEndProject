@@ -11,7 +11,7 @@ import { User } from 'src/app/models/user';
 })
 export class CartService {
   items: CartItem[] = [];
-  currentUser: User | undefined;
+  currentUser: User | null = null;;
   urlCart = "https://first-fucking-app-angular.herokuapp.com/cart";
   constructor(private http: HttpClient, private router: Router, private userService: UserService) {
     this.getData().subscribe((data: CartItem[]) => {
@@ -21,34 +21,32 @@ export class CartService {
   addToCart(product: Product) {
     // nếu tìm thấy cartItem chứa product đó
     // tăng price vs quantity lên
-    this.userService.getCurrentUser().subscribe((currentUsser: User) => {
-      if (currentUsser.id != null) {
-        this.currentUser = currentUsser;
-        if (this.checkExistProduct(product) === true) {
-          let num = this.getIndexExistProduct(product);
-          let id: number = this.items[num].id;
-          let quantity: number = this.items[num].quantity + 1;
-          let price_total: number = this.items[num].price_total + product.price;
-          this.putData(id, new CartItem(id, product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
-            this.getData().subscribe((data: CartItem[]) => {
-              this.items = data;
-              this.router.navigate(['/cart']);
-            });
+    this.currentUser = this.userService.getCurrentUser();
+    if (this.currentUser != null) {
+      if (this.checkExistProduct(product) === true) {
+        let num = this.getIndexExistProduct(product);
+        let id: number = this.items[num].id;
+        let quantity: number = this.items[num].quantity + 1;
+        let price_total: number = this.items[num].price_total + product.price;
+        this.putData(id, new CartItem(id, product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
+          this.getData().subscribe((data: CartItem[]) => {
+            this.items = data;
+            this.router.navigate(['/cart']);
           });
-        } else {
-          // nếu ko tìm thấy cartItem nào
-          // lấy ra id lớn nhất của cartItem + 1
-          this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price, this.currentUser?.id)).subscribe(() => {
-            this.getData().subscribe((data: CartItem[]) => {
-              this.items = data;
-              this.router.navigate(['/cart']);
-            });
-          });
-        }
+        });
       } else {
-        this.router.navigate(['/login']);
+        // nếu ko tìm thấy cartItem nào
+        // lấy ra id lớn nhất của cartItem + 1
+        this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price, this.currentUser?.id)).subscribe(() => {
+          this.getData().subscribe((data: CartItem[]) => {
+            this.items = data;
+            this.router.navigate(['/cart']);
+          });
+        });
       }
-    })
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
   checkExistProduct(product: Product): boolean {
     for (let i: number = 0; i < this.items.length; i++) {
@@ -82,35 +80,33 @@ export class CartService {
   }
   //////
   getProductAndQuantity(quantity: number, product: Product) {
-    this.userService.getCurrentUser().subscribe((currentUsser: User) => {
-      if (currentUsser.id != null) {
-        this.currentUser = currentUsser;
-        if (this.checkExistProduct(product) === true) {
-          let num = this.getIndexExistProduct(product);
-          let id: number = this.items[num].id;
-          let quantityy: number = this.items[num].quantity + quantity;
-          let price_total: number = product.price * quantityy;
-          this.putData(id, new CartItem(id, product, quantityy, price_total, this.currentUser?.id)).subscribe(response => {
-            this.getData().subscribe((data: CartItem[]) => {
-              this.items = data;
-              this.router.navigate(['/cart']);
-            });
+    this.currentUser = this.userService.getCurrentUser();
+    if (this.currentUser != null) {
+      if (this.checkExistProduct(product) === true) {
+        let num = this.getIndexExistProduct(product);
+        let id: number = this.items[num].id;
+        let quantityy: number = this.items[num].quantity + quantity;
+        let price_total: number = product.price * quantityy;
+        this.putData(id, new CartItem(id, product, quantityy, price_total, this.currentUser?.id)).subscribe(response => {
+          this.getData().subscribe((data: CartItem[]) => {
+            this.items = data;
+            this.router.navigate(['/cart']);
           });
-        } else {
-          // nếu ko tìm thấy cartItem nào
-          // lấy ra id lớn nhất của cartItem + 1
-          let price_total: number = product.price * quantity;
-          this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, quantity, price_total, this.currentUser?.id)).subscribe(response => {
-            this.getData().subscribe((data: CartItem[]) => {
-              this.items = data;
-              this.router.navigate(['/cart']);
-            });
-          });
-        }
+        });
       } else {
-        this.router.navigate(['/login']);
+        // nếu ko tìm thấy cartItem nào
+        // lấy ra id lớn nhất của cartItem + 1
+        let price_total: number = product.price * quantity;
+        this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, quantity, price_total, this.currentUser?.id)).subscribe(response => {
+          this.getData().subscribe((data: CartItem[]) => {
+            this.items = data;
+            this.router.navigate(['/cart']);
+          });
+        });
       }
-    })
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
   getData1() {
     return this.http.get<CartItem[]>(this.urlCart).subscribe(data => this.items = data);

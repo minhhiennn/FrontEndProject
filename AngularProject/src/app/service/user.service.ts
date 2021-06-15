@@ -13,17 +13,21 @@ export class UserService {
   constructor(private http: HttpClient, private router: Router) { }
 
   setCurrentUser(user: User) {
-    this.http.post(this.urlCurrentUser, user).subscribe(() => {
-      this.router.navigate(['']);
-    })
+    localStorage.setItem("currentUser", JSON.stringify(user));
+    this.router.navigate(['']);
   }
-  getCurrentUser(): Observable<User> {
-    return this.http.get<User>(this.urlCurrentUser);
+  getCurrentUser(): User | null{
+    let currentUser: User | null = null;
+    let object: any = localStorage.getItem("currentUser");
+    let object2 = JSON.parse(object as any);
+    if (object != null) {
+      currentUser = new User(object2.id, object2.img, object2.name, object2.email, object2.password);
+    }
+    return currentUser;
   }
   logOutCurrentUser() {
-    this.http.post(this.urlCurrentUser, {}).subscribe(() => {
-      this.router.navigate(['']);
-    });
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
   getData(): Observable<User[]> {
     return this.http.get<User[]>(this.url);

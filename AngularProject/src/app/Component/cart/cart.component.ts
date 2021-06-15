@@ -12,23 +12,21 @@ import { Router } from '@angular/router';
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   cartTotal = 0;
-  currentUser: User | undefined;
-  showSpinner: boolean = true;    
-  constructor(private cartService: CartService, private userService: UserService, private router: Router ) { }
+  currentUser: User | null = null;
+  showSpinner: boolean = true;
+  constructor(private cartService: CartService, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.userService.getCurrentUser().subscribe((currentUsser: User) => {
-      if (currentUsser.id != undefined) {
-        this.currentUser = currentUsser;
-        this.cartService.getDataByUserId(this.currentUser.id).subscribe((data: CartItem[]) => {
-          this.cartItems = data;
-          this.caculateCartTotal();
-          this.showSpinner = false;
-        });
-      } else {
-        this.router.navigate(['/login']);
-      }
-    })    
+    this.currentUser = this.userService.getCurrentUser();
+    if (this.currentUser != null) {
+      this.cartService.getDataByUserId(this.currentUser.id).subscribe((data: CartItem[]) => {
+        this.cartItems = data;
+        this.caculateCartTotal();
+        this.showSpinner = false;
+      });
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
   increaseByOne(cartItem: CartItem) {
     this.showSpinner = true;
@@ -39,12 +37,12 @@ export class CartComponent implements OnInit {
         this.cartService.putData(this.cartItems[i].id,
           new CartItem(this.cartItems[i].id, this.cartItems[i].product, quantity, price_total, this.currentUser?.id)).subscribe(response => {
             this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
-            this.cartItems = data;
-            this.caculateCartTotal();
-            this.showSpinner = false;
-            this.cartService.getData1();
+              this.cartItems = data;
+              this.caculateCartTotal();
+              this.showSpinner = false;
+              this.cartService.getData1();
+            });
           });
-        });
         break;
       }
     }
@@ -85,7 +83,7 @@ export class CartComponent implements OnInit {
     let x = inputElement.value;
     for (let i = 0; i < this.cartItems.length; i++) {
       if (this.cartItems[i].product.id == cartItem.product.id) {
-        let numberX:number = parseInt(x);
+        let numberX: number = parseInt(x);
         if (numberX >= 1) {
           let quantity: number = numberX;
           let price_total = quantity * this.cartItems[i].product.price;
