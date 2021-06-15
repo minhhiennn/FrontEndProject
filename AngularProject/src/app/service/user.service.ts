@@ -7,15 +7,8 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
   private Users: User[] = [];
   url = 'https://first-fucking-app-angular.herokuapp.com/users';
-  //url = 'http://localhost:3000/users';
   private currentUser: User | null = null;
   constructor(private http: HttpClient) {
-    // Get data in local json file
-    //for (let i = 0; i < users.length; i++) {
-    //  let user = new User(users[i].id, users[i].name, users[i].email, users[i].password);
-    //  this.Users.push(user);
-    //}
-    // Get data by using http client
     if (this.Users.length == 0) {
       this.http.get(this.url).subscribe(((data) => {
         let x: number = Object.values(data).length;
@@ -33,7 +26,7 @@ export class UserService {
   }
   findUserWithEmailAndPassword(email: string, password: string): User | null {
     for (let i = 0; i < this.Users.length; i++) {
-      if (this.Users[i].getEmail() === email && this.Users[i].getPassword() === password) {
+      if (this.Users[i].email === email && this.Users[i].password === password) {
         return this.Users[i];
       }
     }
