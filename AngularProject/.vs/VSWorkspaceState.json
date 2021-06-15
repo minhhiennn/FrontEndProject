@@ -4,9 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\component",
-    "\\src\\app\\component\\home",
-    "\\src\\app\\component\\login"
+    "\\src\\app\\component\\account",
+    "\\src\\app\\component\\login",
+    "\\src\\app\\component\\share",
+    "\\src\\app\\component\\share\\header",
+    "\\src\\app\\models",
+    "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app\\app.module.ts",
+  "SelectedNode": "\\src\\app\\service\\user.service.ts",
   "PreviewInSolutionExplorer": false
 }

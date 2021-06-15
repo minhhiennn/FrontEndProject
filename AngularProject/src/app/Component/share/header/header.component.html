@@ -8,7 +8,7 @@
             <ul class="nav nav-pills">
               <li><a href=""><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
               <li *ngIf="currentUser != null" class="dropdown">
-                <a><i class="fa fa-envelope"></i> {{currentUser.getEmail()}}</a><div class="dropdown-content">
+                <a><i class="fa fa-envelope"></i> {{currentUser.email}}</a><div class="dropdown-content">
                   <a href="">Account</a>
                   <a [routerLink]="['/login']" (click)="logOut()">Log out</a>
                 </div>

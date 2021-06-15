@@ -4,13 +4,16 @@ import { Product } from '../models/product';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/service/user.service';
+import { User } from 'src/app/models/user';
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   items: CartItem[] = [];
+  currentUser: User | undefined;
   urlCart = "https://first-fucking-app-angular.herokuapp.com/cart";
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private userService: UserService) {
     this.getData().subscribe((data: CartItem[]) => {
       this.items = data;
     });
@@ -18,33 +21,41 @@ export class CartService {
   addToCart(product: Product) {
     // nếu tìm thấy cartItem chứa product đó
     // tăng price vs quantity lên
-    if (this.checkExistProduct(product) === true) {
-      console.log();
-      let num = this.getIndexExistProduct(product);
-      let id: number = this.items[num].id;
-      let quantity: number = this.items[num].quantity + 1;
-      let price_total: number = this.items[num].price_total + product.price;
-      this.putData(id, new CartItem(id, product, quantity, price_total)).subscribe(response => {
-        this.getData().subscribe((data: CartItem[]) => {
-          this.items = data;
-          this.router.navigate(['/cart']);
-        });
-      });
-    } else {
-      // nếu ko tìm thấy cartItem nào
-      // lấy ra id lớn nhất của cartItem + 1
-      this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price)).subscribe(response => {
-        this.getData().subscribe((data: CartItem[]) => {
-          this.items = data;
-          this.router.navigate(['/cart']);
-        });
-      });
-    }
+    this.userService.getCurrentUser().subscribe((currentUsser: User) => {
+      if (currentUsser.id != null) {
+        this.currentUser = currentUsser;
+        if (this.checkExistProduct(product) === true) {
+          let num = this.getIndexExistProduct(product);
+          let id: number = this.items[num].id;
+          let quantity: number = this.items[num].quantity + 1;
+          let price_total: number = this.items[num].price_total + product.price;
+          this.putData(id, new CartItem(id, product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
+            this.getData().subscribe((data: CartItem[]) => {
+              this.items = data;
+              this.router.navigate(['/cart']);
+            });
+          });
+        } else {
+          // nếu ko tìm thấy cartItem nào
+          // lấy ra id lớn nhất của cartItem + 1
+          this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price, this.currentUser?.id)).subscribe(() => {
+            this.getData().subscribe((data: CartItem[]) => {
+              this.items = data;
+              this.router.navigate(['/cart']);
+            });
+          });
+        }
+      } else {
+        this.router.navigate(['/login']);
+      }
+    })
   }
   checkExistProduct(product: Product): boolean {
     for (let i: number = 0; i < this.items.length; i++) {
-      if (this.items[i].product.id === product.id) {
-        return true;
+      if (this.items[i].id_User == this.currentUser?.id) {
+        if (this.items[i].product.id === product.id) {
+          return true;
+        }
       }
     }
     return false;
@@ -71,28 +82,35 @@ export class CartService {
   }
   //////
   getProductAndQuantity(quantity: number, product: Product) {
-    if (this.checkExistProduct(product) === true) {
-      let num = this.getIndexExistProduct(product);
-      let id: number = this.items[num].id;
-      let quantityy: number = this.items[num].quantity + quantity;
-      let price_total: number = product.price * quantityy;
-      this.putData(id, new CartItem(id, product, quantityy, price_total)).subscribe(response => {
-        this.getData().subscribe((data: CartItem[]) => {
-          this.items = data;
-          this.router.navigate(['/cart']);
-        });
-      });
-    } else {
-      // nếu ko tìm thấy cartItem nào
-      // lấy ra id lớn nhất của cartItem + 1
-      let price_total: number = product.price * quantity;
-      this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, quantity, price_total)).subscribe(response => {
-        this.getData().subscribe((data: CartItem[]) => {
-          this.items = data;
-          this.router.navigate(['/cart']);
-        });
-      });
-    }
+    this.userService.getCurrentUser().subscribe((currentUsser: User) => {
+      if (currentUsser.id != null) {
+        this.currentUser = currentUsser;
+        if (this.checkExistProduct(product) === true) {
+          let num = this.getIndexExistProduct(product);
+          let id: number = this.items[num].id;
+          let quantityy: number = this.items[num].quantity + quantity;
+          let price_total: number = product.price * quantityy;
+          this.putData(id, new CartItem(id, product, quantityy, price_total, this.currentUser?.id)).subscribe(response => {
+            this.getData().subscribe((data: CartItem[]) => {
+              this.items = data;
+              this.router.navigate(['/cart']);
+            });
+          });
+        } else {
+          // nếu ko tìm thấy cartItem nào
+          // lấy ra id lớn nhất của cartItem + 1
+          let price_total: number = product.price * quantity;
+          this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, quantity, price_total, this.currentUser?.id)).subscribe(response => {
+            this.getData().subscribe((data: CartItem[]) => {
+              this.items = data;
+              this.router.navigate(['/cart']);
+            });
+          });
+        }
+      } else {
+        this.router.navigate(['/login']);
+      }
+    })
   }
   getData1() {
     return this.http.get<CartItem[]>(this.urlCart).subscribe(data => this.items = data);
@@ -100,6 +118,10 @@ export class CartService {
   // lấy dữ liệu từ urlCart 
   getData(): Observable<CartItem[]> {
     return this.http.get<CartItem[]>(this.urlCart);
+  }
+  // lấy dữ liệu bời id người dùng(currentUser)
+  getDataByUserId(id_User?: number): Observable<CartItem[]> {
+    return this.http.get<CartItem[]>(this.urlCart + "?id_User=" + id_User);
   }
   // thêm cartItem mới
   postData(cartitem: CartItem) {

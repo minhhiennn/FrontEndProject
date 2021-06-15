@@ -9,15 +9,17 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   currentUser: User | null = null;
-  constructor(private userService: UserService, private router: Router) {
-    this.currentUser = this.userService.getCurrentUser();
-  }
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    this.currentUser = this.userService.getCurrentUser();
+    this.userService.getCurrentUser().subscribe((currentUser: User) => {
+      if (currentUser.id != null) {
+        this.currentUser = currentUser;
+      }
+    })
   }
   logOut() {
-    this.userService.setCurrentUser(null);
+    this.userService.logOutCurrentUser();
   }
   Search(stringSearch: string) {
     if (stringSearch != '') {
