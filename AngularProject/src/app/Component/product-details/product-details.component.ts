@@ -16,7 +16,10 @@ export class ProductDetailsComponent implements OnInit {
     const productIdFromRoute = Number(routeParams.get('productId'));
     console.log(productIdFromRoute);
     // Find the product that correspond with the id provided in route.
-    setTimeout(() => { this.product = this.productService.products.find((product) => product.id === productIdFromRoute);}, 300);
+    this.productService.getData().subscribe((data: Product[]) => {
+      this.product = data.find((product) => product.id === productIdFromRoute);
+    })
+    //this.product = this.productService.products.find((product) => product.id === productIdFromRoute);
     console.log(this.product);
   } 
   change(input: any) {
