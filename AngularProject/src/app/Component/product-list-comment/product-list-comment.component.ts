@@ -4,6 +4,8 @@ import { CommentService } from 'src/app/service/comment.service';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { UserService } from 'src/app/service/user.service';
 import { FormBuilder } from '@angular/forms';
+import { User } from 'src/app/models/user';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-list-comment',
@@ -12,7 +14,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class ProductListCommentComponent implements OnInit {
   p: number = 1;
-
+  listSrc:any[] = [];
   commentsFake: any[] = [];
   comments: Comment[] = [];
   commentDisplay: Comment[] = [];
@@ -22,7 +24,7 @@ export class ProductListCommentComponent implements OnInit {
     star: '',
   });
   startGet: any;
-  currentUser: any;
+  currentUser: User;
   isLoading: boolean = true;
   start: number = 0;
   productId: number = 0;
@@ -34,8 +36,11 @@ export class ProductListCommentComponent implements OnInit {
     private route: ActivatedRoute,
     private commentService: CommentService,
     private userService: UserService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private sanitizer: DomSanitizer
+  ) { 
+    this.currentUser = userService.getCurrentUser();
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -52,6 +57,18 @@ export class ProductListCommentComponent implements OnInit {
       this.commentsFake.forEach((element) => {
         let comment = new Comment(element.nameUser, element.idProduct, element.star, element.text, element.date, element.index);
         this.commentDisplay.push(comment);
+        this.userService.getData().subscribe(data => {
+          data.forEach(element1 => {
+            if (element1.email == element.nameUser) {
+              if (element1.img == "") {
+                this.listSrc.push( "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png");
+              } else {
+                this.listSrc.push(this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + element1.img));
+              }
+            }
+          });
+        })
+        this.listSrc.push()
       });
       this.isLoading = false;
     });
@@ -68,9 +85,9 @@ export class ProductListCommentComponent implements OnInit {
     this.commentService.getLastIndexInProductId(this.productId).subscribe((result) => {
       let comment: Comment;
       if (result[0] != null) {
-        comment = (new Comment('aasd', this.productId, star, text, new Date(), result[0]['index'] + 1));
+        comment = (new Comment(this.currentUser.email, this.productId, star, text, new Date(), result[0]['index'] + 1));
       } else {
-        comment = (new Comment('aasd', this.productId, star, text, new Date(), 0));
+        comment = (new Comment(this.currentUser.email, this.productId, star, text, new Date(), 0));
       }
       console.log(comment.$idProduct)
       this.commentService.postComment(comment).subscribe(data => {

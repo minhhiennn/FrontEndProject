@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class UserService {
-  url = 'https://first-fucking-app-angular.herokuapp.com/users';
+  url = 'https://first-fucking-app-angular.herokuapp.com/users/';
   urlCurrentUser = 'https://first-fucking-app-angular.herokuapp.com/currentUser';
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -16,14 +16,12 @@ export class UserService {
     localStorage.setItem("currentUser", JSON.stringify(user));
     this.router.navigate(['']);
   }
-  getCurrentUser(): User | null{
-    let currentUser: User | null = null;
+  getCurrentUser(): User {
+    
     let object: any = localStorage.getItem("currentUser");
     let object2 = JSON.parse(object as any);
-    if (object != null) {
-      currentUser = new User(object2.id, object2.img, object2.name, object2.email, object2.password);
-    }
-    return currentUser;
+    return new User(object2.id, object2.img, object2.name, object2.email, object2.password);
+   
   }
   logOutCurrentUser() {
     localStorage.clear();
@@ -35,4 +33,8 @@ export class UserService {
   getUserByEmailAndPassword(email: string, password: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}?email=${email}&password=${password}`);
   }
+  updateUser(user : User ){
+    return this.http.put(this.url + user.id, user);
+  }
+  
 }
