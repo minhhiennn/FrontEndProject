@@ -19,8 +19,10 @@ export class UserService {
     
     let object: any = localStorage.getItem("currentUser");
     let object2 = JSON.parse(object as any);
-    return new User(object2.id, object2.img, object2.name, object2.email, object2.password);
-   
+    if (object2 != null) {
+      return new User(object2.id, object2.img, object2.name, object2.email, object2.password);
+    }
+    return new User(0, '', '', '', '');
   }
   logOutCurrentUser() {
     localStorage.clear();

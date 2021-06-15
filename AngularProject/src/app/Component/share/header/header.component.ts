@@ -9,10 +9,12 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   currentUser: User | null = null;
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.currentUser = this.userService.getCurrentUser();
+    if (this.userService.getCurrentUser().id != 0) {
+      this.currentUser = this.userService.getCurrentUser();
+    }
   }
   logOut() {
     this.userService.logOutCurrentUser();
@@ -20,7 +22,7 @@ export class HeaderComponent implements OnInit {
   Search(stringSearch: string) {
     if (stringSearch != '') {
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/shop'], { queryParams: { search: stringSearch } }));
+        this.router.navigate(['/shop'], { queryParams: { search: stringSearch } }));
     }
   }
 }
