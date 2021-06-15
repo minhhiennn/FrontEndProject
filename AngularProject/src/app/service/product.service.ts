@@ -11,4 +11,7 @@ export class ProductService {
   getData(): Observable<Product[]> {
     return this.http.get<Product[]>(this.url);
   }
+  getSingleProduct(id: number) {
+    return this.http.get<Product>(this.url + "/" + id);
+  }
 }
