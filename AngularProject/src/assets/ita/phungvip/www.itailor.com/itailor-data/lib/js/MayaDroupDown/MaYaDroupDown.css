@@ -1,0 +1,30 @@
+.MayaDropDown{display: inline-block;padding: 3px 0;height: 20px;font-size: 90%;position: relative;min-width: 100px}
+.MayaDropDown *{color: rgba(255,255,255,1);font-size: 13px!important;font-weight: normal!important;}
+.MayaDropDown:hover{border: 1px solid rgba(255,255,255,.4);color: rgba(255,255,255,.8)}
+.MayaDropDown .boxList{display: flex;height: auto;width: 100%;overflow: hidden;position: absolute;top:25px;z-index: 250}
+.MayaDropDown , .MayaDropDown ul{border: 1px solid rgba(255,255,255,.2);background: rgba(0,0,0,.9)}
+.MayaDropDown > select{display: none}
+.MayaDropDown >span{cursor: pointer;display: inline-block;line-height: 20px;padding: 0 0 0 5px;width: 95%;}
+.MayaDropDown >span:after{position: absolute; right: 0; margin: 7px; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid; content: ""; font-size: 12px; cursor: pointer;}
+.MayaDropDown ul{list-style: none;width: 100%;min-height: 10px;overflow-y: auto;overflow-x: hidden;max-height: 380px;right: 0;z-index: 9999;
+                 transition:all 0.5s ease;
+                 -webkit-transition:all .3s ease-in-out;
+                 -moz-transition:all .3s ease-in-out;
+                 -o-transition:all .3s ease-in-out;
+                 -webkit-transform: translateY(-100%);
+                 -moz-transform: translateY(-100%);
+                 -o-transform: translateY(-100%);
+                 -ms-transform: translateY(-100%);
+                 transform: translateY(-100%);
+}
+.MayaDropDown ul li{text-align: left;cursor: pointer;padding: 3%!important;width: 96%;border-left: 2px solid rgba(255,255,255,0)!important;display: block!important;font-weight: normal!important;}
+.MayaDropDown ul li:hover{background: rgba(0, 148, 178, 0.95);color: #FFF;border-left: 2px solid #55DDF3!important;}
+.MayaDropDown .activet{
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -o-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+}
+.MayaDropDown .mCustomScrollBox > .mCSB_scrollTools{width: 5px}
+.MayaDropDown .mCSB_container{margin-right: 5px!important;}

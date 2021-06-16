@@ -1,0 +1,5 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+www.itailor.com	TRUE	/	FALSE	1999999999	PHPSESSID	t0mn4cbd7ilsjv2h3a3gstuloe
+www.itailor.com	TRUE	/	FALSE	1999999999	TRAFFIC_visit__SUIT	TRUE
+
