@@ -28,7 +28,6 @@ export class ShopComponent implements OnInit {
     } else if (stringSearch == null && priceRange == null) {
       this.getListProduct();
     }
-
   }
 
   onClick2(p: number) {

@@ -22,7 +22,7 @@ export class CartService {
     // nếu tìm thấy cartItem chứa product đó
     // tăng price vs quantity lên
     this.currentUser = this.userService.getCurrentUser();
-    if (this.currentUser.id != null) {
+    if (this.currentUser != null) {
       if (this.checkExistProduct(product) === true) {
         let num = this.getIndexExistProduct(product);
         let id: number = this.items[num].id;
@@ -34,7 +34,7 @@ export class CartService {
             this.router.navigate(['/cart']);
           });
         });
-      } else if (this.currentUser.id == 0) {
+      } else  {
         // nếu ko tìm thấy cartItem nào
         // lấy ra id lớn nhất của cartItem + 1
         this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price, this.currentUser?.id)).subscribe(() => {

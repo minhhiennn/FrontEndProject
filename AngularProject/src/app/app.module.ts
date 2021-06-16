@@ -54,9 +54,6 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
     ShopListProductComponent,
     AccountComponent,
     UserProfileComponent,
-    
-    
-
   ],
   imports: [
     MatProgressSpinnerModule,
@@ -70,11 +67,11 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyDfni1WuIp9vDdQ-FtQoPF-OQ4LfRggcYY",
       libraries: ["places", "geometry"]
-  }),
+    }),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'products', component: ProductDetailsComponent },
-      { path: 'shop', component: ShopComponent },
+      { path: 'shop', component: ShopComponent},
       { path: 'login', component: LoginComponent },
       { path: 'blog/blog-list', component: BlogListComponent },
       { path: 'blog/blog-single', component: BlogSingleComponent },
@@ -83,10 +80,10 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
       { path: 'cart', component: CartComponent },
       { path: 'checkout', component: CheckoutComponent },
       { path: 'account', component: AccountComponent },
-       { path: 'user', component: UserProfileComponent }
+      { path: 'user', component: UserProfileComponent }
     ])
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
