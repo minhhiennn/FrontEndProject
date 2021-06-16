@@ -20,7 +20,6 @@ export class ProductDetailsComponent implements OnInit {
       this.product = product;
     })
     //this.product = this.productService.products.find((product) => product.id === productIdFromRoute);
-    console.log(this.product);
   } 
   change(input: any) {
     let num = Number(input.value);

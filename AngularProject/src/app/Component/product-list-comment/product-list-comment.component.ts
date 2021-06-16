@@ -43,6 +43,7 @@ export class ProductListCommentComponent implements OnInit {
   ) { 
     this.currentUser = userService.getCurrentUser();
     
+    
   }
 
   ngOnInit(): void {
@@ -51,18 +52,13 @@ export class ProductListCommentComponent implements OnInit {
     });
     const productIdFromRoute = this.productId;
     this.commentService.getLastIndexInProductId(productIdFromRoute).subscribe((result) => { this.total = result[0]['index'] + 1 });
-
-    this.commentService.getCommentByIDProduct(productIdFromRoute, (this.p - 1) * 5).subscribe((countries) => {
-      this.commentsFake = countries;
-      if (countries == null) {
-        this.isLoading = false;
-      }
-      this.commentsFake.forEach((element) => {
-        let comment = new Comment(element.nameUser, element.idProduct, element.star, element.text, element.date, element.index);
+    this.commentService.getCommentByIDProduct(productIdFromRoute, (this.p - 1) * 5).subscribe((data) => {
+      data.forEach((element) => {
+        let comment = new Comment(element['idProduct'], element['star'], element['text'], element['date'], element['index'], element['nameUser']);
         this.commentDisplay.push(comment);
         this.userService.getData().subscribe(data => {
           data.forEach(element1 => {
-            if (element1.email == element.nameUser) {
+            if (element1.email == element['nameUser']) {
               if (element1.img == "") {
                 this.listSrc.push( "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png");
               } else {
@@ -71,7 +67,7 @@ export class ProductListCommentComponent implements OnInit {
             }
           });
         })
-        this.listSrc.push()
+        this.listSrc.push();
       });
       this.isLoading = false;
     });
@@ -88,15 +84,16 @@ export class ProductListCommentComponent implements OnInit {
     this.commentService.getLastIndexInProductId(this.productId).subscribe((result) => {
       let comment: Comment;
       if (result[0] != null) {
+        
         comment = (new Comment(this.productId, star, text, new Date(), result[0]['index'] + 1, this.currentUser?.email));
       } else {
         comment = (new Comment(this.productId, star, text, new Date(), 0, this.currentUser?.email));
       }
-      console.log(comment.$idProduct)
+      
       this.commentService.postComment(comment).subscribe(data => {
         this.myForm1.get('txt')?.setValue("")
         this.myForm1.get('star')?.setValue(0);
-        this.pagination(this.p)
+        this.pagination(1)
       })
     });
   }

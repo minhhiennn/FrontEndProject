@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    if (this.userService.getCurrentUser().id != 0) {
+    if (this.userService.getCurrentUser() != null) {
       this.currentUser = this.userService.getCurrentUser();
     }
   }

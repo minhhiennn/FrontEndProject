@@ -11,7 +11,7 @@ import { User } from 'src/app/models/user';
 })
 export class CartService {
   items: CartItem[] = [];
-  currentUser: User | null = null;;
+  currentUser: any;
   urlCart = "https://first-fucking-app-angular.herokuapp.com/cart";
   constructor(private http: HttpClient, private router: Router, private userService: UserService) {
     this.getData().subscribe((data: CartItem[]) => {
@@ -22,7 +22,7 @@ export class CartService {
     // nếu tìm thấy cartItem chứa product đó
     // tăng price vs quantity lên
     this.currentUser = this.userService.getCurrentUser();
-    if (this.currentUser.id != 0) {
+    if (this.currentUser.id != null) {
       if (this.checkExistProduct(product) === true) {
         let num = this.getIndexExistProduct(product);
         let id: number = this.items[num].id;
