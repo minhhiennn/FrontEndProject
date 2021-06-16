@@ -1,9 +1,8 @@
 <mat-spinner *ngIf="isLoading;else asd"></mat-spinner>
 <ng-template #asd>
 
-    <div class="col-sm-12" e>
 
-
+    <div class="col-sm-12" *ngIf="currentUser; else templateName" e>
         <p><b>Write Your Review</b></p>
         <form action="#" [formGroup]="myForm1" (ngSubmit)="submitC()">
 
@@ -28,6 +27,11 @@
 
     </div>
 
+    <ng-template #templateName>
+
+        <p><b>Bạn phải đăng nhập để có thể bình luận</b></p>
+    </ng-template>
+    
     
 
     <h3>User Comment Example</h3>

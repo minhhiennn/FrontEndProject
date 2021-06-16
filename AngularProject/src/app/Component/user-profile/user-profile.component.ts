@@ -13,7 +13,7 @@ export class UserProfileComponent implements OnInit {
   path: string = "";
   userProfileImg: any;
   storageRef: any;
-  currentUser: User  ;
+  currentUser: any  ;
   base64textString: string = "";
   isLoading = true;
   constructor(private us: UserService, private sanitizer: DomSanitizer) {

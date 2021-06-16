@@ -16,11 +16,16 @@ export class UserService {
     localStorage.setItem("currentUser", JSON.stringify(user));
     this.router.navigate(['']);
   }
-  getCurrentUser(): User {
+  getCurrentUser(): User | null{
     
     let object: any = localStorage.getItem("currentUser");
     let object2 = JSON.parse(object as any);
-    return new User(object2.id, object2.img, object2.name, object2.email, object2.password);
+    if(object != null){
+
+      return new User(object2.id, object2.img, object2.name, object2.email, object2.password);
+    }
+    return null;
+  
    
   }
   logOutCurrentUser() {

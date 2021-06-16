@@ -24,7 +24,7 @@ export class ProductListCommentComponent implements OnInit {
     star: '',
   });
   startGet: any;
-  currentUser: User;
+  currentUser: any;
   isLoading: boolean = true;
   start: number = 0;
   productId: number = 0;
@@ -40,6 +40,7 @@ export class ProductListCommentComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) { 
     this.currentUser = userService.getCurrentUser();
+    
   }
 
   ngOnInit(): void {
