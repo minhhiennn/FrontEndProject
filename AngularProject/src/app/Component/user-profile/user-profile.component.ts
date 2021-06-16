@@ -9,60 +9,64 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  localUrl: any ;
+  localUrl: any;
   path: string = "";
   userProfileImg: any;
   storageRef: any;
+
   currentUser: any  ;
+
+  
   base64textString: string = "";
   isLoading = true;
   constructor(private us: UserService, private sanitizer: DomSanitizer) {
     this.currentUser = us.getCurrentUser();
-   }
+  }
 
   ngOnInit(): void {
-    this.us.getData().subscribe(data =>{
+    this.us.getData().subscribe(data => {
       data.forEach(element => {
-        if(element.id == this.currentUser.id){
+        if (element.id == this.currentUser.id) {
           if (element.img == "") {
             this.localUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png";
           } else {
-            this.localUrl = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'+element.img);
+            this.localUrl = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + element.img);
           }
         }
       });
       this.isLoading = false
     })
-  
+
 
   }
- showPreviewImage(event: any) {
-   var files = event.target.files;
-   var file = files[0];
+  showPreviewImage(event: any) {
+    var files = event.target.files;
+    var file = files[0];
 
-   if (files && file) {
-     var reader = new FileReader();
+    if (files && file) {
+      var reader = new FileReader();
 
-     reader.onload = this.handleReaderLoaded.bind(this);
 
-     reader.readAsBinaryString(file);
- }
+      reader.onload = this.handleReaderLoaded.bind(this);
+
+
+      reader.readAsBinaryString(file);
+    }
   }
 
-  handleReaderLoaded(readerEvt:any) {
+  handleReaderLoaded(readerEvt: any) {
     var binaryString = readerEvt.target.result;
     this.base64textString = btoa(binaryString);
     this.currentUser.img = this.base64textString;
-    this.us.updateUser(this.currentUser).subscribe(data => {
+    this.us.updateUser(this.currentUser).subscribe(() => {
       this.isLoading = true;
       this.ngOnInit();
     });
-  
+
   }
 
-save(){
-  
-  this.us.updateUser(this.currentUser).subscribe(data => {});
-  
-}
+  save() {
+    this.us.updateUser(this.currentUser).subscribe(() => { });
+
+  }
 }

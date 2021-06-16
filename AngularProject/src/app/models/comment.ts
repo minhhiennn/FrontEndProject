@@ -1,13 +1,13 @@
 export class Comment {
 
-    private nameUser: string;
+    private nameUser?: string;
     private idProduct: number;
     private star: number;
     private text: string;
     private date: Date;
     private index: number;
 
-	constructor($nameUser: string, $idProduct: number, $star: number, $text: string, $date: Date, $index: number) {
+  constructor($idProduct: number, $star: number, $text: string, $date: Date, $index: number, $nameUser?: string) {
 		this.nameUser = $nameUser;
 		this.idProduct = $idProduct;
 		this.star = $star;
@@ -23,7 +23,7 @@ export class Comment {
      * Getter $nameUser
      * @return {string}
      */
-	public get $nameUser(): string {
+  public get $nameUser(): string | undefined{
 		return this.nameUser;
 	}
 
@@ -71,7 +71,7 @@ export class Comment {
      * Setter $nameUser
      * @param {string} value
      */
-	public set $nameUser(value: string) {
+  public set $nameUser(value: string | undefined) {
 		this.nameUser = value;
 	}
 

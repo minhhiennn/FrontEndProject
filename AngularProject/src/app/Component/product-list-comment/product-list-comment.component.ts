@@ -24,7 +24,9 @@ export class ProductListCommentComponent implements OnInit {
     star: '',
   });
   startGet: any;
+
   currentUser: any;
+
   isLoading: boolean = true;
   start: number = 0;
   productId: number = 0;
@@ -86,9 +88,9 @@ export class ProductListCommentComponent implements OnInit {
     this.commentService.getLastIndexInProductId(this.productId).subscribe((result) => {
       let comment: Comment;
       if (result[0] != null) {
-        comment = (new Comment(this.currentUser.email, this.productId, star, text, new Date(), result[0]['index'] + 1));
+        comment = (new Comment(this.productId, star, text, new Date(), result[0]['index'] + 1, this.currentUser?.email));
       } else {
-        comment = (new Comment(this.currentUser.email, this.productId, star, text, new Date(), 0));
+        comment = (new Comment(this.productId, star, text, new Date(), 0, this.currentUser?.email));
       }
       console.log(comment.$idProduct)
       this.commentService.postComment(comment).subscribe(data => {

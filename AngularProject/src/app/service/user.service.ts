@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   url = 'https://first-fucking-app-angular.herokuapp.com/users/';
-  urlCurrentUser = 'https://first-fucking-app-angular.herokuapp.com/currentUser';
   constructor(private http: HttpClient, private router: Router) { }
 
   setCurrentUser(user: User) {
@@ -20,6 +19,7 @@ export class UserService {
     
     let object: any = localStorage.getItem("currentUser");
     let object2 = JSON.parse(object as any);
+
     if(object != null){
 
       return new User(object2.id, object2.img, object2.name, object2.email, object2.password);
@@ -27,6 +27,8 @@ export class UserService {
     return null;
   
    
+
+
   }
   logOutCurrentUser() {
     localStorage.clear();

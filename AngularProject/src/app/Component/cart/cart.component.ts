@@ -18,13 +18,13 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.userService.getCurrentUser();
-    if (this.currentUser != null) {
+    if (this.currentUser.id != 0) {
       this.cartService.getDataByUserId(this.currentUser.id).subscribe((data: CartItem[]) => {
         this.cartItems = data;
         this.caculateCartTotal();
         this.showSpinner = false;
       });
-    } else {
+    } else if (this.currentUser.id == 0) {
       this.router.navigate(['/login']);
     }
   }
