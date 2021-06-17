@@ -12,6 +12,7 @@ $(document).ready(function () {
  * =============================================================================*/
 var FrmMeaBodySize = {'unit': 'inch', 'pd': '', 'type': '', 'max': '', 'min': '', '_this': '', 'val': '', status: false};
 $.fn.EventBodySizeRadio = function () {
+    
     $(this).change(function () {
         var value = $(this).val();
         FrmMeaBodySize.unit = value;
@@ -19,6 +20,7 @@ $.fn.EventBodySizeRadio = function () {
     });
 };
 $.fn.FrmMeasurementValidation = function () {
+    
     var frm = $(this), recommentStatus = false;
     frm.find('input').focus(function () {
         $('#jk-size-detail, #pt-size-detail, #vt-size-detail, #ct-size-detail').text('');
@@ -46,9 +48,11 @@ $.fn.FrmMeasurementValidation = function () {
         
         if (recommentStatus === true) {
             strRecomend();
+            
         }
         else {
             recommentStatus = false;
+            
         }
     });
     frm.find('input').focusout(function () {
@@ -137,6 +141,7 @@ $.fn.FrmMeasurementValidation = function () {
         FrmMeaBodySize.val = val;
         FrmMeaBodySize.min = min;
         FrmMeaBodySize.max = max;
+        
     };
 
     function checkFrmSubmit() {
@@ -251,6 +256,7 @@ $.fn.FrmMeasurementValidation = function () {
     }
 };
 function tabmeasurements() {
+    
     if (designObject.subMenuMain === "menu-body-size" || designObject.subMenuMain === "menu-standard-size") {
         $('#menu').css({'width': '14.35%'});
         $('#menu-main').css({'width': '100%'});
@@ -705,6 +711,7 @@ function vestShoulderSize(a) {
  * SELECT MEASUREMENTS SML
  * =============================================================================*/
 $.fn.JsSelectBox = function () {
+    
     var _this = $(this);
     var _List = $('.JSselectboxList');
     var _ListLi = $('.JSselectboxList ul');
@@ -736,6 +743,7 @@ $.fn.JsSelectBox = function () {
     });
 };
 $.fn.EventStandardSizeRadio = function () {
+    
     $(this).change(function () {
         var value = $(this).val();
         $('#frmStandardSize .tag-unit').text(value);
@@ -743,6 +751,7 @@ $.fn.EventStandardSizeRadio = function () {
     });
 };
 $.fn.EventInputFocus = function () {
+     
     var frm = $(this);
     frm.find('input').focus(function () {
         var type = $(this).attr('data-sizeName');
@@ -783,9 +792,14 @@ $.fn.zoomImageSize = function () {
     });
 };
 function changStandardSize() {
+    console.log("changStandardSize")
     var arr = designObject.measurementSize.standard;
     var unit = $('#frmStandardSize input[name=unit]:checked').val();
     var sizeNo = $('#StandardsizeNo input').val();
+    
+    
+   
+    let meansureArr = []
     $('#frmStandardSize li').each(function () {
         var _this = $(this);
         var pd = _this.parents('ul').attr('data-sizeproduct');
@@ -795,10 +809,40 @@ function changStandardSize() {
             /*change*/
             _this.find('input').val(value);
             _this.find('span').text(value);
+            meansureArr.push(value);
         }
+        
     });
+    
+    var jacketMe = {
+
+        chest: meansureArr[0],
+        waist: meansureArr[1],
+        hip: meansureArr[2],
+        shoulder: meansureArr[3],
+        sleeve: meansureArr[4],
+        length: meansureArr[5],
+
+    }
+    var pantMe = {
+
+        waist: meansureArr[6],
+        hip: meansureArr[7],
+        crotch: meansureArr[8],
+        thigh: meansureArr[9],
+        length: meansureArr[10],
+
+    }
+    var measure = {
+        type: unit,
+        jacket: jacketMe,
+        pant : pantMe
+    }
+    localStorage.setItem('measure', JSON.stringify(measure));
+  
 }
 function changeStandardsizeNo(callback) {
+    console.log("changeStandardsizeNo")
     var tagMain = $('#StandardsizeNo ul');
     var arr = designObject.measurementSize.standard;
     var sizeType = $('#selectSizeType input').val();

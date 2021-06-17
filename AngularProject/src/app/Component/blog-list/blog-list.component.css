@@ -1,0 +1,29 @@
+
+
+.inside_element {
+  float:right;
+  clear:both;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+
+#clickable-zone {
+  margin-right: -600px;
+  position: absolute;
+  top: 750px;
+  right: 4px;
+  float:left;
+  z-index: 5;
+  height: 50px;
+  width: 100px;
+  
+}
+
+#editable-content {
+  height: 208px;
+  width: 508px;
+  position: relative;
+}
