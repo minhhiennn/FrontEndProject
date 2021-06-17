@@ -41,7 +41,7 @@ export class BlogListComponent implements OnInit {
     this.imagePath =localStorage.getItem("#jacket-front") as string
     
     let product: Product = new Product(-2, JSON.parse(localStorage.getItem("sumExtra") as any), "do custom", (this.imagePath));
-    this.cartService.addToCart(product);
+    this.cartService.addToCart(product,1);
   }
 
 }
