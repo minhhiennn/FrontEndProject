@@ -89,7 +89,7 @@ export class CartService {
       } else {
         // nếu ko tìm thấy cartItem nào
         // lấy ra id lớn nhất của cartItem + 1
-        this.postData(new CartItem(this.getMaxIndexCartItem() + 1, cartItems[i].product, cartItems[i].quantity, cartItems[i].product.price, this.currentUser?.id)).subscribe(() => {
+        this.postData(new CartItem(this.getMaxIndexCartItem() + 1, cartItems[i].product, cartItems[i].quantity, cartItems[i].price_total, this.currentUser?.id)).subscribe(() => {
           this.getData().subscribe((data: CartItem[]) => {
             this.items = data;
             this.cartSync(cartItems, i + 1)
