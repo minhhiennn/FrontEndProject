@@ -13,7 +13,7 @@ export class BlogListComponent implements OnInit {
   constructor(public sanitizer: DomSanitizer) {
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
-
+  
   ngOnInit(): void {
     
   }

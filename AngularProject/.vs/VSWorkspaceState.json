@@ -4,12 +4,10 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\component",
-    "\\src\\app\\component\\cart",
-    "\\src\\app\\component\\share",
-    "\\src\\app\\component\\share\\header",
-    "\\src\\app\\component\\user-profile",
-    "\\src\\app\\service"
+    "\\src\\app\\component\\blog-list",
+    "\\src\\assets",
+    "\\src\\assets\\ita\\phungvip"
   ],
-  "SelectedNode": "\\src\\app\\component\\cart\\cart.component.ts",
+  "SelectedNode": "\\src\\app\\app.module.ts",
   "PreviewInSolutionExplorer": false
 }

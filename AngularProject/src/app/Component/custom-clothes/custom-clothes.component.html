@@ -1,0 +1,143 @@
+<!--header-->
+<app-header></app-header>
+<!--/header-->
+<div class="container" id="div-container">
+  <div class="custom-vest-header">
+    <h2 style="padding-bottom:60px;">Tự Chọn Vật Liệu Để May Áo Vest Cho Bạn </h2>
+  </div>
+  <div class="custom-vest-body">
+    <div class="item">
+      <div class="name">
+        <span>1. Chất liệu vải </span>
+      </div>
+      <div class="popup-select" id="div-btn1">
+        <div #input class="btn-select" id="btn1" (click)="test(input)">
+          <i class="fa fas fa-plus"></i>Chọn vải
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="name">
+        <span>1. Bo mạch chủ</span>
+      </div>
+      <div class="popup-select">
+        <div class="btn-select" id="btn2">
+          <i class="fa fas fa-plus"></i>
+          Bo mạch chủ
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="name">
+        <span>1. Bo mạch chủ</span>
+      </div>
+      <div class="popup-select">
+        <div class="btn-select" id="btn3">
+          <i class="fa fas fa-plus"></i>Bo mạch chủ
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="name">
+        <span>1. Bo mạch chủ</span>
+      </div>
+      <div class="popup-select">
+        <div class="btn-select" id="btn4">
+          <i class="fa fas fa-plus"></i>Bo mạch chủ
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="name">
+        <span>1. Bo mạch chủ</span>
+      </div>
+      <div class="popup-select">
+        <div class="btn-select" id="btn5">
+          <i class="fa fas fa-plus"></i>Bo mạch chủ
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-vest-footer">
+    <p>Thành giá: 100 VND</p>
+    <button>Tiếp Theo</button>
+  </div>
+</div>
+<div id="btn1-choose-id" class="btn-choose" hidden>
+  <div class="btn-header-choose">
+    <button (click)="exitOverflowDiv()">Thoát</button>
+  </div>
+  <div class="btn-body-choose">
+    <div class="btn-list-to-choose">
+      <div class="detail" #detail1>
+        <div class="img">
+          <img src="assets/images/shop/product10.jpg" />
+        </div>
+        <div class="content" style="padding-left:10px">
+          <p>Loại vãi trẻ trung năng động</p>
+          <p>Giá :100 VND</p>
+          <p>Mã sản phẩm: 000001</p>
+          <button (click)="select(detail1)">Chọn</button>
+        </div>
+      </div>
+      <div class="detail" #detail2>
+        <div class="img">
+          <img src="assets/images/shop/product11.jpg" />
+        </div>
+        <div class="content">
+          <p>Loại vãi trẻ trung năng động</p>
+          <p>Giá :100 VND</p>
+          <p>Mã sản phẩm: 000001</p>
+          <button (click)="select(detail2)">Chọn</button>
+        </div>
+      </div>
+      <div class="detail" #detail3>
+        <div class="img">
+          <img src="assets/images/shop/product12.jpg" />
+        </div>
+        <div class="content">
+          <p>Loại vãi trẻ trung năng động</p>
+          <p>Giá :100 VND</p>
+          <p>Mã sản phẩm: 000001</p>
+          <button (click)="select(detail3)">Chọn</button>
+        </div>
+      </div>
+      <div class="detail" #detail4>
+        <div class="img">
+          <img src="assets/images/shop/product8.jpg" />
+        </div>
+        <div class="content">
+          <p>Loại vãi trẻ trung năng động</p>
+          <p>Giá :100 VND</p>
+          <p>Mã sản phẩm: 000001</p>
+          <button (click)="select(detail4)">Chọn</button>
+        </div>
+      </div>
+      <div class="detail" #detail5>
+        <div class="img">
+          <img src="assets/images/shop/product7.jpg" />
+        </div>
+        <div class="content">
+          <p>Loại vãi trẻ trung năng động</p>
+          <p>Giá :100 VND</p>
+          <p>Mã sản phẩm: 000001</p>
+          <button (click)="select(detail5)">Chọn</button>
+        </div>
+      </div>
+      <div class="detail" #detail6>
+        <div class="img">
+          <img src="assets/images/shop/product9.jpg" />
+        </div>
+        <div class="content">
+          <p>Loại vãi trẻ trung năng động</p>
+          <p>Giá :100 VND</p>
+          <p>Mã sản phẩm: 000001</p>
+          <button (click)="select(detail6)">Chọn</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Footer-->
+<app-footer></app-footer>
+<!--/Footer-->

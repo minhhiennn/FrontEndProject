@@ -1,3 +1,4 @@
+
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -28,11 +29,7 @@ import { ShopListProductComponent } from './component/shop-list-product/shop-lis
 import { ProductListCommentComponent } from './component/product-list-comment/product-list-comment.component';
 import { AccountComponent } from './component/account/account.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
-
-
-
-
-
+import { CustomClothesComponent } from './component/custom-clothes/custom-clothes.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +51,7 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
     ShopListProductComponent,
     AccountComponent,
     UserProfileComponent,
+    CustomClothesComponent,
   ],
   imports: [
     MatProgressSpinnerModule,
@@ -80,7 +78,8 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
       { path: 'cart', component: CartComponent },
       { path: 'checkout', component: CheckoutComponent },
       { path: 'account', component: AccountComponent },
-      { path: 'user', component: UserProfileComponent }
+      { path: 'user', component: UserProfileComponent },
+      { path: 'custom-clothes', component: CustomClothesComponent }
     ])
   ],
   providers: [],

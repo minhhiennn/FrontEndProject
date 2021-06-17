@@ -1,0 +1,71 @@
+.container {
+}
+
+.item {
+  display: flex;
+  padding-left: 0px;
+}
+
+  .item > * {
+    font-size: 15px;
+  }
+
+.name {
+  width: 200px;
+  padding: 15px 2px;
+  border: 1px solid silver;
+  border-right: none;
+}
+
+.popup-select {
+  width: 862px;
+  border: 1px solid silver;
+  padding: 15px 2px;
+}
+
+.disable-div-container {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.custom-vest-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 50px;
+  border: 1px solid red;
+}
+
+.btn-select {
+  display: inline-block;
+  border: 1px solid green;
+  border-radius: 8px;
+  background-color: antiquewhite;
+}
+/*
+    đây là css cho những div khi được click
+*/
+.btn-choose {
+  position: fixed;
+  z-index: 99;
+  width: 500px;
+  height: 400px;
+  background-color: wheat;
+  /* center a div */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /*..........*/
+  overflow:auto;
+}
+.btn-list-to-choose .detail {
+  display: flex;
+  border-bottom: 1px solid red;
+  padding: 10px
+}
+.btn-list-to-choose img {
+  width: 120px;
+  height: 120px;
+}
+.btn-list-to-choose .content {
+  padding-left: 10px;
+}
