@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Product } from 'src/app/models/product';
+import { CartService } from 'src/app/service/cart.service';
+
 
 @Component({
   selector: 'app-blog-list',
@@ -9,12 +12,14 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class BlogListComponent implements OnInit {
   name = 'Set iframe source';
   url: string = "https://www.itailor.com/designsuits/";
+  imagePath : string = "";
   urlSafe: SafeResourceUrl;
-  constructor(public sanitizer: DomSanitizer) {
+  constructor(public sanitizer: DomSanitizer, private cartService: CartService, ) {
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
   
   ngOnInit(): void {
+  
     
   }
   post(){
@@ -30,8 +35,13 @@ export class BlogListComponent implements OnInit {
     console.log(JSON.parse(localStorage.getItem("sumExtra") as any))
 
     //hai cai cuoi nay la base64 lay hinh cua cai ao vest voi cai quan
-    console.log(JSON.parse(localStorage.getItem("vest") as any))
+    
     console.log(JSON.parse(localStorage.getItem("pant") as any))
+    console.log(JSON.parse(localStorage.getItem("vest") as any))
+    this.imagePath =localStorage.getItem("#jacket-front") as string
+    
+    let product: Product = new Product(-2, JSON.parse(localStorage.getItem("sumExtra") as any), "do custom", (this.imagePath));
+    this.cartService.addToCart(product);
   }
 
 }

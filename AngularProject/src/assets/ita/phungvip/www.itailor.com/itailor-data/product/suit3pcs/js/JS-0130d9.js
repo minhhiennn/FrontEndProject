@@ -803,6 +803,8 @@ function callDesign() {
     function _suit() {
         jacketDesign({view: 'front'}, function (path) {
             appendImage({pd: "jacket", path: path, view: "front"});
+            appendImage({ pd: "pant", path: path, view: "front" });
+            appendImage({ pd: "pant", path: path, view: "back" });
             jacketDesign({view: 'back'}, function (path) {
                 appendImage({pd: "jacket", path: path, view: "back"});
                 menuLDesign();
@@ -1136,9 +1138,10 @@ function encodeDesign() {
         var input2 = $('<input>').attr({'value': base64[i], 'name': i + "Object", 'type': 'hidden', 'class': 'base64'});
         input.appendTo(frmBodySize);
         input2.appendTo(frmStandardSize);
+        
     }
-
-   
+    
+    
     localStorage.setItem('vest', JSON.stringify(base64['vest']));
     
     localStorage.setItem('pant', JSON.stringify(base64['pant']));

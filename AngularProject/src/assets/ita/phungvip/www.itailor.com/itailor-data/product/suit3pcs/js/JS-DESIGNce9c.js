@@ -407,6 +407,7 @@ function canvasDesignMain(view, pd, arr, callback) {
 }
 function loadImage(id, sources, view, callback) {
     var canvas = document.getElementById(id);
+    
     var context = canvas.getContext('2d');
     var images = {};
     var loadedImages = 0;
@@ -415,7 +416,9 @@ function loadImage(id, sources, view, callback) {
         numImages++;
     }
     for (var src in sources) {
+        
         images[src] = new Image();
+        
         images[src].crossOrigin = "anonymous";
         images[src].onload = function () {
             if (++loadedImages >= numImages) {
@@ -427,6 +430,7 @@ function loadImage(id, sources, view, callback) {
             $(this).attr('src', "../itailor-data/webroot/img/missing.png");
         });
     }
+    
 }
 function appendImage(option, callback) {
     var pd = option.pd;
@@ -437,7 +441,10 @@ function appendImage(option, callback) {
     var img = [];
     img[0] = ({src: path});
     MethodsGalbal.AppendImg(Main, img);
+    console.log(mainId)
+    localStorage.setItem(mainId, path);
 
+    
     if (callback) {
         callback();
     }
