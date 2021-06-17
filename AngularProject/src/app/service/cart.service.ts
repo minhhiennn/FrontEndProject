@@ -14,38 +14,60 @@ export class CartService {
   currentUser: any;
   urlCart = "https://first-fucking-app-angular.herokuapp.com/cart";
   constructor(private http: HttpClient, private router: Router, private userService: UserService) {
-    this.getData().subscribe((data: CartItem[]) => {
-      this.items = data;
-    });
   }
   addToCart(product: Product) {
     // nếu tìm thấy cartItem chứa product đó
     // tăng price vs quantity lên
     this.currentUser = this.userService.getCurrentUser();
     if (this.currentUser != null) {
-      if (this.checkExistProduct(product) === true) {
-        let num = this.getIndexExistProduct(product);
-        let id: number = this.items[num].id;
-        let quantity: number = this.items[num].quantity + 1;
-        let price_total: number = this.items[num].price_total + product.price;
-        this.putData(id, new CartItem(id, product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
-          this.getData().subscribe((data: CartItem[]) => {
-            this.items = data;
-            this.router.navigate(['/cart']);
+      this.getData().subscribe((data: CartItem[]) => {
+        this.items = data;
+        if (this.checkExistProduct(product) === true) {
+          let num = this.getIndexExistProduct(product);
+          let id: number = this.items[num].id;
+          let quantity: number = this.items[num].quantity + 1;
+          let price_total: number = this.items[num].price_total + product.price;
+          this.putData(id, new CartItem(id, product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
+            this.getData().subscribe((data: CartItem[]) => {
+              this.items = data;
+              this.router.navigate(['/cart']);
+            });
           });
-        });
-      } else  {
-        // nếu ko tìm thấy cartItem nào
-        // lấy ra id lớn nhất của cartItem + 1
-        this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price, this.currentUser?.id)).subscribe(() => {
-          this.getData().subscribe((data: CartItem[]) => {
-            this.items = data;
-            this.router.navigate(['/cart']);
+        } else {
+          // nếu ko tìm thấy cartItem nào
+          // lấy ra id lớn nhất của cartItem + 1
+          this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price, this.currentUser?.id)).subscribe(() => {
+            this.getData().subscribe((data: CartItem[]) => {
+              this.items = data;
+              this.router.navigate(['/cart']);
+            });
           });
-        });
-      }
+        }
+      });
     } else {
-      this.router.navigate(['/login']);
+      let CookieCart: any = localStorage.getItem("CookieCart");
+      if (CookieCart != null) {
+        let listCartItem: CartItem[] = JSON.parse(CookieCart) as CartItem[];
+        this.items = listCartItem;
+        if (this.checkExistProduct(product) === true) {
+          let num = this.getIndexExistProduct(product);
+          let quantity: number = this.items[num].quantity + 1;
+          let price_total: number = this.items[num].price_total + product.price;
+          listCartItem[num].quantity = quantity;
+          listCartItem[num].price_total = price_total;
+          localStorage.setItem("CookieCart", JSON.stringify(listCartItem));
+          this.router.navigate(['/cart']);
+        } else {
+          listCartItem.push(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price));
+          localStorage.setItem("CookieCart", JSON.stringify(listCartItem));
+          this.router.navigate(['/cart']);
+        }
+      } else {
+        let listCartItem: CartItem[] = [];
+        listCartItem.push(new CartItem(1, product, 1, product.price));
+        localStorage.setItem("CookieCart", JSON.stringify(listCartItem));
+        this.router.navigate(['/cart']);
+      }
     }
   }
   checkExistProduct(product: Product): boolean {
@@ -82,30 +104,57 @@ export class CartService {
   getProductAndQuantity(quantity: number, product: Product) {
     this.currentUser = this.userService.getCurrentUser();
     if (this.currentUser != null) {
-      if (this.checkExistProduct(product) === true) {
-        let num = this.getIndexExistProduct(product);
-        let id: number = this.items[num].id;
-        let quantityy: number = this.items[num].quantity + quantity;
-        let price_total: number = product.price * quantityy;
-        this.putData(id, new CartItem(id, product, quantityy, price_total, this.currentUser?.id)).subscribe(response => {
-          this.getData().subscribe((data: CartItem[]) => {
-            this.items = data;
-            this.router.navigate(['/cart']);
+      this.getData().subscribe((data: CartItem[]) => {
+        this.items = data;
+        if (this.checkExistProduct(product) === true) {
+          let num = this.getIndexExistProduct(product);
+          let id: number = this.items[num].id;
+          let quantityy: number = this.items[num].quantity + quantity;
+          let price_total: number = product.price * quantityy;
+          this.putData(id, new CartItem(id, product, quantityy, price_total, this.currentUser?.id)).subscribe(response => {
+            this.getData().subscribe((data: CartItem[]) => {
+              this.items = data;
+              this.router.navigate(['/cart']);
+            });
           });
-        });
-      } else {
-        // nếu ko tìm thấy cartItem nào
-        // lấy ra id lớn nhất của cartItem + 1
-        let price_total: number = product.price * quantity;
-        this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, quantity, price_total, this.currentUser?.id)).subscribe(response => {
-          this.getData().subscribe((data: CartItem[]) => {
-            this.items = data;
-            this.router.navigate(['/cart']);
+        } else {
+          // nếu ko tìm thấy cartItem nào
+          // lấy ra id lớn nhất của cartItem + 1
+          let price_total: number = product.price * quantity;
+          this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, quantity, price_total, this.currentUser?.id)).subscribe(response => {
+            this.getData().subscribe((data: CartItem[]) => {
+              this.items = data;
+              this.router.navigate(['/cart']);
+            });
           });
-        });
-      }
+        }
+      });
     } else {
-      this.router.navigate(['/login']);
+      let CookieCart: any = localStorage.getItem("CookieCart");
+      if (CookieCart != null) {
+        let listCartItem: CartItem[] = JSON.parse(CookieCart) as CartItem[];
+        this.items = listCartItem;
+        if (this.checkExistProduct(product) === true) {
+          let num = this.getIndexExistProduct(product);
+          let quantityy: number = this.items[num].quantity + quantity;
+          let price_total: number = product.price * quantityy;
+          listCartItem[num].quantity = quantityy;
+          listCartItem[num].price_total = price_total;
+          localStorage.setItem("CookieCart", JSON.stringify(listCartItem));
+          this.router.navigate(['/cart']);
+        } else {
+          let price_total: number = product.price * quantity
+          listCartItem.push(new CartItem(this.getMaxIndexCartItem() + 1, product, quantity, price_total));
+          localStorage.setItem("CookieCart", JSON.stringify(listCartItem));
+          this.router.navigate(['/cart']);
+        }
+      } else {
+        let listCartItem: CartItem[] = [];
+        let price_total: number = product.price * quantity
+        listCartItem.push(new CartItem(1, product, quantity, price_total));
+        localStorage.setItem("CookieCart", JSON.stringify(listCartItem));
+        this.router.navigate(['/cart']);
+      }
     }
   }
   getData1() {

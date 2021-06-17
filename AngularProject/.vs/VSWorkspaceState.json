@@ -5,9 +5,12 @@
     "\\src\\app",
     "\\src\\app\\component",
     "\\src\\app\\component\\blog-list",
-    "\\src\\assets",
-    "\\src\\assets\\ita\\phungvip"
+    "\\src\\app\\component\\cart",
+    "\\src\\app\\component\\shop",
+    "\\src\\app\\models",
+    "\\src\\app\\service",
+    "\\src\\assets"
   ],
-  "SelectedNode": "\\src\\app\\app.module.ts",
+  "SelectedNode": "\\src\\app\\component\\cart\\cart.component.ts",
   "PreviewInSolutionExplorer": false
 }

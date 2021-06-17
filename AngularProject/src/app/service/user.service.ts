@@ -17,14 +17,14 @@ export class UserService {
   }
   getCurrentUser(): User | null {
     let object: any = localStorage.getItem("currentUser");
-    let object2 = JSON.parse(object as any);
+    let object2 = JSON.parse(object as any) as User;
     if (object != null) {
-      return new User(object2.id, object2.img, object2.name, object2.email, object2.password);
+      return object2;
     }
     return null;
   }
   logOutCurrentUser() {
-    localStorage.clear();
+    localStorage.removeItem("currentUser");
     this.router.navigate(['/login']);
   }
   getData(): Observable<User[]> {
