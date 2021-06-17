@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-custom-clothes',
   templateUrl: './custom-clothes.component.html',
@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomClothesComponent implements OnInit {
 
-  constructor() { }
+  information: string | undefined;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -27,6 +29,11 @@ export class CustomClothesComponent implements OnInit {
   }
   select(divElement: HTMLElement) {
     let div = document.getElementById("div-btn1") as HTMLElement;
+    let div2 = document.getElementById("content1") as HTMLElement;
+    // p price là div thứ 1
+    let price = div2.children[1];
+    this.information = price.innerHTML;
+    console.log(this.information);
     div.removeChild(document.getElementById("btn1") as HTMLElement);
     let imgUrl: string = divElement.getElementsByTagName("img")[0].src;
     let newDiv: HTMLElement = document.createElement("div");
@@ -41,5 +48,10 @@ export class CustomClothesComponent implements OnInit {
     let x = document.getElementById("btn1-choose-id") as HTMLElement;
     x.hidden = true;
     div_container.classList.remove("disable-div-container");
+  }
+  deleteAll() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/custom-clothes']);
   }
 }

@@ -5,6 +5,9 @@
   <div class="custom-vest-header">
     <h2 style="padding-bottom:60px;">Tự Chọn Vật Liệu Để May Áo Vest Cho Bạn </h2>
   </div>
+  <div class="rebuild" id="rebuild" style="border:1px solid red;background-color:antiquewhite;border-radius:8px;width:90px;text-align:center;margin-bottom:20px;font-size:15px" (click)="deleteAll()">
+    <span>Xây dựng lại</span>
+  </div>
   <div class="custom-vest-body">
     <div class="item">
       <div class="name">
@@ -59,7 +62,7 @@
     </div>
   </div>
   <div class="custom-vest-footer">
-    <p>Thành giá: 100 VND</p>
+    <p id="priceTotal">Thành giá: 0 VND</p>
     <button>Tiếp Theo</button>
   </div>
 </div>
@@ -73,7 +76,7 @@
         <div class="img">
           <img src="assets/images/shop/product10.jpg" />
         </div>
-        <div class="content" style="padding-left:10px">
+        <div class="content" id="content1" style="padding-left:10px">
           <p>Loại vãi trẻ trung năng động</p>
           <p>Giá :100 VND</p>
           <p>Mã sản phẩm: 000001</p>
@@ -86,7 +89,7 @@
         </div>
         <div class="content">
           <p>Loại vãi trẻ trung năng động</p>
-          <p>Giá :100 VND</p>
+          <p>Giá :120 VND</p>
           <p>Mã sản phẩm: 000001</p>
           <button (click)="select(detail2)">Chọn</button>
         </div>
@@ -97,7 +100,7 @@
         </div>
         <div class="content">
           <p>Loại vãi trẻ trung năng động</p>
-          <p>Giá :100 VND</p>
+          <p>Giá :130 VND</p>
           <p>Mã sản phẩm: 000001</p>
           <button (click)="select(detail3)">Chọn</button>
         </div>
@@ -108,7 +111,7 @@
         </div>
         <div class="content">
           <p>Loại vãi trẻ trung năng động</p>
-          <p>Giá :100 VND</p>
+          <p>Giá :140 VND</p>
           <p>Mã sản phẩm: 000001</p>
           <button (click)="select(detail4)">Chọn</button>
         </div>
@@ -119,7 +122,7 @@
         </div>
         <div class="content">
           <p>Loại vãi trẻ trung năng động</p>
-          <p>Giá :100 VND</p>
+          <p>Giá :150 VND</p>
           <p>Mã sản phẩm: 000001</p>
           <button (click)="select(detail5)">Chọn</button>
         </div>
@@ -130,7 +133,7 @@
         </div>
         <div class="content">
           <p>Loại vãi trẻ trung năng động</p>
-          <p>Giá :100 VND</p>
+          <p>Giá :160 VND</p>
           <p>Mã sản phẩm: 000001</p>
           <button (click)="select(detail6)">Chọn</button>
         </div>
