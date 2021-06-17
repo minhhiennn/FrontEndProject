@@ -839,7 +839,7 @@ function changStandardSize() {
         pant : pantMe
     }
     localStorage.setItem('measure', JSON.stringify(measure));
-    console.log(JSON.parse(localStorage.getItem("measure")))
+  
 }
 function changeStandardsizeNo(callback) {
     console.log("changeStandardsizeNo")

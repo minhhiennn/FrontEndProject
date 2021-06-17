@@ -993,13 +993,9 @@ function checkItemMenuS() {
         pant: pantMe
     }
     localStorage.setItem('measure', JSON.stringify(measure));
-    console.log(JSON.parse(localStorage.getItem("measure")))
     localStorage.setItem('iTailorObject', JSON.stringify(iTailorObject));
-    console.log(JSON.parse(localStorage.getItem("iTailorObject")))
     localStorage.setItem('vestObject', JSON.stringify(vestObject));
-    console.log(JSON.parse(localStorage.getItem("vestObject")))
     localStorage.setItem('pantObject', JSON.stringify(pantObject));
-    console.log(JSON.parse(localStorage.getItem("pantObject")))
     $('[data-main]').each(function () {
         var tag = $(this).attr('data-main');
         appendItemChk(tag);
@@ -1144,9 +1140,8 @@ function encodeDesign() {
 
    
     localStorage.setItem('vest', JSON.stringify(base64['vest']));
-    console.log(JSON.parse(localStorage.getItem("vest")))
+    
     localStorage.setItem('pant', JSON.stringify(base64['pant']));
-    console.log(JSON.parse(localStorage.getItem("pant")))
 }
 function setFabric(data) {
     var fabricAll = designObject.fabric;
@@ -1255,7 +1250,7 @@ function setPrice(data) {
     $(".layout-box-extra-pant .extra-pant-price").html(designObject.sign + ' ' + extraPant);
     
     localStorage.setItem('sumExtra', (sumExtra));
-    console.log(JSON.parse(localStorage.getItem("sumExtra")))
+  
     setPriceMenuSFabric();
     encodeDesign();
 }
