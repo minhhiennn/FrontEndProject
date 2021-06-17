@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CartItem } from 'src/app/models/cart-item';
+import { Product } from 'src/app/models/product';
+import { CartService } from 'src/app/service/cart.service';
 import { UserService } from 'src/app/service/user.service';
 import { User } from '../../models/user';
 @Component({
@@ -12,7 +15,7 @@ export class LoginComponent implements OnInit {
   myForm: FormGroup = new FormGroup({});
   myForm2: FormGroup = new FormGroup({});
   user: User | null = null;
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.myForm = this.formBuilder.group({
@@ -34,7 +37,17 @@ export class LoginComponent implements OnInit {
       if (user == null) {
         alert('Đăng nhập thất bại');
       } else {
+        
         this.userService.setCurrentUser(user);
+        if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
+          let cartItem = JSON.parse(localStorage.getItem('CookieCart') as any)
+          cartItem.forEach((element: Product) => {
+            if (element) {
+              this.cartService.addToCart(element);
+            }
+          });
+        }
+        localStorage.removeItem('CookieCart')
       }
     })
   }
