@@ -260,7 +260,7 @@ function menuL() {
 function imageError() {
     $('img').each(function () {
         $(this).error(function () {
-            $(this).attr('src', '../iTailor-data/webroot/img/missing.png');
+            $(this).attr('src', '../itailor-data/webroot/img/missing.png');
         });
     });
 }
@@ -399,7 +399,7 @@ $.fn.zoomFabric = function () {
 
 $.fn.faceMaskInfo = function () {
     $(this).click(function () {
-        $(this).popupMaya({url: "../iTailor-data/product/suit3pcs/popup/face-mask-info.php", transparent: true, run: true, width: 1024, subEleHeight: "100%"});
+        $(this).popupMaya({url: "../itailor-data/product/suit3pcs/popup/face-mask-info.php", transparent: true, run: true, width: 1024, subEleHeight: "100%"});
     });
 };
 
@@ -417,7 +417,7 @@ $.fn.lapelOption = function () {
     $(this).click(function () {
         var lapelWidthOptionCurrent = jacketObject.lapelWidthOption;
 
-        $(this).popupMaya({url: "../iTailor-data/product/suit3pcs/option/lapel-width-option.php", run: true}, function (option, eleData) {
+        $(this).popupMaya({url: "../itailor-data/product/suit3pcs/option/lapel-width-option.php", run: true}, function (option, eleData) {
             eleData.find('[name="lapelWidthOption"]').each(function () {
                 var value = $(this).val();
 

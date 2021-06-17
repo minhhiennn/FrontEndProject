@@ -706,6 +706,7 @@ function toggleViewProduct(pd) {
 var menuLLiningOptTimeout;
 
 function callDesign() {
+    
     setPrice();
     encodeDesign();
     preloadMainDesign();
@@ -713,7 +714,7 @@ function callDesign() {
     var menuMain = designObject.menuMain;
     var productMenu = designObject.productMenu;
     var project = designObject.project;
-
+    
     switch (menuMain) {
         case "menu-fabric":
             switch (project) {
@@ -967,9 +968,42 @@ function CheckInputNumber(val) {
     return val;
 }
 function checkItemMenuS() {
+    var jacketMe = {
+
+        chest: 39,
+        waist: 35,
+        hip: 38.5,
+        shoulder: 16,
+        sleeve: 23.75,
+        length: 29.5
+
+    }
+    var pantMe = {
+
+        waist: 29,
+        hip: 36,
+        crotch: 24,
+        thigh: 24.5,
+        length: 40
+
+    }
+    var measure = {
+        type: "inch",
+        jacket: jacketMe,
+        pant: pantMe
+    }
+    localStorage.setItem('measure', JSON.stringify(measure));
+    console.log(JSON.parse(localStorage.getItem("measure")))
+    localStorage.setItem('iTailorObject', JSON.stringify(iTailorObject));
+    console.log(JSON.parse(localStorage.getItem("iTailorObject")))
+    localStorage.setItem('vestObject', JSON.stringify(vestObject));
+    console.log(JSON.parse(localStorage.getItem("vestObject")))
+    localStorage.setItem('pantObject', JSON.stringify(pantObject));
+    console.log(JSON.parse(localStorage.getItem("pantObject")))
     $('[data-main]').each(function () {
         var tag = $(this).attr('data-main');
         appendItemChk(tag);
+        
     });
 
     function appendItemChk(tag) {
@@ -1077,12 +1111,13 @@ function checkItemMenuS() {
         }
 
         if (id) {
+            
             var main = $("ul[data-main='" + tag + "']:visible");
 
             if (tag === "lining") {
                 main = $("ul[data-main='" + tag + "']");
             }
-
+            
             var img = $('<img>').attr({'src': "../itailor-data/webroot/img/icon/checkmarkblue.png", 'class': 'icon-check-item'});
             var ele = main.find('#' + id);
             main.find('.icon-check-item').remove();
@@ -1094,6 +1129,7 @@ function encodeDesign() {
     var base64 = [];
     base64['iTailor'] = get_base64_encode(iTailorObject);
     base64['jacket'] = get_base64_encode(jacketObject);
+    
     base64['pant'] = get_base64_encode(pantObject);
     base64['vest'] = get_base64_encode(vestObject);
     $('.base64').remove();
@@ -1105,6 +1141,12 @@ function encodeDesign() {
         input.appendTo(frmBodySize);
         input2.appendTo(frmStandardSize);
     }
+
+   
+    localStorage.setItem('vest', JSON.stringify(base64['vest']));
+    console.log(JSON.parse(localStorage.getItem("vest")))
+    localStorage.setItem('pant', JSON.stringify(base64['pant']));
+    console.log(JSON.parse(localStorage.getItem("pant")))
 }
 function setFabric(data) {
     var fabricAll = designObject.fabric;
@@ -1130,6 +1172,7 @@ function setFabric(data) {
 }
 function setPrice(data) {
     /*set new arra fabric*/
+    
     if (data) {
         designObject.category = data.CATEGORY;
         designObject.sign = data.SUM.SIGN;
@@ -1207,8 +1250,12 @@ function setPrice(data) {
     /*price fabric*/
     var guaranteedNumber = iTailorObject.fabricRegular + parseFloat(guaranteed[designObject.curr]);
     $('.price').html(designObject.sign + ' ' + (fabricPrice).toFixed(2));
+    
     $('.regular-price').html(designObject.sign + ' ' + guaranteedNumber);
     $(".layout-box-extra-pant .extra-pant-price").html(designObject.sign + ' ' + extraPant);
+    
+    localStorage.setItem('sumExtra', (sumExtra));
+    console.log(JSON.parse(localStorage.getItem("sumExtra")))
     setPriceMenuSFabric();
     encodeDesign();
 }
@@ -1220,12 +1267,15 @@ function setCategoryPrice() {
 
         var price = _this.find(".category-price");
         var discount = _this.find(".discount");
-
+ 
         if (arr[i]) {
             price.html(arr[i]['REGULAR'] + ' ' + sign);
             discount.html(arr[i]['PRICE'] + ' ' + sign);
         }
+         
+   
     });
+   
 }
 function setPriceMenuSFabric() {
     /*function change price fabric promotion and signature event run login mober and call function set price*/

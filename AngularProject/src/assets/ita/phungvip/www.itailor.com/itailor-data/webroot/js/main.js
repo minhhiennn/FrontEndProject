@@ -60,7 +60,7 @@ linkObj = {
         });
     },
     allProduct: function (ele) {
-        //$(ele).popupMaya({url: "../iTailor-data/elements/popup2/all-product-v2.php", position: "top", effStart: "left", width: "100%"}); //old version
+        //$(ele).popupMaya({url: "../itailor-data/elements/popup2/all-product-v2.php", position: "top", effStart: "left", width: "100%"}); //old version
         $(ele).popupProduct();
     },
     menu: function (ele) {

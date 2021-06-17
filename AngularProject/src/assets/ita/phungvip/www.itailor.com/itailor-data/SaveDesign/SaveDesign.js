@@ -132,7 +132,7 @@
                         $(this).prop("checked", true);
                     }
                 });
-
+                
                 $('.tab-body-size input[name="' + measureProduct + '-CHEST"]').val(getSaveDesign(mainProject, "CHEST", ""));
                 $('.tab-body-size input[name="' + measureProduct + '-WAIST"]').val(getSaveDesign(mainProject, "WAIST", ""));
                 $('.tab-body-size input[name="' + measureProduct + '-HIP"]').val(getSaveDesign(mainProject, "HIP", ""));
