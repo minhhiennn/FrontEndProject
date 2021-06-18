@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\component",
-    "\\src\\app\\component\\account",
-    "\\src\\app\\component\\login",
-    "\\src\\app\\component\\product-details",
+    "\\src\\app\\component\\blog-list",
+    "\\src\\app\\component\\cart",
+    "\\src\\app\\component\\product-list-comment",
     "\\src\\app\\component\\shop-list-product",
     "\\src\\app\\models",
     "\\src\\app\\service"
   ],
-  "SelectedNode": "\\src\\app\\component\\product-details\\product-details.component.ts",
+  "SelectedNode": "\\src\\app\\component\\blog-list\\blog-list.component.html",
   "PreviewInSolutionExplorer": false
 }
