@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   myForm2: FormGroup = new FormGroup({});
   user: User | null = null;
   items: CartItem[] = [];
+  isLoading : boolean = false;
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
         this.userService.setCurrentUser(user);
         if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
           let cartItems = JSON.parse(localStorage.getItem('CookieCart') as any)
-          this.cartService.cartSync(cartItems ,0)
+          this.isLoading = this.cartService.cartSync(cartItems ,0)
         }
         
       }

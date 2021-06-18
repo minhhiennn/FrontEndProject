@@ -70,7 +70,7 @@ export class CartService {
       }
     }
   }
-  cartSync(cartItems : CartItem[],i : number){
+  cartSync(cartItems : CartItem[],i : number): boolean{
     this.currentUser = this.userService.getCurrentUser();
     if(i < cartItems.length){
     this.getData().subscribe((data: CartItem[]) => {
@@ -96,11 +96,13 @@ export class CartService {
           });
         });
       }
-    
     });
+    return true;
     }else{
       this.router.navigate(['/cart']);
       localStorage.removeItem("CookieCart");
+      return false
+      
     }
   }
   checkExistProduct(product: Product): boolean {

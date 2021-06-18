@@ -1,6 +1,8 @@
 <!--header-->
 <app-header></app-header>
 <!--/header-->
+<mat-spinner *ngIf="isLoading;else asd"></mat-spinner>
+<ng-template #asd>
 <section id="form">
   <!--form-->
   <div class="container">
@@ -58,6 +60,7 @@
     </div>
   </div>
 </section><!--/form-->
+</ng-template>
 <!--Footer-->
 <app-footer></app-footer>
 <!--/Footer-->
