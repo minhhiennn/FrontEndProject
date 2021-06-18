@@ -10,7 +10,7 @@ export class ShopListProductComponent implements OnInit {
   @Input() productItem: any;
   constructor(private cartService: CartService) { }
   handleAddToCart() {
-    this.cartService.addToCart(this.productItem,1);
+    this.cartService.addToCart(this.productItem);
   }
   ngOnInit(): void {
   }
