@@ -22,7 +22,7 @@
                 <button type="button" class="btn btn-default get">Get it now</button>
               </div>
               <div class="col-sm-6">
-                <img src="assets/images/home/girl1.jpg" class="girl img-responsive" alt="" />
+                <img src="assets/images/home/vest2.png" class="girl img-responsive" alt="" style="height:450px;" />
                 <img src="assets/images/home/pricing.png" class="pricing" alt="" />
               </div>
             </div>
@@ -34,7 +34,7 @@
                 <button type="button" class="btn btn-default get">Get it now</button>
               </div>
               <div class="col-sm-6">
-                <img src="assets/images/home/girl2.jpg" class="girl img-responsive" alt="" />
+                <img src="assets/images/home/vest2.png" class="girl img-responsive" alt=""style="height:450px;" />
                 <img src="assets/images/home/pricing.png" class="pricing" alt="" />
               </div>
             </div>
@@ -47,7 +47,7 @@
                 <button type="button" class="btn btn-default get">Get it now</button>
               </div>
               <div class="col-sm-6">
-                <img src="assets/images/home/girl3.jpg" class="girl img-responsive" alt="" />
+                <img src="assets/images/home/vest2.png" class="girl img-responsive" alt="" style="height:450px;"/>
                 <img src="assets/images/home/pricing.png" class="pricing" alt="" />
               </div>
             </div>
@@ -192,87 +192,32 @@
         <div class="recommended_items">
           <!--recommended_items-->
           <h2 class="title text-center">recommended items</h2>
-
           <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="item active">
-                <div class="col-sm-4">
+                <div class="col-sm-4" *ngFor="let product of products | slice:7:10">
                   <div class="product-image-wrapper">
                     <div class="single-products">
                       <div class="productinfo text-center">
-                        <img src="assets/images/home/recommend1.jpg" alt="" />
-                        <h2>$56</h2>
-                        <p>Easy Polo Black Edition</p>
+                        <img [src]="product.img" alt="" />
+                        <h2>{{product.price}}</h2>
+                        <p>{{product.name}}</p>
                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                       </div>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="product-image-wrapper">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img src="assets/images/home/recommend2.jpg" alt="" />
-                        <h2>$56</h2>
-                        <p>Easy Polo Black Edition</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="product-image-wrapper">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img src="assets/images/home/recommend3.jpg" alt="" />
-                        <h2>$56</h2>
-                        <p>Easy Polo Black Edition</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                      </div>
-
                     </div>
                   </div>
                 </div>
               </div>
               <div class="item">
-                <div class="col-sm-4">
+                <div class="col-sm-4" *ngFor="let product of products | slice:7:10">
                   <div class="product-image-wrapper">
                     <div class="single-products">
                       <div class="productinfo text-center">
-                        <img src="assets/images/home/recommend1.jpg" alt="" />
+                        <img [src]="product.img" alt="" />
                         <h2>$56</h2>
                         <p>Easy Polo Black Edition</p>
                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                       </div>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="product-image-wrapper">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img src="assets/images/home/recommend2.jpg" alt="" />
-                        <h2>$56</h2>
-                        <p>Easy Polo Black Edition</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="product-image-wrapper">
-                    <div class="single-products">
-                      <div class="productinfo text-center">
-                        <img src="assets/images/home/recommend3.jpg" alt="" />
-                        <h2>$56</h2>
-                        <p>Easy Polo Black Edition</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                      </div>
-
                     </div>
                   </div>
                 </div>
