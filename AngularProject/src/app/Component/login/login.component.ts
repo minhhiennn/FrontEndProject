@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   myForm: FormGroup = new FormGroup({});
   myForm2: FormGroup = new FormGroup({});
   user: User | null = null;
+  items: CartItem[] = [];
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
@@ -37,8 +38,8 @@ export class LoginComponent implements OnInit {
       if (user == null) {
         alert('Đăng nhập thất bại');
       } else {
-        
         this.userService.setCurrentUser(user);
+<<<<<<< HEAD
         //if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
         //  let cartItem = JSON.parse(localStorage.getItem('CookieCart') as any)
         //  cartItem.forEach((element: Product) => {
@@ -48,6 +49,13 @@ export class LoginComponent implements OnInit {
         //  });
         //}
         //localStorage.removeItem('CookieCart')
+=======
+        if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
+          let cartItems = JSON.parse(localStorage.getItem('CookieCart') as any)
+          this.cartService.cartSync(cartItems ,0)
+        }
+        
+>>>>>>> 32990d68488680d768d534fc416cd34c4072c616
       }
     })
   }

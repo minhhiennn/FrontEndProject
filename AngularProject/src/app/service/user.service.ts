@@ -13,7 +13,7 @@ export class UserService {
 
   setCurrentUser(user: User) {
     localStorage.setItem("currentUser", JSON.stringify(user));
-    this.router.navigate(['']);
+    
   }
   getCurrentUser(): User | null {
     let object: any = localStorage.getItem("currentUser");
