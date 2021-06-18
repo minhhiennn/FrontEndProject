@@ -39,23 +39,11 @@ export class LoginComponent implements OnInit {
         alert('Đăng nhập thất bại');
       } else {
         this.userService.setCurrentUser(user);
-<<<<<<< HEAD
-        //if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
-        //  let cartItem = JSON.parse(localStorage.getItem('CookieCart') as any)
-        //  cartItem.forEach((element: Product) => {
-        //    if (element) {
-        //      this.cartService.addToCart(element);
-        //    }
-        //  });
-        //}
-        //localStorage.removeItem('CookieCart')
-=======
         if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
           let cartItems = JSON.parse(localStorage.getItem('CookieCart') as any)
           this.cartService.cartSync(cartItems ,0)
         }
         
->>>>>>> 32990d68488680d768d534fc416cd34c4072c616
       }
     })
   }

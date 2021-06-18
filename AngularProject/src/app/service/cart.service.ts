@@ -13,14 +13,9 @@ export class CartService {
   items: CartItem[] = [];
   currentUser: any;
   urlCart = "https://first-fucking-app-angular.herokuapp.com/cart";
-<<<<<<< HEAD
-  constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
-  addToCart(product: Product) {
-=======
   constructor(private http: HttpClient, private router: Router, private userService: UserService) {
   }
-  addToCart(product: Product,quantityIn : number) {
->>>>>>> 32990d68488680d768d534fc416cd34c4072c616
+  addToCart(product: Product) {
     // nếu tìm thấy cartItem chứa product đó
     // tăng price vs quantity lên
     this.currentUser = this.userService.getCurrentUser();
@@ -30,7 +25,7 @@ export class CartService {
         if (this.checkExistProduct(product) === true) {
           let num = this.getIndexExistProduct(product);
           let id: number = this.items[num].id;
-          let quantity: number = this.items[num].quantity + quantityIn;
+          let quantity: number = this.items[num].quantity + 1;
           let price_total: number = this.items[num].price_total + product.price;
           this.putData(id, new CartItem(id, product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
             this.getData().subscribe((data: CartItem[]) => {
@@ -41,7 +36,7 @@ export class CartService {
         } else {
           // nếu ko tìm thấy cartItem nào
           // lấy ra id lớn nhất của cartItem + 1
-          this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, quantityIn, product.price, this.currentUser?.id)).subscribe(() => {
+          this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price, this.currentUser?.id)).subscribe(() => {
             this.getData().subscribe((data: CartItem[]) => {
               this.items = data;
               this.router.navigate(['/cart']);
@@ -105,6 +100,7 @@ export class CartService {
     });
     }else{
       this.router.navigate(['/cart']);
+      localStorage.removeItem("CookieCart");
     }
   }
   checkExistProduct(product: Product): boolean {
