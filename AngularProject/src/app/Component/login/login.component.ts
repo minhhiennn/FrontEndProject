@@ -52,15 +52,20 @@ export class LoginComponent implements OnInit {
     })
   }
   signUp() {
-    //let name: string = this.myForm2.get('name')?.value;
-    //let email: string = this.myForm2.get('email')?.value;
-    //let password: string = this.myForm2.get('password')?.value;
-    //if (this.myForm2.get('name')?.valid && this.myForm2.get('email')?.valid && this.myForm2.get('password')?.valid) {
-    //  this.userService.addNewUser(name, email, password);
-    //  this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-    //  this.router.navigate(['/login']));
-    //} else {
-    //  alert('Đăng ký thất bại');
-    //}
+    let name: string = this.myForm2.get('name')?.value;
+    let email: string = this.myForm2.get('email')?.value;
+    let password: string = this.myForm2.get('password')?.value;
+    if (this.myForm2.get('name')?.valid && this.myForm2.get('email')?.valid && this.myForm2.get('password')?.valid) {
+      
+       let id: number =this.userService.getData.length;
+     this.userService.addNewUser(id,name,email, password).subscribe((data)=>{
+       console.log("addNewUsr",data);
+     });
+     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+     this.router.navigate(['/login']));
+     alert('đăng kí thành công');
+    } else {
+     alert('Đăng ký thất bại');
+    }
   }
 }

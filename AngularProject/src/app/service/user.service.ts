@@ -36,5 +36,14 @@ export class UserService {
   updateUser(user: User) {
     return this.http.put(this.url + user.id, user);
   }
-
+  addNewUser(id:number,name: string, email: string, password: string): Observable<User[]> {
+    // let id: number = this.getData1.length+1 ;
+    
+    let newUser: User = new User(id,'', name, email, password);
+    console.log(newUser);
+    console.log(id);
+   return this.http.post<User[]>(`${this.url}`, newUser);
+    
+    
+  }
 }
