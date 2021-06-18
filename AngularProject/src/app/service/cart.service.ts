@@ -13,8 +13,7 @@ export class CartService {
   items: CartItem[] = [];
   currentUser: any;
   urlCart = "https://first-fucking-app-angular.herokuapp.com/cart";
-  constructor(private http: HttpClient, private router: Router, private userService: UserService) {
-  }
+  constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
   addToCart(product: Product) {
     // nếu tìm thấy cartItem chứa product đó
     // tăng price vs quantity lên
@@ -94,7 +93,6 @@ export class CartService {
     let maxIndex: number = 0;
     for (let i = 0; i < this.items.length; i++) {
       if (this.items[i].id > maxIndex) {
-        console.log(this.items[i].id);
         maxIndex = this.items[i].id;
       }
     }

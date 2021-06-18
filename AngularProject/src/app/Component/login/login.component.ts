@@ -39,15 +39,15 @@ export class LoginComponent implements OnInit {
       } else {
         
         this.userService.setCurrentUser(user);
-        if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
-          let cartItem = JSON.parse(localStorage.getItem('CookieCart') as any)
-          cartItem.forEach((element: Product) => {
-            if (element) {
-              this.cartService.addToCart(element);
-            }
-          });
-        }
-        localStorage.removeItem('CookieCart')
+        //if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
+        //  let cartItem = JSON.parse(localStorage.getItem('CookieCart') as any)
+        //  cartItem.forEach((element: Product) => {
+        //    if (element) {
+        //      this.cartService.addToCart(element);
+        //    }
+        //  });
+        //}
+        //localStorage.removeItem('CookieCart')
       }
     })
   }
