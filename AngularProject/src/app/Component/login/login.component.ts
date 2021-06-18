@@ -42,7 +42,10 @@ export class LoginComponent implements OnInit {
         this.userService.setCurrentUser(user);
         if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
           let cartItems = JSON.parse(localStorage.getItem('CookieCart') as any)
-          this.isLoading = this.cartService.cartSync(cartItems ,0)
+          this.isLoading = this.cartService.cartSync(cartItems, 0)
+        } else {
+          localStorage.removeItem("CookieCart");
+          this.router.navigate(['']);
         }
         
       }

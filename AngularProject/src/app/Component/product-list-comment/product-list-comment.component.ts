@@ -41,7 +41,7 @@ export class ProductListCommentComponent implements OnInit {
     private router: Router,
     private sanitizer: DomSanitizer
   ) { 
-    this.currentUser = userService.getCurrentUser();
+    /*this.currentUser = userService.getCurrentUser();*/
     
     
   }
@@ -79,23 +79,28 @@ export class ProductListCommentComponent implements OnInit {
     this.ngOnInit();
   }
   submitC() {
-    let text: string = this.myForm1.get('txt')?.value;
-    let star: number = this.myForm1.get('star')?.value;
-    this.commentService.getLastIndexInProductId(this.productId).subscribe((result) => {
-      let comment: Comment;
-      if (result[0] != null) {
-        
-        comment = (new Comment(this.productId, star, text, new Date(), result[0]['index'] + 1, this.currentUser?.email));
-      } else {
-        comment = (new Comment(this.productId, star, text, new Date(), 0, this.currentUser?.email));
-      }
-      
-      this.commentService.postComment(comment).subscribe(data => {
-        this.myForm1.get('txt')?.setValue("")
-        this.myForm1.get('star')?.setValue(0);
-        this.pagination(1)
-      })
-    });
+    this.currentUser = this.userService.getCurrentUser();
+    if (this.currentUser != null) {
+      let text: string = this.myForm1.get('txt')?.value;
+      let star: number = this.myForm1.get('star')?.value;
+      this.commentService.getLastIndexInProductId(this.productId).subscribe((result) => {
+        let comment: Comment;
+        if (result[0] != null) {
+
+          comment = (new Comment(this.productId, star, text, new Date(), result[0]['index'] + 1, this.currentUser?.email));
+        } else {
+          comment = (new Comment(this.productId, star, text, new Date(), 0, this.currentUser?.email));
+        }
+
+        this.commentService.postComment(comment).subscribe(data => {
+          this.myForm1.get('txt')?.setValue("")
+          this.myForm1.get('star')?.setValue(0);
+          this.pagination(1)
+        })
+      });
+    } else {
+      alert("Bạn phải đăng nhập để bình luận");
+    }
   }
   setStar(numberStar: number) {
     this.startGet = numberStar;
