@@ -1,6 +1,10 @@
 <!--header-->
 <app-header></app-header>
 <!--/header-->
+  <ng-progress [meteor]="options.meteor" [color]="options.color" [minimum]="options.minimum" [speed]="options.speed"
+    [spinner]="options.spinner" [spinnerPosition]="options.spinnerPosition" [direction]="options.direction"
+    [thick]="options.thick" [trickleSpeed]="options.trickleSpeed" [ease]="options.ease">
+  </ng-progress>
 <mat-spinner *ngIf="isLoading;else asd"></mat-spinner>
 <ng-template #asd>
 <section id="form">

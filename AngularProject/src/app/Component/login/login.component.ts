@@ -12,6 +12,20 @@ import { User } from '../../models/user';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  options = {
+    minimum: 0.08,
+    maximum: 1,
+    ease: 'linear',
+    speed: 200,
+    trickleSpeed: 300,
+    meteor: true,
+    spinner: true,
+    spinnerPosition: 'right',
+    direction: 'leftToRightIncreased',
+    color: 'red',
+    thick: true
+  };
+  preventAbuse = false;
   myForm: FormGroup = new FormGroup({});
   myForm2: FormGroup = new FormGroup({});
   user: User | null = null;
@@ -31,6 +45,7 @@ export class LoginComponent implements OnInit {
     })
   }
   submit() {
+    this.preventAbuse = true;
     let email: string = this.myForm.get('email')?.value;
     let password: string = this.myForm.get('password')?.value;
     let user: User | null = null;
@@ -42,7 +57,8 @@ export class LoginComponent implements OnInit {
         this.userService.setCurrentUser(user);
         if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
           let cartItems = JSON.parse(localStorage.getItem('CookieCart') as any)
-          this.isLoading = this.cartService.cartSync(cartItems, 0)
+          this.preventAbuse = this.cartService.cartSync(cartItems, 0);
+          //this.isLoading = this.cartService.cartSync(cartItems, 0)
         } else {
           localStorage.removeItem("CookieCart");
           this.router.navigate(['']);
@@ -55,8 +71,13 @@ export class LoginComponent implements OnInit {
     let name: string = this.myForm2.get('name')?.value;
     let email: string = this.myForm2.get('email')?.value;
     let password: string = this.myForm2.get('password')?.value;
+<<<<<<< HEAD
     if (this.myForm2.get('name')?.valid && this.myForm2.get('email')?.valid && this.myForm2.get('password')?.valid) {      
      let id: number =this.userService.getData.length;
+=======
+    if (this.myForm2.get('name')?.valid && this.myForm2.get('email')?.valid && this.myForm2.get('password')?.valid) {
+       let id: number =this.userService.getData.length;
+>>>>>>> 7066810465765083b296419ce4120b2d805bdd45
      this.userService.addNewUser(id,name,email, password).subscribe((data)=>{
        console.log("addNewUsr",data);
      });

@@ -30,6 +30,9 @@ import { ProductListCommentComponent } from './component/product-list-comment/pr
 import { AccountComponent } from './component/account/account.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { CustomClothesComponent } from './component/custom-clothes/custom-clothes.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressHttpClientModule } from '@ngx-progressbar/http-client';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,9 @@ import { CustomClothesComponent } from './component/custom-clothes/custom-clothe
     CustomClothesComponent,
   ],
   imports: [
+    NgProgressModule.forRoot(),
+    NgProgressHttpClientModule,
+    MatProgressBarModule,
     MatProgressSpinnerModule,
     NgxPaginationModule,
     BrowserModule,

@@ -5,3 +5,8 @@
 .ng-touched.ng-invalid:not(form) {
   border-left: 5px solid #a94442; /* red */
 }
+
+/** No CSS for this example */
+mat-progress-bar {
+  height: 2em;
+}

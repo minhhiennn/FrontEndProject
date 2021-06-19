@@ -97,11 +97,11 @@ export class CartService {
         });
       }
     });
-    return true;
+    return false;
     }else{
-      this.router.navigate(['/cart']);
       localStorage.removeItem("CookieCart");
-      return false
+      this.router.navigate(['/cart']);
+      return true
       
     }
   }
