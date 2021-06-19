@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/service/user.service';
-import { User } from 'src/app/models/user';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +14,7 @@ export class CartService {
   urlCart = "https://first-fucking-app-angular.herokuapp.com/cart";
   constructor(private http: HttpClient, private router: Router, private userService: UserService) {
   }
-  addToCart(product: Product) {
+  addToCart(product: Product){
     // nếu tìm thấy cartItem chứa product đó
     // tăng price vs quantity lên
     this.currentUser = this.userService.getCurrentUser();
@@ -101,8 +100,7 @@ export class CartService {
     }else{
       localStorage.removeItem("CookieCart");
       this.router.navigate(['/cart']);
-      return true
-      
+      return true      
     }
   }
   checkExistProduct(product: Product): boolean {

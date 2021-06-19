@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
     })
   }
   submit() {
-    this.preventAbuse = true;
     let email: string = this.myForm.get('email')?.value;
     let password: string = this.myForm.get('password')?.value;
     let user: User | null = null;
@@ -55,15 +54,19 @@ export class LoginComponent implements OnInit {
         alert('Đăng nhập thất bại');
       } else {
         this.userService.setCurrentUser(user);
-        if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
-          let cartItems = JSON.parse(localStorage.getItem('CookieCart') as any)
-          this.preventAbuse = this.cartService.cartSync(cartItems, 0);
-          //this.isLoading = this.cartService.cartSync(cartItems, 0)
+        let CookieCart = localStorage.getItem('CookieCart');
+        if (CookieCart != null) {
+          if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
+            let cartItems = JSON.parse(CookieCart as any);
+            this.preventAbuse = this.cartService.cartSync(cartItems, 0);
+            //this.isLoading = this.cartService.cartSync(cartItems, 0)
+          } else {
+            localStorage.removeItem("CookieCart");
+            this.router.navigate(['']);
+          }
         } else {
-          localStorage.removeItem("CookieCart");
           this.router.navigate(['']);
-        }
-        
+        }        
       }
     })
   }
@@ -71,13 +74,8 @@ export class LoginComponent implements OnInit {
     let name: string = this.myForm2.get('name')?.value;
     let email: string = this.myForm2.get('email')?.value;
     let password: string = this.myForm2.get('password')?.value;
-<<<<<<< HEAD
-    if (this.myForm2.get('name')?.valid && this.myForm2.get('email')?.valid && this.myForm2.get('password')?.valid) {      
-     let id: number =this.userService.getData.length;
-=======
     if (this.myForm2.get('name')?.valid && this.myForm2.get('email')?.valid && this.myForm2.get('password')?.valid) {
        let id: number =this.userService.getData.length;
->>>>>>> 7066810465765083b296419ce4120b2d805bdd45
      this.userService.addNewUser(id,name,email, password).subscribe((data)=>{
        console.log("addNewUsr",data);
      });

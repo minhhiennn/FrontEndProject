@@ -1,23 +1,27 @@
-<div class="product-image-wrapper">
-  <div class="single-products">
-    <div class="productinfo text-center">
-      <img [src]="productItem.img" alt="" style="max-height:200px"/>
-      <h2>{{productItem.price | currency: 'USD'}}</h2>
-      <p>{{productItem.name}}</p>
-      <a class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-    </div>
-    <div class="product-overlay">
-      <div class="overlay-content">
-        <h2>{{productItem.price}}</h2>
-        <p [routerLink]="['/products']" [queryParams]="{productId:productItem.id}">{{productItem.name}}</p>
-        <a class="btn btn-default add-to-cart" (click)="handleAddToCart()"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+<ng-progress [meteor]="options.meteor" [color]="options.color" [minimum]="options.minimum" [speed]="options.speed"
+             [spinner]="options.spinner" [spinnerPosition]="options.spinnerPosition" [direction]="options.direction"
+             [thick]="options.thick" [trickleSpeed]="options.trickleSpeed" [ease]="options.ease" *ngIf="preventAbuse == true">
+</ng-progress>
+  <div class="product-image-wrapper">
+    <div class="single-products">
+      <div class="productinfo text-center">
+        <img [src]="productItem.img" alt="" style="max-height:200px" />
+        <h2>{{productItem.price | currency: 'USD'}}</h2>
+        <p>{{productItem.name}}</p>
+        <a class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+      </div>
+      <div class="product-overlay">
+        <div class="overlay-content">
+          <h2>{{productItem.price}}</h2>
+          <p [routerLink]="['/products']" [queryParams]="{productId:productItem.id}">{{productItem.name}}</p>
+          <a class="btn btn-default add-to-cart" (click)="handleAddToCart()"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+        </div>
       </div>
     </div>
+    <div class="choose">
+      <ul class="nav nav-pills nav-justified">
+        <li><a><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+        <li><a><i class="fa fa-plus-square"></i>Add to compare</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="choose">
-    <ul class="nav nav-pills nav-justified">
-      <li><a><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-      <li><a><i class="fa fa-plus-square"></i>Add to compare</a></li>
-    </ul>
-  </div>
-</div>

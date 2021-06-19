@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
+  ///
   pageNumber: number = 9;
   start: number = 0;
   end: number = 9;

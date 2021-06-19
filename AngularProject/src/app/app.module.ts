@@ -1,4 +1,3 @@
-
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,6 +9,9 @@ import { AgmCoreModule } from '@agm/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppRoutingModule } from './app-routing.module';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressHttpClientModule } from '@ngx-progressbar/http-client';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/share/header/header.component';
@@ -30,9 +32,7 @@ import { ProductListCommentComponent } from './component/product-list-comment/pr
 import { AccountComponent } from './component/account/account.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { CustomClothesComponent } from './component/custom-clothes/custom-clothes.component';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { NgProgressModule } from '@ngx-progressbar/core';
-import { NgProgressHttpClientModule } from '@ngx-progressbar/http-client';
+
 
 @NgModule({
   declarations: [
