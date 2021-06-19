@@ -11,7 +11,7 @@ import { Observable, pipe } from 'rxjs';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  url = 'https://www.tienphong.vn/rss/home.rss';
+  url = 'https://first-fucking-app-angular.herokuapp.com/cart';
   dataPost2 = {
     "product": {
       "id": 2,
@@ -46,25 +46,28 @@ export class AccountComponent implements OnInit {
     //  this.config.push(country);
     //}
     //this.http.post(this.url, new CartItem(new Product(1, 56, "Easy Polo Black Edition ahihi", "assets/images/home/product1.jpg"), 1000, 155)).subscribe((data) => console.log(data));
-    //this.http.get<CartItem[]>(this.url).pipe(
-    //  map((data) => {
-    //    return data;
-    //  }), switchMap((data) => {
-    //    return data;
-    //  })
-    //).subscribe((data) => {
-    //  console.log(data.product);
-    //});
-    this.http.get(this.url,
-      {
-        headers: new HttpHeaders({
-          'Accept': 'application/xml',
-        }),
-        responseType: 'text'
+    let x = 1;
+    this.http.get<CartItem[]>(this.url).pipe(
+      map((data) => {
+        return data;
+      }), switchMap((data) => {
+        return data;
       })
-      .subscribe((data) => {
-        console.log(data)
-      });
+    ).subscribe((data) => {
+      console.log(data);
+      console.log(x);
+      x++;
+    });
+    //this.http.get(this.url,
+    //  {
+    //    headers: new HttpHeaders({
+    //      'Accept': 'application/xml',
+    //    }),
+    //    responseType: 'text'
+    //  })
+    //  .subscribe((data) => {
+    //    console.log(data)
+    //  });
     
     
     //this.http.delete(this.url + "/6").subscribe();
