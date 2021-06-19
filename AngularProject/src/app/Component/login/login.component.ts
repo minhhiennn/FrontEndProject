@@ -58,7 +58,8 @@ export class LoginComponent implements OnInit {
         if (CookieCart != null) {
           if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
             let cartItems = JSON.parse(CookieCart as any);
-            this.preventAbuse = this.cartService.cartSync(cartItems);
+            this.preventAbuse = this.cartService.cartSync(cartItems, 0);
+            //this.isLoading = this.cartService.cartSync(cartItems, 0)
           } else {
             localStorage.removeItem("CookieCart");
             this.router.navigate(['']);

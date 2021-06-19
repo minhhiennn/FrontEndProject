@@ -1,73 +1,69 @@
 <!--header-->
 <app-header></app-header>
 <!--/header-->
-<ng-progress [meteor]="options.meteor" [color]="options.color" [minimum]="options.minimum" [speed]="options.speed"
-             [spinner]="options.spinner" [spinnerPosition]="options.spinnerPosition" [direction]="options.direction"
-             [thick]="options.thick" [trickleSpeed]="options.trickleSpeed" [ease]="options.ease">
-</ng-progress>
+  <ng-progress [meteor]="options.meteor" [color]="options.color" [minimum]="options.minimum" [speed]="options.speed"
+    [spinner]="options.spinner" [spinnerPosition]="options.spinnerPosition" [direction]="options.direction"
+    [thick]="options.thick" [trickleSpeed]="options.trickleSpeed" [ease]="options.ease">
+  </ng-progress>
 <mat-spinner *ngIf="isLoading;else asd"></mat-spinner>
 <ng-template #asd>
-  <section id="form">
-    <!--form-->
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-4 col-sm-offset-1">
-          <div class="login-form">
-            <!--login form-->
-            <h2>Login to your account</h2>
-            <form action="#" [formGroup]="myForm">
-              <input type="email" placeholder="Email Address" required name="email" formControlName="email" id="email" />
-              <div *ngIf="this.myForm.get('email')?.invalid == true && this.myForm.get('email')?.touched == true"
-                   class="alert alert-danger">
-                Email invalid
-              </div>
-              <input type="password" placeholder="Password" required name="password" formControlName="password" id="password" />
-              <div *ngIf="this.myForm.get('password')?.invalid == true && this.myForm.get('password')?.touched == true"
-                   class="alert alert-danger">
-                Password must contain at least 9 characters
-              </div>
-              <div>
-                <span>
-                  Sign in with
-                </span>
-                <img src="assets/images/shop/facebook-icon.png" style="width:40px;height:40px;margin-left:5px;margin-right:10px" />
-                <span>Or</span>
-                <img src="assets/images/shop/google-icon.png" style="width:60px;height:60px;margin-left:5px" />
-              </div>
-              <button type="button" class="btn btn-default" (click)="submit()">Login</button>
-            </form>
-          </div><!--/login form-->
-        </div>
-        <div class="col-sm-1">
-          <h2 class="or">OR</h2>
-        </div>
-        <div class="col-sm-4">
-          <div class="signup-form">
-            <!--sign up form-->
-            <h2>New User Signup!</h2>
-            <form action="#" [formGroup]="myForm2">
-              <input type="text" placeholder="Name" required name="name" formControlName="name" />
-              <div *ngIf="this.myForm2.get('name')?.invalid == true && this.myForm2.get('name')?.touched == true"
-                   class="alert alert-danger">
-                Name must contain at least 6 characters
-              </div>
-              <input type="email" placeholder="Email Address" required name="email" formControlName="email" />
-              <div *ngIf="this.myForm2.get('email')?.invalid == true && this.myForm2.get('email')?.touched == true"
-                   class="alert alert-danger">
-                Email invalid
-              </div>
-              <input type="password" placeholder="Password" required name="password" formControlName="password" />
-              <div *ngIf="this.myForm2.get('password')?.invalid == true && this.myForm2.get('password')?.touched == true"
-                   class="alert alert-danger">
-                Password must contain at least 9 characters
-              </div>
-              <button type="button" class="btn btn-default" (click)="signUp()">Signup</button>
-            </form>
-          </div><!--/sign up form-->
-        </div>
+<section id="form">
+  <!--form-->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1">
+        <div class="login-form">
+          <!--login form-->
+          <h2>Login to your account</h2>
+          <form action="#" [formGroup]="myForm">
+            <input type="email" placeholder="Email Address" required name="email" formControlName="email" id="email" />
+            <div *ngIf="this.myForm.get('email')?.invalid == true && this.myForm.get('email')?.touched == true"
+                 class="alert alert-danger">
+              Email invalid
+            </div>
+            <input type="password" placeholder="Password" required name="password" formControlName="password" id="password" />
+            <div *ngIf="this.myForm.get('password')?.invalid == true && this.myForm.get('password')?.touched == true"
+                 class="alert alert-danger">
+              Password must contain at least 9 characters
+            </div>
+            <span>
+              <input type="checkbox" class="checkbox">
+              Keep me signed in
+            </span>
+            <button type="button" class="btn btn-default" (click)="submit()">Login</button>
+          </form>
+        </div><!--/login form-->
+      </div>
+      <div class="col-sm-1">
+        <h2 class="or">OR</h2>
+      </div>
+      <div class="col-sm-4">
+        <div class="signup-form">
+          <!--sign up form-->
+          <h2>New User Signup!</h2>
+          <form action="#" [formGroup]="myForm2">
+            <input type="text" placeholder="Name" required name="name" formControlName="name" />
+            <div *ngIf="this.myForm2.get('name')?.invalid == true && this.myForm2.get('name')?.touched == true"
+                 class="alert alert-danger">
+              Name must contain at least 6 characters
+            </div>
+            <input type="email" placeholder="Email Address" required name="email" formControlName="email" />
+            <div *ngIf="this.myForm2.get('email')?.invalid == true && this.myForm2.get('email')?.touched == true"
+                 class="alert alert-danger">
+              Email invalid
+            </div>
+            <input type="password" placeholder="Password" required name="password" formControlName="password" />
+            <div *ngIf="this.myForm2.get('password')?.invalid == true && this.myForm2.get('password')?.touched == true"
+                 class="alert alert-danger">
+              Password must contain at least 9 characters
+            </div>
+            <button type="button" class="btn btn-default" (click)="signUp()">Signup</button>
+          </form>
+        </div><!--/sign up form-->
       </div>
     </div>
-  </section><!--/form-->
+  </div>
+</section><!--/form-->
 </ng-template>
 <!--Footer-->
 <app-footer></app-footer>
