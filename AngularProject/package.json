@@ -24,7 +24,6 @@
     "@angular/router": "~11.2.11",
     "@ngx-progressbar/core": "^3.0.2",
     "@ngx-progressbar/http-client": "^3.0.2",
-    "angularx-social-login": "^3.5.7",
     "ng5-slider": "^1.2.6",
     "ngx-pagination": "^5.1.1",
     "ngx-progressbar": "^6.1.1",

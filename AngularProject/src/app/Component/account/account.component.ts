@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/models/cart-item';
 import { Product } from 'src/app/models/product';
@@ -46,6 +46,7 @@ export class AccountComponent implements OnInit {
     //  this.config.push(country);
     //}
     //this.http.post(this.url, new CartItem(new Product(1, 56, "Easy Polo Black Edition ahihi", "assets/images/home/product1.jpg"), 1000, 155)).subscribe((data) => console.log(data));
+<<<<<<< HEAD
     let x = 1;
     this.http.get<CartItem[]>(this.url).pipe(
       map((data) => {
@@ -68,6 +69,19 @@ export class AccountComponent implements OnInit {
     //  .subscribe((data) => {
     //    console.log(data)
     //  });
+=======
+    //this.http.get<CartItem[]>(this.url).pipe(
+    //  map((data) => {
+    //    return data;
+    //  }), switchMap((data) => {
+    //    return data;
+    //  })
+    //).subscribe((data) => {
+    //  console.log(data.product);
+    //});
+    let CookieCart: any = localStorage.getItem("CookieCart");
+    let listCartItem: CartItem[] = JSON.parse(CookieCart) as CartItem[];
+>>>>>>> 9893bbc8583807960cfde7fa76a7f4d598046e86
     
     
     //this.http.delete(this.url + "/6").subscribe();
