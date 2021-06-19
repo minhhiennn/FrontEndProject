@@ -50,15 +50,26 @@ export class CartComponent implements OnInit {
         if (this.cartItems[i].product.id == cartItem.product.id) {
           let quantity: number = this.cartItems[i].quantity + 1;
           let price_total: number = quantity * this.cartItems[i].product.price;
-          this.cartService.putData(this.cartItems[i].id,
-            new CartItem(this.cartItems[i].id, this.cartItems[i].product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
-              this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
-                this.cartItems = data;
-                this.caculateCartTotal();
-                this.showSpinner = false;
-                this.cartService.getData1();
-              });
-            });
+          this.cartService.getData2(cartItem).subscribe(((data) => {
+            let x: number = Object.values(data).length;
+            for (let i = 0; i < Object.values(data).length; i++) {
+              let x1: any = Object.values(data)[i];
+              let key: number = x1.id;
+              let idC: number = x1.idC;
+              let product: Product = x1.product;
+              if (product.id === cartItem.product.id) {
+                this.cartService.putData(key, new CartItem(this.cartItems[i].idC, this.cartItems[i].product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
+                  this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
+                    this.cartItems = data;
+                    this.caculateCartTotal();
+                    this.showSpinner = false;
+                    this.cartService.getData1();
+                  });
+                });
+              }
+            }
+          }));
+         
           break;
         }
       }
@@ -86,15 +97,26 @@ export class CartComponent implements OnInit {
           if (this.cartItems[i].quantity > 1) {
             let quantity: number = this.cartItems[i].quantity - 1;
             let price_total: number = quantity * this.cartItems[i].product.price;
-            this.cartService.putData(this.cartItems[i].id,
-              new CartItem(this.cartItems[i].id, this.cartItems[i].product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
-                this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
-                  this.cartItems = data;
-                  this.caculateCartTotal();
-                  this.showSpinner = false;
-                  this.cartService.getData1();
-                });
-              });
+            this.cartService.getData2(cartItem).subscribe(((data) => {
+              let x: number = Object.values(data).length;
+              for (let i = 0; i < Object.values(data).length; i++) {
+                let x1: any = Object.values(data)[i];
+                let key: number = x1.id;
+                let product: Product = x1.product;
+                if (product.id === cartItem.product.id) {
+                  this.cartService.putData(key,
+                    new CartItem(this.cartItems[i].idC, this.cartItems[i].product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
+                      this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
+                        this.cartItems = data;
+                        this.caculateCartTotal();
+                        this.showSpinner = false;
+                        this.cartService.getData1();
+                      });
+                    });
+                }
+              }
+            }));
+         
             break;
           } else {
             break;
@@ -139,28 +161,50 @@ export class CartComponent implements OnInit {
           if (numberX >= 1) {
             let quantity: number = numberX;
             let price_total = quantity * this.cartItems[i].product.price;
-            this.cartService.putData(this.cartItems[i].id,
-              new CartItem(this.cartItems[i].id, this.cartItems[i].product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
-                this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
-                  this.cartItems = data;
-                  this.caculateCartTotal();
-                  this.showSpinner = false;
-                  this.cartService.getData1();
-                });
-              });
+            this.cartService.getData2(cartItem).subscribe(((data) => {
+              let x: number = Object.values(data).length;
+              for (let i = 0; i < Object.values(data).length; i++) {
+                let x1: any = Object.values(data)[i];
+                let key: number = x1.id;
+                let product: Product = x1.product;
+                if (product.id === cartItem.product.id) {
+                  this.cartService.putData(key,
+                    new CartItem(this.cartItems[i].idC, this.cartItems[i].product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
+                      this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
+                        this.cartItems = data;
+                        this.caculateCartTotal();
+                        this.showSpinner = false;
+                        this.cartService.getData1();
+                      });
+                    });
+                }
+              }
+            }));
+          
             break;
           } else {
             let quantity: number = 1;
             let price_total = quantity * this.cartItems[i].product.price;
-            this.cartService.putData(this.cartItems[i].id,
-              new CartItem(this.cartItems[i].id, this.cartItems[i].product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
-                this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
-                  this.cartItems = data;
-                  this.caculateCartTotal();
-                  this.showSpinner = false;
-                  this.cartService.getData1();
-                });
-              });
+            this.cartService.getData2(cartItem).subscribe(((data) => {
+              let x: number = Object.values(data).length;
+              for (let i = 0; i < Object.values(data).length; i++) {
+                let x1: any = Object.values(data)[i];
+                let key: number = x1.id;
+                let product: Product = x1.product;
+                if (product.id === cartItem.product.id) {
+                  this.cartService.putData(key,
+                    new CartItem(this.cartItems[i].idC, this.cartItems[i].product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
+                      this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
+                        this.cartItems = data;
+                        this.caculateCartTotal();
+                        this.showSpinner = false;
+                        this.cartService.getData1();
+                      });
+                    });
+                }
+              }
+            }));
+          
             break;
           }
         }
@@ -196,14 +240,25 @@ export class CartComponent implements OnInit {
     this.showSpinner = true;
     this.currentUser = this.userService.getCurrentUser();
     if (this.currentUser != null) {
-      this.cartService.deleteData(cartItem.id).subscribe(() => {
-        this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
-          this.cartItems = data;
-          this.caculateCartTotal();
-          this.showSpinner = false;
-          this.cartService.getData1();
-        });
-      });
+      this.cartService.getData2(cartItem).subscribe(((data) => {
+        let x: number = Object.values(data).length;
+        for (let i = 0; i < Object.values(data).length; i++) {
+          let x1: any = Object.values(data)[i];
+          let key: number = x1.id;
+          let product: Product = x1.product;
+          if (product.id === cartItem.product.id) {
+            this.cartService.deleteData(key).subscribe(() => {
+              this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
+                this.cartItems = data;
+                this.caculateCartTotal();
+                this.showSpinner = false;
+                this.cartService.getData1();
+              });
+            });
+          }
+        }
+      }));
+     
     } else {
       let index: number = this.cartItems.findIndex((cartItem: CartItem) => cartItem.product.id === cartItem.product.id);
       if (index > -1) {
