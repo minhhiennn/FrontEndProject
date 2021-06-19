@@ -98,7 +98,7 @@
               <li class="dropdown">
                 <a href="#">Shop<i class="fa fa-angle-down"></i></a>
                 <ul role="menu" class="sub-menu">
-                  <li><a (click)="goToShop()" style="cursor: pointer;">Products</a></li>
+                  <li><a [routerLink]="['/shop']">Products</a></li>
                   <li><a href="product-details.html">Product Details</a></li>
                   <li><a [routerLink]="['/checkout']">Checkout</a></li>
                   <li><a [routerLink]="['/cart']">Cart</a></li>

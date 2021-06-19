@@ -67,9 +67,9 @@ import { CustomClothesComponent } from './component/custom-clothes/custom-clothe
       libraries: ["places", "geometry"]
     }),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
+      { path: '', component: HomeComponent},
       { path: 'products', component: ProductDetailsComponent },
-      { path: 'shop', component: ShopComponent},
+      { path: 'shop', component: ShopComponent },
       { path: 'login', component: LoginComponent },
       { path: 'blog/blog-list', component: BlogListComponent },
       { path: 'blog/blog-single', component: BlogSingleComponent },

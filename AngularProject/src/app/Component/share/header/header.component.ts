@@ -25,9 +25,4 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/shop'], { queryParams: { search: stringSearch } }));
     }
   }
-  goToShop() {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/shop']);
-  }
 }

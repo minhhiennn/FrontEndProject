@@ -18,7 +18,6 @@ export class LeftSidebarComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
   SearchByPrice() {
     let priceRange: string = this.value + "-" + this.highValue;
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>

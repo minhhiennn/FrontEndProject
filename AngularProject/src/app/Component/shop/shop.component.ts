@@ -18,16 +18,20 @@ export class ShopComponent implements OnInit {
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const routeParams = this.route.snapshot.queryParamMap;
-    const stringSearch = routeParams.get('search');
-    const priceRange = routeParams.get('priceRange');
-    if (stringSearch == null && priceRange != null) {
-      this.getListProductByPriceRange(priceRange);
-    } else if (stringSearch != null && priceRange == null) {
-      this.getListProductByName(stringSearch);
-    } else if (stringSearch == null && priceRange == null) {
-      this.getListProduct();
-    }
+    //const routeParams = this.route.snapshot.queryParamMap;
+    //const stringSearch = routeParams.get('search');
+    //const priceRange = routeParams.get('priceRange');
+    this.route.queryParamMap.subscribe((para) => {
+      let stringSearch = para.get('search');
+      let priceRange = para.get('priceRange');
+      if (stringSearch == null && priceRange != null) {
+        this.getListProductByPriceRange(priceRange);
+      } else if (stringSearch != null && priceRange == null) {
+        this.getListProductByName(stringSearch);
+      } else if (stringSearch == null && priceRange == null) {
+        this.getListProduct();
+      }
+    })
   }
 
   onClick2(p: number) {

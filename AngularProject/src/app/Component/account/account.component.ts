@@ -2,14 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/models/cart-item';
 import { Product } from 'src/app/models/product';
-import { map } from 'rxjs/operators';
+import { User } from 'src/app/models/user';
+import { map, switchMap } from 'rxjs/operators';
+import { Observable, pipe } from 'rxjs';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  url = 'http://localhost:3000/cart';
+  url = 'https://first-fucking-app-angular.herokuapp.com/cart';
   dataPost2 = {
     "product": {
       "id": 2,
@@ -21,6 +23,7 @@ export class AccountComponent implements OnInit {
     "priceTotal": 1555
   }
   cart: CartItem[] = [];
+  user: User[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -43,10 +46,19 @@ export class AccountComponent implements OnInit {
     //  this.config.push(country);
     //}
     //this.http.post(this.url, new CartItem(new Product(1, 56, "Easy Polo Black Edition ahihi", "assets/images/home/product1.jpg"), 1000, 155)).subscribe((data) => console.log(data));
-    this.http.get<CartItem[]>(this.url).subscribe((data: CartItem[]) => {
-      this.cart = data;
-      console.log(this.cart[6].id);
-    });
+    //this.http.get<CartItem[]>(this.url).pipe(
+    //  map((data) => {
+    //    return data;
+    //  }), switchMap((data) => {
+    //    return data;
+    //  })
+    //).subscribe((data) => {
+    //  console.log(data.product);
+    //});
+    let CookieCart: any = localStorage.getItem("CookieCart");
+    let listCartItem: CartItem[] = JSON.parse(CookieCart) as CartItem[];
+    
+    
     //this.http.delete(this.url + "/6").subscribe();
   }
 }

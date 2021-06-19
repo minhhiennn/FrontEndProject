@@ -18,7 +18,6 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.getSingleProduct(productIdFromRoute).subscribe(product => {
       this.product = product;
     })
-    //this.product = this.productService.products.find((product) => product.id === productIdFromRoute);
   } 
   change(input: any) {
     let num = Number(input.value);
