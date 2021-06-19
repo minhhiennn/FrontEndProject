@@ -52,13 +52,12 @@ export class CartComponent implements OnInit {
           let price_total: number = quantity * this.cartItems[i].product.price;
           this.cartService.getData2(cartItem).subscribe(((data) => {
             let x: number = Object.values(data).length;
-            for (let i = 0; i < Object.values(data).length; i++) {
+            for (let i = 0; i < Object.values(data).length; i++) {             
               let x1: any = Object.values(data)[i];
               let key: number = x1.id;
-              let idC: number = x1.idC;
               let product: Product = x1.product;
               if (product.id === cartItem.product.id) {
-                this.cartService.putData(key, new CartItem(this.cartItems[i].idC, this.cartItems[i].product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
+                this.cartService.putData(key, new CartItem(this.cartItems[i].idC, product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
                   this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
                     this.cartItems = data;
                     this.caculateCartTotal();
@@ -66,8 +65,10 @@ export class CartComponent implements OnInit {
                     this.cartService.getData1();
                   });
                 });
+                break;
               }
             }
+           
           }));
          
           break;
@@ -105,7 +106,7 @@ export class CartComponent implements OnInit {
                 let product: Product = x1.product;
                 if (product.id === cartItem.product.id) {
                   this.cartService.putData(key,
-                    new CartItem(this.cartItems[i].idC, this.cartItems[i].product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
+                    new CartItem(this.cartItems[i].idC, product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
                       this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
                         this.cartItems = data;
                         this.caculateCartTotal();
@@ -113,8 +114,10 @@ export class CartComponent implements OnInit {
                         this.cartService.getData1();
                       });
                     });
+                  break;
                 }
               }
+              
             }));
          
             break;
