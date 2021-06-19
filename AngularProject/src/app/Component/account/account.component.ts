@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/models/cart-item';
 import { Product } from 'src/app/models/product';
@@ -11,7 +11,7 @@ import { Observable, pipe } from 'rxjs';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  url = 'https://first-fucking-app-angular.herokuapp.com/cart';
+  url = 'https://www.tienphong.vn/rss/home.rss';
   dataPost2 = {
     "product": {
       "id": 2,
@@ -55,8 +55,16 @@ export class AccountComponent implements OnInit {
     //).subscribe((data) => {
     //  console.log(data.product);
     //});
-    let CookieCart: any = localStorage.getItem("CookieCart");
-    let listCartItem: CartItem[] = JSON.parse(CookieCart) as CartItem[];
+    this.http.get(this.url,
+      {
+        headers: new HttpHeaders({
+          'Accept': 'application/xml',
+        }),
+        responseType: 'text'
+      })
+      .subscribe((data) => {
+        console.log(data)
+      });
     
     
     //this.http.delete(this.url + "/6").subscribe();

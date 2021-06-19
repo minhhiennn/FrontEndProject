@@ -172,7 +172,7 @@ export class CartComponent implements OnInit {
                 let product: Product = x1.product;
                 if (product.id === cartItem.product.id) {
                   this.cartService.putData(key,
-                    new CartItem(this.cartItems[i].idC, this.cartItems[i].product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
+                    new CartItem(this.cartItems[i].idC, product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
                       this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
                         this.cartItems = data;
                         this.caculateCartTotal();
@@ -180,11 +180,10 @@ export class CartComponent implements OnInit {
                         this.cartService.getData1();
                       });
                     });
+                  break;
                 }
               }
-            }));
-          
-            break;
+            }));          
           } else {
             let quantity: number = 1;
             let price_total = quantity * this.cartItems[i].product.price;
@@ -196,7 +195,7 @@ export class CartComponent implements OnInit {
                 let product: Product = x1.product;
                 if (product.id === cartItem.product.id) {
                   this.cartService.putData(key,
-                    new CartItem(this.cartItems[i].idC, this.cartItems[i].product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
+                    new CartItem(this.cartItems[i].idC, product, quantity, price_total, this.currentUser?.id)).subscribe(() => {
                       this.cartService.getDataByUserId(this.currentUser?.id).subscribe((data: CartItem[]) => {
                         this.cartItems = data;
                         this.caculateCartTotal();
@@ -204,11 +203,10 @@ export class CartComponent implements OnInit {
                         this.cartService.getData1();
                       });
                     });
+                  break;
                 }
               }
-            }));
-          
-            break;
+            }));          
           }
         }
       }

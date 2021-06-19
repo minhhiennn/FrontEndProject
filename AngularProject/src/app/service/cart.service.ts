@@ -30,6 +30,7 @@ export class CartService {
             let x: number = Object.values(data).length;
             for (let i = 0; i < Object.values(data).length; i++) {
               let x1: any = Object.values(data)[i];
+              console.log(x1);
               let key: number = x1.id;
               let product : Product = x1.product;
               if (product.id === this.items[num].product.id) {
@@ -82,7 +83,7 @@ export class CartService {
   }
   cartSync(cartItems : CartItem[]): boolean{
     this.currentUser = this.userService.getCurrentUser();
-     let i : number= 0;
+    let i : number= 0;
     let b: boolean = true;
     cartItems.forEach(element => {
       this.getData().subscribe((data: CartItem[]) => {
@@ -111,7 +112,6 @@ export class CartService {
               }
             }
           }));
-
         } else {
           // nếu ko tìm thấy cartItem nào
           // lấy ra id lớn nhất của cartItem + 1
@@ -126,7 +126,6 @@ export class CartService {
           });
         }
       });
-      
       i++;
     });
     return false;
@@ -162,7 +161,6 @@ export class CartService {
   }
   getLastIndexInProductId(): Observable<CartItem[]> {
     return this.http.get<CartItem[]>(`${this.urlCart}?_sort=id&_order=desc`);
-
   }
   //////
   getProductAndQuantity(quantity: number, product: Product) {
@@ -176,6 +174,7 @@ export class CartService {
           let quantityy: number = this.items[num].quantity + quantity;
           let price_total: number = product.price * quantityy;
           this.getData2(this.items[num]).subscribe(((data) => {
+            console.log(data);
             let x: number = Object.values(data).length;
             for (let i = 0; i < Object.values(data).length; i++) {
               let x1: any = Object.values(data)[i];
@@ -191,7 +190,6 @@ export class CartService {
               }
             }
           }));
-        
         } else {
           // nếu ko tìm thấy cartItem nào
           // lấy ra id lớn nhất của cartItem + 1
