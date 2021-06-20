@@ -1,6 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { RssfeedService } from 'src/app/service/rssfeed.service';
-import { ItemFeed } from 'src/app/models/item-feed';
+
+import { Rss } from 'src/app/models/rss-item';
+
+
 
 @Component({
   selector: 'app-blog-list',
@@ -8,51 +11,31 @@ import { ItemFeed } from 'src/app/models/item-feed';
   styleUrls: ['./blog-list.component.css']
 })
 export class BlogListComponent implements OnInit {
-  pageNumber: number = 3;
-  start: number = 0;
-  end: number = 3;
-  p: number = 1;
-  items: ItemFeed[] = [];
 
-  constructor(private rss: RssfeedService) {
-  }
+  api: string = "https://api.rss2json.com/v1/api.json?rss_url=";
+  url: string = "https://garrisonbespoke.com/feed"
+  linkArr : Rss[]=[]
+  p: number = 1;
+  total : number = 0;
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    this.rss.getData().subscribe((data) => {
-      let itemss: ItemFeed[] = [];
-      // parse to XML content
-      let parser = new DOMParser();
-      let xml = parser.parseFromString(data, "application/xhtml+xml");
-      let itemsArr = xml.getElementsByTagName('item');
-      for (let i = 0; i < 7; i++) {
-        this.getItem(itemsArr[i], itemss);
+    this.httpClient.get(this.api + this.url).subscribe(data => {
+      let x1: any = Object.values(data)[2];
+      this.total = x1.length;
+      for (let index = 0; index < x1.length; index++) {
+        if (index >= (this.p - 1) * 3 && index < ((this.p - 1) * 3)+3 ){
+
+          this.linkArr.push(new Rss(x1[index].author, x1[index].content, x1[index].description, x1[index].link, x1[index].pubDate, x1[index].thumbnail, x1[index].title));        
+        }
       }
-      this.items = itemss;
-      console.log(this.items);
     });
+
   }
-  getItem(element: any, itemss: ItemFeed[]) {
-    let dateAndTime = element.getElementsByTagName('pubDate')[0].innerHTML;
-    let date = dateAndTime.slice(4, 16);
-    let time = dateAndTime.slice(16, 22);
-    let title: string = element.getElementsByTagName('title')[0].innerHTML;
-    let content: any = element.getElementsByTagName('content:encoded')[0].textContent;
-    // parse to HTML content
-    let parser = new DOMParser();
-    let html = parser.parseFromString(content, "text/html");
-    let imgUrl = html.getElementsByTagName('figure')[0].getElementsByTagName('img')[0].src;
-    let description = html.getElementsByTagName('p')[0].innerHTML;
-    itemss.push(new ItemFeed(date, time, title, imgUrl, description));
+  pagination(pageNow: number) {
+    this.p = pageNow;
+    this.linkArr = [];
+    this.ngOnInit();
   }
-  onClick2(p: number) {
-    if (p == 1) {
-      this.p = p;
-      this.start = 0;
-      this.end = 3;
-    } else {
-      this.p = p;
-      this.start = (this.p - 1) * this.pageNumber;
-      this.end = this.start + 3;
-    }
-  }
-}
+ }
+
