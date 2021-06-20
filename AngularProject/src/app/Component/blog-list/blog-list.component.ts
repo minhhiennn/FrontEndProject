@@ -1,9 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
 import { Rss } from 'src/app/models/rss-item';
-
-
 
 @Component({
   selector: 'app-blog-list',
@@ -25,8 +22,8 @@ export class BlogListComponent implements OnInit {
       this.total = x1.length;
       for (let index = 0; index < x1.length; index++) {
         if (index >= (this.p - 1) * 3 && index < ((this.p - 1) * 3)+3 ){
-
-          this.linkArr.push(new Rss(x1[index].author, x1[index].content, x1[index].description, x1[index].link, x1[index].pubDate, x1[index].thumbnail, x1[index].title));        
+          this.linkArr.push(new Rss(x1[index].author, x1[index].content, x1[index].description, x1[index].link, x1[index].pubDate, x1[index].thumbnail, x1[index].title));
+          console.log(x1[index].pubDate);
         }
       }
     });

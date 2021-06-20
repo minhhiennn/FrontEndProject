@@ -9,17 +9,14 @@
         <div class="blog-post-area">
           <h2 class="title text-center">Latest From our Blog</h2>
           <div class="single-blog-post">
-            <h3>Girls Pink T Shirt arrived in store</h3>
-            <div id="editable-content" ng-controller="SimpleController" style="z-index: 1;">
-
-            
+            <h3>{{title}}</h3>
+            <div id="editable-content" ng-controller="SimpleController" style="z-index: 1;">            
             </div>
-
             <div class="post-meta">
               <ul>
-                <li><i class="fa fa-user"></i> Mac Doe</li>
-                <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-                <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+                <li><i class="fa fa-user"></i>{{author}}</li>
+                <li><i class="fa fa-clock-o"></i> {{date}}</li>
+                <li><i class="fa fa-calendar"></i> {{time}}</li>
               </ul>
               <span>
                 <i class="fa fa-star"></i>
@@ -166,7 +163,6 @@
     </div>
   </div>
 </section>
-
 <!--Footer-->
 <app-footer></app-footer>
 <!--/Footer-->

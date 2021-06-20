@@ -8,18 +8,13 @@
       <div class="col-sm-9">
         <div class="blog-post-area">
           <h2 class="title text-center">Latest From our Blog</h2>
-
-          <div *ngFor="let o of linkArr" class="single-blog-post" >
+          <div *ngFor="let o of linkArr" class="single-blog-post">
             <h3>{{o.title}}</h3>
-  
-      
-
             <div class="post-meta">
               <ul>
                 <li><i class="fa fa-user"></i>{{o.author}}</li>
-                <li><i class="fa fa-clock-o"></i> {{o.pubDate}}</li>
-                <li><i class="fa fa-calendar"></i> {{o.pubDate}}</li>
-
+                <li><i class="fa fa-clock-o"></i> {{o.getTime()}}</li>
+                <li><i class="fa fa-calendar"></i> {{o.getDate()}}</li>
               </ul>
               <span>
                 <i class="fa fa-star"></i>
@@ -29,23 +24,16 @@
                 <i class="fa fa-star-half-o"></i>
               </span>
             </div>
-            <a href="">
-
-
+            <a [routerLink]="['/blog/blog-single']" [queryParams]="{rssTitle:o.title}">
               <img [src]=o.thumbnail alt="">
             </a>
             <div [innerHTML]=o.description></div>
-             
-              
-            <a class="btn btn-primary"[routerLink]="['/blog/blog-single']" [queryParams]="{rssTitle:o.title}" >Read More</a>
-
+            <a class="btn btn-primary" [routerLink]="['/blog/blog-single']" [queryParams]="{rssTitle:o.title}">Read More</a>
           </div>
-         
         </div>
         <ul>
           <li *ngFor="let item of linkArr | paginate: { itemsPerPage: 3, currentPage: p,totalItems: total  }"> </li>
         </ul>
-        
         <pagination-controls (pageChange)="pagination($event)"></pagination-controls>
       </div>
     </div>
