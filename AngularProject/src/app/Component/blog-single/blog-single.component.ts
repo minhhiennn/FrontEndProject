@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Product } from 'src/app/models/product';
-import { CartService } from 'src/app/service/cart.service';
+
+
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-blog-single',
@@ -10,37 +12,24 @@ import { CartService } from 'src/app/service/cart.service';
 })
 export class BlogSingleComponent implements OnInit {
 
-  name = 'Set iframe source';
-  url: string = "https://www.itailor.com/designsuits/";
-  imagePath: string = "";
-  urlSafe: SafeResourceUrl;
-  constructor(public sanitizer: DomSanitizer, private cartService: CartService,) {
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
-  }
-
-
+  api: string = "https://api.rss2json.com/v1/api.json?rss_url=";
+  url: string = "https://garrisonbespoke.com/feed"
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute) { }
+  content : string = "";
+  
   ngOnInit(): void {
+    const routeParams = this.route.snapshot.queryParamMap;
+    const productIdFromRoute = (routeParams.get('rssTitle'));
+    this.httpClient.get(this.api + this.url).subscribe(data => {
+      let x1: any = Object.values(data)[2];
+      for (let index = 0; index < x1.length; index++) {
+        if (x1[index].title == (productIdFromRoute))
+        this.content = x1[index].content
+      }
+    });
+
 
   }
-  post() {
-    //measure la thong tin so do cua khach hang
-    console.log(JSON.parse(localStorage.getItem("measure") as any))
-    //iTailorObject la thong tin chat vai
-    console.log(JSON.parse(localStorage.getItem("iTailorObject") as any))
-    //vestObject la thong tin cai ao
-    console.log(JSON.parse(localStorage.getItem("vestObject") as any))
-    //pantObject la thong tin cai quan
-    console.log(JSON.parse(localStorage.getItem("pantObject") as any))
-    //sumExtra la gia
-    console.log(JSON.parse(localStorage.getItem("sumExtra") as any))
+  
 
-    //hai cai cuoi nay la base64 lay hinh cua cai ao vest voi cai quan
-
-    console.log(JSON.parse(localStorage.getItem("pant") as any))
-    console.log(JSON.parse(localStorage.getItem("vest") as any))
-    this.imagePath = localStorage.getItem("#jacket-front") as string
-
-    let product: Product = new Product(-2, JSON.parse(localStorage.getItem("sumExtra") as any), "do custom", (this.imagePath));
-    this.cartService.addToCart(product);
-  }
 }
