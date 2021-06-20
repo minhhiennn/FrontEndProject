@@ -1,17 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/models/cart-item';
-import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
-import { map, switchMap } from 'rxjs/operators';
-import { Observable, pipe } from 'rxjs';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  url = 'https://first-fucking-app-angular.herokuapp.com/cart';
+  url = 'https://garrisonbespoke.com/feed';
   dataPost2 = {
     "product": {
       "id": 2,
@@ -46,44 +43,40 @@ export class AccountComponent implements OnInit {
     //  this.config.push(country);
     //}
     //this.http.post(this.url, new CartItem(new Product(1, 56, "Easy Polo Black Edition ahihi", "assets/images/home/product1.jpg"), 1000, 155)).subscribe((data) => console.log(data));
-<<<<<<< HEAD
-    let x = 1;
-    this.http.get<CartItem[]>(this.url).pipe(
-      map((data) => {
-        return data;
-      }), switchMap((data) => {
-        return data;
-      })
-    ).subscribe((data) => {
-      console.log(data);
-      console.log(x);
-      x++;
-    });
-    //this.http.get(this.url,
-    //  {
-    //    headers: new HttpHeaders({
-    //      'Accept': 'application/xml',
-    //    }),
-    //    responseType: 'text'
-    //  })
-    //  .subscribe((data) => {
-    //    console.log(data)
-    //  });
-=======
-    //this.http.get<CartItem[]>(this.url).pipe(
-    //  map((data) => {
-    //    return data;
-    //  }), switchMap((data) => {
-    //    return data;
-    //  })
-    //).subscribe((data) => {
-    //  console.log(data.product);
-    //});
-    let CookieCart: any = localStorage.getItem("CookieCart");
-    let listCartItem: CartItem[] = JSON.parse(CookieCart) as CartItem[];
->>>>>>> 9893bbc8583807960cfde7fa76a7f4d598046e86
-    
-    
     //this.http.delete(this.url + "/6").subscribe();
+    this.http.get(this.url,
+      {
+        headers: new HttpHeaders({
+          'Accept': 'application/xml',
+        }),
+        responseType: 'text'
+      })
+      .subscribe((data) => {
+        // parse to XML content
+        let parser = new DOMParser();
+        let xml = parser.parseFromString(data, "text/xml");
+        let itemsArr = xml.getElementsByTagName('item');
+        //let imgUrl = itemsArr[0].getElementsByTagName('content:encoded')[0];
+        //let test: any = imgUrl.childNodes[0].textContent;
+        //let html = parser.parseFromString(test, "text/html");
+        //console.log(html);
+        for (let i = 0; i < 3; i++) {
+          let dateAndTime: string = itemsArr[i].getElementsByTagName('pubDate')[0].innerHTML;
+          let date = dateAndTime.slice(4, 16);
+          let time = dateAndTime.slice(16, 22);
+          let title: string = itemsArr[i].getElementsByTagName('title')[0].innerHTML;
+          let content: any = itemsArr[i].getElementsByTagName('content:encoded')[0].textContent;
+          let html = parser.parseFromString(content, "text/html");
+          let imgUrl = html.getElementsByTagName('figure')[1].getElementsByTagName('img')[0].src;
+          let description = html.getElementsByTagName('p')[1].innerHTML;
+          console.log(description + " " + imgUrl);
+        }
+        //let content = html.getElementsByClassName('rss-channels')[0].getElementsByTagName('li');
+        //let link = 'https://tienphong.vn' + content[1].getElementsByTagName('a')[1].getAttribute('href') ?? '';
+        //let title = content[0].getElementsByTagName('a')[1].innerHTML;
+        //console.log(content);
+        //console.log(link);
+        //console.log(title);
+    });
   }
 }
