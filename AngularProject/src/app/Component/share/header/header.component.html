@@ -9,7 +9,7 @@
               <li><a href=""><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
               <li *ngIf="currentUser != null" class="dropdown">
                 <a><i class="fa fa-envelope"></i> {{currentUser.email}}</a><div class="dropdown-content">
-                  <a href="">Account</a>
+                  <a href="">{{'Account' | translate}}</a>
                   <a [routerLink]="['/login']" (click)="logOut()">Log out</a>
                 </div>
               </li>
@@ -41,18 +41,21 @@
           </div>
           <div class="btn-group pull-right clearfix">
             <div class="btn-group">
-              <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+              <!--<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
                 USA
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a href="">Canada</a></li>
-                <li><a href="">UK</a></li>
-              </ul>
+                <li><a href="">Vietnamese</a></li>
+              </ul>-->
+              <select #selectLang (change)="changeLanguges(selectLang)" id="languges" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown" style="width:90%">
+                <option value="En" [selected]= "languagueEng == true">En</option>
+                <option value="Vi" [selected]= "languagueEng == false">Vi</option>
+              </select>
             </div>
 
-            <div class="btn-group">
-              <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+            <div class="btn-group" style="height:28px">
+              <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown" style="height:80%">
                 DOLLAR
                 <span class="caret"></span>
               </button>
@@ -66,12 +69,12 @@
         <div class="col-md-8 clearfix">
           <div class="shop-menu clearfix pull-right">
             <ul class="nav navbar-nav">
-              <li *ngIf="currentUser != null"><a href=""><i class="fa fa-user"></i> Account</a></li>
-              <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
-              <li><a [routerLink]="['/checkout']"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-              <li><a [routerLink]="['/cart']"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+              <li *ngIf="currentUser != null"><a href=""><i class="fa fa-user"></i> {{'Account' | translate}}</a></li>
+              <li><a href=""><i class="fa fa-star"></i> {{'WishList' | translate  }}</a></li>
+              <li><a [routerLink]="['/checkout']"><i class="fa fa-crosshairs"></i> {{'Checkout' | translate}}</a></li>
+              <li><a [routerLink]="['/cart']"><i class="fa fa-shopping-cart"></i> {{'Cart' | translate}}</a></li>
               <li *ngIf="currentUser != null"> <a [routerLink]="['/user']"><i class="fa fa-lock"></i> user</a></li>
-              <li *ngIf="currentUser == null"><a [routerLink]="['/login']"><i class="fa fa-lock"></i> Login</a></li>
+              <li *ngIf="currentUser == null"><a [routerLink]="['/login']"><i class="fa fa-lock"></i> {{'Login' | translate}}</a></li>
             </ul>
           </div>
         </div>
@@ -94,33 +97,31 @@
           </div>
           <div class="mainmenu pull-left">
             <ul class="nav navbar-nav collapse navbar-collapse">
-              <li><a [routerLink]="['']" class="active">Home</a></li>
+              <li><a [routerLink]="['']" class="active">{{'Home' | translate}}</a></li>
               <li class="dropdown">
                 <a href="#">Shop<i class="fa fa-angle-down"></i></a>
                 <ul role="menu" class="sub-menu">
-                  <li><a [routerLink]="['/shop']">Products</a></li>
-                  <li><a href="product-details.html">Product Details</a></li>
-                  <li><a [routerLink]="['/checkout']">Checkout</a></li>
-                  <li><a [routerLink]="['/cart']">Cart</a></li>
-                  <li><a [routerLink]="['/login']">Login</a></li>
+                  <li><a [routerLink]="['/shop']">{{'Product' | translate}}</a></li>
+                  <li><a [routerLink]="['/checkout']">{{'Checkout' | translate}}</a></li>
+                  <li><a [routerLink]="['/cart']">{{'Checkout' | translate}}</a></li>
+                  <li><a [routerLink]="['/login']">{{'Login' | translate}}</a></li>
                 </ul>
               </li>
               <li class="dropdown">
                 <a href="#">Blog<i class="fa fa-angle-down"></i></a>
                 <ul role="menu" class="sub-menu">
-                  <li><a [routerLink]="['/blog/blog-list']">Blog List</a></li>
-                  <li><a [routerLink]="['/blog/blog-single']">Blog Single</a></li>
+                  <li><a [routerLink]="['/blog/blog-list']">{{'Blog_List' | translate}}</a></li>
                 </ul>
               </li>
               <li><a [routerLink]="['/page-404']">404</a></li>
-              <li><a [routerLink]="['/contact-us']">Contact</a></li>
+              <li><a [routerLink]="['/contact-us']">{{'Contact' | translate}}</a></li>
             </ul>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="search_box pull-right">
             <input type="text" placeholder="Search" #stringSearch (keyup.enter)="Search(stringSearch.value)" />
-            <img src="assets/images/home/searchicon.png" alt="" style="position:absolute;right:20px;bottom:13px"/>
+            <img src="assets/images/home/searchicon.png" alt="" style="position:absolute;right:20px;bottom:13px" />
           </div>
         </div>
       </div>

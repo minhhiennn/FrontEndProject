@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpClientModule } from '@ngx-progressbar/http-client';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/share/header/header.component';
@@ -67,13 +69,19 @@ import { CustomClothesComponent } from './component/custom-clothes/custom-clothe
     ReactiveFormsModule,
     BrowserAnimationsModule,
     Ng5SliderModule,
-    HttpClientModule,
+    HttpClientModule, TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: translateFactory,
+        deps: [HttpClient]
+      }
+    }),
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyDfni1WuIp9vDdQ-FtQoPF-OQ4LfRggcYY",
       libraries: ["places", "geometry"]
     }),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent},
+      { path: '', component: HomeComponent },
       { path: 'products', component: ProductDetailsComponent },
       { path: 'shop', component: ShopComponent },
       { path: 'login', component: LoginComponent },
@@ -92,3 +100,7 @@ import { CustomClothesComponent } from './component/custom-clothes/custom-clothe
   bootstrap: [AppComponent],
 })
 export class AppModule { }
+
+export function translateFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
