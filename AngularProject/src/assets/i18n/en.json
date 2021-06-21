@@ -9,5 +9,22 @@
   "Product": "Product",
   "Blog": "Blog",
   "Blog_List": "Blog List",
-  "Contact": "Contact"
+  "Contact": "Contact",
+  "Category": "Category",
+  "Sportswear": "Sportswear",
+  "Mens": "Mens",
+  "Womens": "Womens",
+  "Kids": "Kids",
+  "Fashion": "Fashion",
+  "Households": "Households",
+  "Interiors": "Interiors",
+  "Clothing": "Clothing",
+  "Bags": "Bags",
+  "Shoes": "Shoes",
+  "Brands": "Brands",
+  "Price_Range": "Price Range",
+  "Service": "Service",
+  "Quick_Shop": "Quick Shop",
+  "Policies": "Policies",
+  "About_Shopper": "About Shopper"
 }

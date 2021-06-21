@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\component",
-    "\\src\\app\\component\\blog-list",
-    "\\src\\app\\component\\blog-single",
-    "\\src\\app\\component\\checkout",
-    "\\src\\app\\service",
+    "\\src\\app\\component\\account",
+    "\\src\\app\\component\\share",
+    "\\src\\app\\component\\share\\header",
+    "\\src\\app\\component\\share\\left-sidebar",
     "\\src\\assets",
-    "\\src\\assets\\images\\shop"
+    "\\src\\assets\\i18n"
   ],
-  "SelectedNode": "\\src\\app\\models\\rss-item.ts",
+  "SelectedNode": "\\src\\app\\service\\languages.service.ts",
   "PreviewInSolutionExplorer": false
 }
