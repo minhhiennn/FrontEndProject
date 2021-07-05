@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/models/cart-item';
@@ -44,39 +45,31 @@ export class AccountComponent implements OnInit {
     //}
     //this.http.post(this.url, new CartItem(new Product(1, 56, "Easy Polo Black Edition ahihi", "assets/images/home/product1.jpg"), 1000, 155)).subscribe((data) => console.log(data));
     //this.http.delete(this.url + "/6").subscribe();
-    this.http.get(this.url,
-      {
-        headers: new HttpHeaders({
-          'Accept': 'application/xml',
-        }),
-        responseType: 'text'
-      })
-      .subscribe((data) => {
-        // parse to XML content
-        let parser = new DOMParser();
-        let xml = parser.parseFromString(data, "text/xml");
-        let itemsArr = xml.getElementsByTagName('item');
-        //let imgUrl = itemsArr[0].getElementsByTagName('content:encoded')[0];
-        //let test: any = imgUrl.childNodes[0].textContent;
-        //let html = parser.parseFromString(test, "text/html");
-        //console.log(html);
-        for (let i = 0; i < 3; i++) {
-          let dateAndTime: string = itemsArr[i].getElementsByTagName('pubDate')[0].innerHTML;
-          let date = dateAndTime.slice(4, 16);
-          let time = dateAndTime.slice(16, 22);
-          let title: string = itemsArr[i].getElementsByTagName('title')[0].innerHTML;
-          let content: any = itemsArr[i].getElementsByTagName('content:encoded')[0].textContent;
-          let html = parser.parseFromString(content, "text/html");
-          let imgUrl = html.getElementsByTagName('figure')[1].getElementsByTagName('img')[0].src;
-          let description = html.getElementsByTagName('p')[1].innerHTML;
-          console.log(description + " " + imgUrl);
-        }
-        //let content = html.getElementsByClassName('rss-channels')[0].getElementsByTagName('li');
-        //let link = 'https://tienphong.vn' + content[1].getElementsByTagName('a')[1].getAttribute('href') ?? '';
-        //let title = content[0].getElementsByTagName('a')[1].innerHTML;
-        //console.log(content);
-        //console.log(link);
-        //console.log(title);
-    });
+    //this.http.get(this.url,
+    //  {
+    //    headers: new HttpHeaders({
+    //      'Accept': 'application/xml',
+    //    }),
+    //    responseType: 'text'
+    //  })
+    //  .subscribe((data) => {
+    //    // parse to XML content
+    //    let parser = new DOMParser();
+    //    let xml = parser.parseFromString(data, "text/xml");
+    //    let itemsArr = xml.getElementsByTagName('item');
+    //    for (let i = 0; i < 3; i++) {
+    //      let dateAndTime: string = itemsArr[i].getElementsByTagName('pubDate')[0].innerHTML;
+    //      let date = dateAndTime.slice(4, 16);
+    //      let time = dateAndTime.slice(16, 22);
+    //      let title: string = itemsArr[i].getElementsByTagName('title')[0].innerHTML;
+    //      let content: any = itemsArr[i].getElementsByTagName('content:encoded')[0].textContent;
+    //      let html = parser.parseFromString(content, "text/html");
+    //      let imgUrl = html.getElementsByTagName('figure')[1].getElementsByTagName('img')[0].src;
+    //      let description = html.getElementsByTagName('p')[1].innerHTML;
+    //      console.log(description + " " + imgUrl);
+    //    }
+    //});
+    let date: Date = new Date();
+    console.log(date);
   }
 }
