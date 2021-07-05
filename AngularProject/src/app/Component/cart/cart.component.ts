@@ -3,7 +3,8 @@ import { CartService } from 'src/app/service/cart.service';
 import { CartItem } from '../../models/cart-item';
 import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/models/user';
-import { Product } from 'src/app/models/product';
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { CourseDialogComponent } from 'src/app/component/course-dialog/course-dialog.component';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,7 @@ export class CartComponent implements OnInit {
   cartTotal = 0;
   currentUser: User | null = null;
   showSpinner: boolean = true;
-  constructor(private cartService: CartService, private userService: UserService, private router: Router) { }
+  constructor(private cartService: CartService, private userService: UserService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.currentUser = this.userService.getCurrentUser();
@@ -213,5 +214,28 @@ export class CartComponent implements OnInit {
       }
       this.caculateCartTotal();
     }
+  }
+  // Đây là pt khi click vào cái checkbox mở dialog
+  checkVoucher(ele: HTMLInputElement) {
+    if (ele.checked == true) {
+      ele.checked = false;
+      this.openDialog();
+    }
+  }
+  // Đây là phương thức mở lớp dialog
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    // Chỗ .data này để đưa data vô cái component của cái dialog
+    // Có thể truyền vào bất cứ gì
+    // Giờ ko sài nên tui comment lại
+    //dialogConfig.data = {
+    //  id: 1,
+    //  title: 'Angular For Beginners'
+    //};
+    this.dialog.open(CourseDialogComponent, dialogConfig).afterClosed().subscribe(
+      data => console.log("Dialog output:", data)
+    );
   }
 }

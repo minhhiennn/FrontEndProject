@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   myForm2: FormGroup = new FormGroup({});
   user: User | null = null;
   items: CartItem[] = [];
-  isLoading : boolean = false;
+  isLoading: boolean = false;
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
@@ -54,7 +54,9 @@ export class LoginComponent implements OnInit {
       } else {
         this.userService.setCurrentUser(user);
         let CookieCart = localStorage.getItem('CookieCart');
-        if (CookieCart != null) {
+        if (CookieCart == null || CookieCart.length == 0) {
+          this.router.navigate(['']);
+        } else if (CookieCart.length > 0) {
           if (confirm("Bạn có muốn đồng bộ giỏ hàng không ? ")) {
             let cartItems = JSON.parse(CookieCart as any);
             this.preventAbuse = this.cartService.cartSync(cartItems, 0);
@@ -62,9 +64,7 @@ export class LoginComponent implements OnInit {
             localStorage.removeItem("CookieCart");
             this.router.navigate(['']);
           }
-        } else {
-          this.router.navigate(['']);
-        }        
+        }
       }
     })
   }
@@ -73,15 +73,15 @@ export class LoginComponent implements OnInit {
     let email: string = this.myForm2.get('email')?.value;
     let password: string = this.myForm2.get('password')?.value;
     if (this.myForm2.get('name')?.valid && this.myForm2.get('email')?.valid && this.myForm2.get('password')?.valid) {
-       let id: number =this.userService.getData.length;
-     this.userService.addNewUser(id,name,email, password).subscribe((data)=>{
-       console.log("addNewUsr",data);
-     });
-     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-     this.router.navigate(['/login']));
-     alert('đăng kí thành công');
+      let id: number = this.userService.getData.length;
+      this.userService.addNewUser(id, name, email, password).subscribe((data) => {
+        console.log("addNewUsr", data);
+      });
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate(['/login']));
+      alert('đăng kí thành công');
     } else {
-     alert('Đăng ký thất bại');
+      alert('Đăng ký thất bại');
     }
   }
 }

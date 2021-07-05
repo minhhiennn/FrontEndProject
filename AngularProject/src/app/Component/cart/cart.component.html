@@ -76,7 +76,7 @@
               <label>Use Coupon Code</label>
             </li>
             <li>
-              <input type="checkbox">
+              <input type="checkbox" #checkvoucher (change)="checkVoucher(checkvoucher)">
               <label>Use Gift Voucher</label>
             </li>
             <li>

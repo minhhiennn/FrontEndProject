@@ -1,15 +1,13 @@
 //import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { CourseDialogComponent } from 'src/app/component/course-dialog/course-dialog.component';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-
-  constructor(/*private http: HttpClient*/private dialog: MatDialog) { }
+  soduong: number = 5;
+  constructor(/*private http: HttpClient*/) { }
 
   ngOnInit(): void {
     //this.http.get(this.url,
@@ -43,11 +41,5 @@ export class AccountComponent implements OnInit {
     //} else {
     //  console.log("false");
     //}
-  }
-  openDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    this.dialog.open(CourseDialogComponent, dialogConfig);
   }
 }
