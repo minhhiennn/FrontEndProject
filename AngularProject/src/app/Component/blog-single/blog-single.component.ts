@@ -65,13 +65,11 @@ export class BlogSingleComponent implements OnInit, AfterViewInit {
     //         }
     //       }
     //     }
-
     //     if (elements[i].className == "enter-24h-cate-article") {
     //       for (let index = 1; index < elements[i].getElementsByClassName("news-image").length; index++) {
     //         elements[i].getElementsByClassName("news-image")[index].setAttribute("src",
     //           elements[i].getElementsByClassName("news-image")[index].getAttribute("data-original") as string)
     //       }
-      
     //       if (elements[i].getElementsByClassName("v-24h-media-player")) {
     //         const newItem = document.createElement('video');
     //         newItem.setAttribute("id", "video-player")
@@ -83,7 +81,6 @@ export class BlogSingleComponent implements OnInit, AfterViewInit {
     //         this.object.parentNode.replaceChild(newItem, this.object);
     //       }
     //       classArray.push(((elements[i].innerHTML)))          
-        
     //     }
     //   }
 

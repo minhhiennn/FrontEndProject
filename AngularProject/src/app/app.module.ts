@@ -17,6 +17,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppComponent } from './app.component';
+<<<<<<< HEAD
 import { HeaderComponent } from './component/share/header/header.component';
 import { FooterComponent } from './component/share/footer/footer.component';
 import { LeftSidebarComponent } from './component/share/left-sidebar/left-sidebar.component';
@@ -36,6 +37,26 @@ import { AccountComponent } from './component/account/account.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { CustomClothesComponent } from './component/custom-clothes/custom-clothes.component';
 import { CourseDialogComponent } from './component/course-dialog/course-dialog.component';
+=======
+import { HeaderComponent } from './Component/share/header/header.component';
+import { FooterComponent } from './Component/share/footer/footer.component';
+import { LeftSidebarComponent } from './Component/share/left-sidebar/left-sidebar.component';
+import { ProductDetailsComponent } from './Component/product-details/product-details.component';
+import { HomeComponent } from './Component/home/home.component';
+import { ShopComponent } from './Component/shop/shop.component';
+import { LoginComponent } from './Component/login/login.component';
+import { BlogListComponent } from './Component/blog-list/blog-list.component';
+import { BlogSingleComponent } from './Component/blog-single/blog-single.component';
+import { ContactComponent } from './Component/contact/contact.component';
+import { Page404Component } from './Component/page404/page404.component';
+import { CartComponent } from './Component/cart/cart.component';
+import { CheckoutComponent } from './Component/checkout/checkout.component';
+import { ShopListProductComponent } from './Component/shop-list-product/shop-list-product.component';
+import { ProductListCommentComponent } from './Component/product-list-comment/product-list-comment.component';
+import { AccountComponent } from './Component/account/account.component';
+import { UserProfileComponent } from './Component/user-profile/user-profile.component';
+import { CustomClothesComponent } from './Component/custom-clothes/custom-clothes.component';
+>>>>>>> 4334dda88c971031a44d3b64ebd0007a083c477b
 
 
 @NgModule({
@@ -97,8 +118,12 @@ import { CourseDialogComponent } from './component/course-dialog/course-dialog.c
       { path: 'account', component: AccountComponent },
       { path: 'user', component: UserProfileComponent },
       { path: 'custom-clothes', component: CustomClothesComponent },
+<<<<<<< HEAD
       { path: 'testDialog', component: CourseDialogComponent },
       { path: '', component: HomeComponent }
+=======
+      { path: '**',component: Page404Component }
+>>>>>>> 4334dda88c971031a44d3b64ebd0007a083c477b
     ])
   ],
   providers: [],
