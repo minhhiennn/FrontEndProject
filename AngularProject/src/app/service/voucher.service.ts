@@ -25,37 +25,38 @@ export class VoucherService {
     }
     return false;
   }
-  checkCondition(voucher: Voucher, cartItems: CartItem[]): CartItem[] {
+  checkCondition(voucher: Voucher, cartItems: CartItem[]): number {
     //Condition
-    let conditionArr: string[] = voucher.condition.split("-");
+    if (this.checkCanUser(voucher)){
+      let conditionArr: string[] = voucher.condition.split("-");
+      //Content
+      let contentArr: string[] = voucher.content.split("-");
+      //contentPrice và contentPriceMax chỉ có khi giảm giá theo giỏ hàng
+      let contentPrice: number = parseInt(contentArr[0]); //lượng tiền 
+      let contentPriceMax: number = parseInt(contentArr[1]); //(Số tiền tối đa được giảm giá) 
+      // ba thằng ở dưới chỉ có khi giảm giá theo tên mặt hàng
+      let contentAmount: number = parseInt(contentArr[2]); //số lượng 
+      let contentType: number = parseInt(contentArr[3]);//loại giảm theo số lượng
+      let contentAmountMax: number = parseInt(contentArr[4]);//Số lượng tối đa được giảm giá
+      // 2 thằng đầu null khi giảm giá theo tên mặt hàng và ngược lại
 
-    //Content
-    let contentArr: string[] = voucher.content.split("-");
-    //contentPrice và contentPriceMax chỉ có khi giảm giá theo giỏ hàng
-    let contentPrice: number = parseInt(contentArr[0]); //lượng tiền 
-    let contentPriceMax: number = parseInt(contentArr[1]); //(Số tiền tối đa được giảm giá) 
-    // ba thằng ở dưới chỉ có khi giảm giá theo tên mặt hàng
-    let contentAmount: number = parseInt(contentArr[2]); //số lượng 
-    let contentType: number = parseInt(contentArr[3]);//loại giảm theo số lượng
-    let contentAmountMax: number = parseInt(contentArr[4]);//Số lượng tối đa được giảm giá
-    // 2 thằng đầu null khi giảm giá theo tên mặt hàng và ngược lại
-
-    let total: number = 0;
-    let cartItemsN: CartItem[] = cartItems;
-
-    // giảm giá theo tên mặt hàng
-    for (let index = 0; index < cartItems.length; index++) {
-      if (conditionArr.includes(cartItems[index].product.name) && cartItems[index].quantity >= contentAmount) {
-        cartItemsN[index].price_total =  this.discountWithType(cartItems[index].product.price, contentAmountMax, contentType, voucher.type, voucher.discount, cartItems[index].quantity, contentAmount);
+      let total: number = 0;
+      let cartItemsN: CartItem[] = cartItems;
+      // giảm giá theo tên mặt hàng
+      for (let index = 0; index < cartItems.length; index++) {
+        if (conditionArr.includes(cartItems[index].product.name) && cartItems[index].quantity >= contentAmount) {
+          cartItemsN[index].price_total = this.discountWithType(cartItems[index].product.price, contentAmountMax, contentType, voucher.type, voucher.discount, cartItems[index].quantity, contentAmount);
+        }
+        total += cartItemsN[index].price_total;
       }
-      total += cartItems[index].price_total;
+
+      // giảm giá theo giỏ hàng
+      if (conditionArr.includes("null") && total >= contentPrice) {
+        total = this.discountWithType(total, contentPriceMax, 1, voucher.type, voucher.discount, 0, 0);
+      }
+      return total;
     }
-   
-    // giảm giá theo giỏ hàng
-    if (conditionArr.includes("null") && total >= contentPrice) {
-       cartItemsN[0].price_total = this.discountWithType(total, contentPriceMax, 1, voucher.type, voucher.discount, 0, 0);
-    }
-    return cartItemsN;
+    return 0;
   }
 
   discountWithType(total: number, contentPriceMaxOrAmountMax: number, contentType: number, type: string, discount: number, quantity: number, contentAmount: number): number {
