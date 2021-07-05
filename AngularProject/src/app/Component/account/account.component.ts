@@ -1,50 +1,17 @@
-import { DatePipe } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+//import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { CartItem } from 'src/app/models/cart-item';
-import { User } from 'src/app/models/user';
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { CourseDialogComponent } from 'src/app/component/course-dialog/course-dialog.component';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  url = 'https://garrisonbespoke.com/feed';
-  dataPost2 = {
-    "product": {
-      "id": 2,
-      "price": 56,
-      "name": "Easy Polo Black Edition ahihi",
-      "img": "assets/images/home/product1.jpg"
-    },
-    "quantity": 1000,
-    "priceTotal": 1555
-  }
-  cart: CartItem[] = [];
-  user: User[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(/*private http: HttpClient*/private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    //this.http.get(this.url).subscribe(((data) => {
-    //  let x: number = Object.values(data).length;
-    //  console.log(x);
-    //  for (let i = 0; i < Object.values(data).length; i++) {
-    //    let x1: any = Object.values(data)[i];
-    //    let user: User = new User(x1.id, x1.name, x1.email, x1.password);
-    //    this.config.push(user);
-    //  }
-    //}));
-    // this.http.post(this.url, this.dataPost).subscribe(data => console.log(data));
-    //this.http.patch(this.url + "/" + 1, JSON.stringify({ isRead: true })).subscribe(data => console.log(data));
-    //this.http.put(this.url + "/" + 1, this.postData).subscribe(data => { this.config = data; console.log(data) });
-    //let country: Country | null = null;
-    //for (let i = 0; i < countries.length; i++) {
-    //  country = new Country(countries[i].name, countries[i].code);
-    //  this.config.push(country);
-    //}
-    //this.http.post(this.url, new CartItem(new Product(1, 56, "Easy Polo Black Edition ahihi", "assets/images/home/product1.jpg"), 1000, 155)).subscribe((data) => console.log(data));
-    //this.http.delete(this.url + "/6").subscribe();
     //this.http.get(this.url,
     //  {
     //    headers: new HttpHeaders({
@@ -69,7 +36,18 @@ export class AccountComponent implements OnInit {
     //      console.log(description + " " + imgUrl);
     //    }
     //});
-    let date: Date = new Date();
-    console.log(date);
+    //let date: Date = new Date();
+    //let date2: Date = new Date("01/01/2021");
+    //if (date2 < date) {
+    //  console.log("true");
+    //} else {
+    //  console.log("false");
+    //}
+  }
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(CourseDialogComponent, dialogConfig);
   }
 }

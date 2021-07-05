@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpClientModule } from '@ngx-progressbar/http-client';
+import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -34,6 +35,7 @@ import { ProductListCommentComponent } from './component/product-list-comment/pr
 import { AccountComponent } from './component/account/account.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { CustomClothesComponent } from './component/custom-clothes/custom-clothes.component';
+import { CourseDialogComponent } from './component/course-dialog/course-dialog.component';
 
 
 @NgModule({
@@ -57,6 +59,7 @@ import { CustomClothesComponent } from './component/custom-clothes/custom-clothe
     AccountComponent,
     UserProfileComponent,
     CustomClothesComponent,
+    CourseDialogComponent,
   ],
   imports: [
     NgProgressModule.forRoot(),
@@ -65,6 +68,7 @@ import { CustomClothesComponent } from './component/custom-clothes/custom-clothe
     MatProgressSpinnerModule,
     NgxPaginationModule,
     BrowserModule,
+    MatDialogModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -81,7 +85,6 @@ import { CustomClothesComponent } from './component/custom-clothes/custom-clothe
       libraries: ["places", "geometry"]
     }),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
       { path: 'products', component: ProductDetailsComponent },
       { path: 'shop', component: ShopComponent },
       { path: 'login', component: LoginComponent },
@@ -93,7 +96,9 @@ import { CustomClothesComponent } from './component/custom-clothes/custom-clothe
       { path: 'checkout', component: CheckoutComponent },
       { path: 'account', component: AccountComponent },
       { path: 'user', component: UserProfileComponent },
-      { path: 'custom-clothes', component: CustomClothesComponent }
+      { path: 'custom-clothes', component: CustomClothesComponent },
+      { path: 'testDialog', component: CourseDialogComponent },
+      { path: '', component: HomeComponent }
     ])
   ],
   providers: [],
