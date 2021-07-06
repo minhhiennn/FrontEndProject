@@ -50,18 +50,19 @@ export class CourseDialogComponent implements OnInit {
           } else {
             if (data == null) {
               this.err = "cái voucher này đã hết hạn";
+            } else if (Number.isInteger(data)) {
+              console.log(isNaN(parseInt(data.toString())));
+              let total: number = parseInt(data.toString());
+              this.dialogRef.close(total);
             } else {
-              let cartItem: CartItem[] | number= data;
+              console.log(data);
+              let cartItem: CartItem[] | number = data;
               this.dialogRef.close(cartItem);
             }
           }
         })
       });
-<<<<<<< HEAD
-=======
-    } 
->>>>>>> 07934a35c9df3aa7c57b5833b56a155035bd2b61
     }
   }
-
+}
   

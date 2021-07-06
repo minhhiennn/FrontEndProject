@@ -233,9 +233,15 @@ export class CartComponent implements OnInit {
     this.dialog.open(CourseDialogComponent, dialogConfig).afterClosed().subscribe(
       (data: any) => {
         if (data !== undefined) {
-          let totalWhenGetVoucher: number = this.cartService.getTotal(data);
-          this.cartTotalReal = totalWhenGetVoucher;
-          this.listCartItemsWhenVoucher = data;
+          if (isNaN(parseInt(data.toString()))) {
+            let totalWhenGetVoucher: number = parseInt(data.toString());
+            console.log("bun");
+            this.cartTotalReal = totalWhenGetVoucher;
+          } else {
+            let totalWhenGetVoucher: number = this.cartService.getTotal(data);
+            this.cartTotalReal = totalWhenGetVoucher;
+            this.listCartItemsWhenVoucher = data;
+          }
         }
       }
     );
