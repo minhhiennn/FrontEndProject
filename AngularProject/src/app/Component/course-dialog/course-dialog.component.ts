@@ -40,7 +40,7 @@ export class CourseDialogComponent implements OnInit {
             let date1: Date = new Date(data[0].dateBegin.toString());
             let date2: Date = new Date(data[0].dateEnd.toString());
             let voucher: Voucher = new Voucher(data[0].code, data[0].quantity, data[0].type, data[0].content, data[0].condition, data[0].discount, date1, date2);
-            let data2: CartItem[] | null = this.voucherService.checkCondition(voucher, data1);
+            let data2: CartItem[] | null | number = this.voucherService.checkCondition(voucher, data1);
             return data2;
           }
         })).subscribe(data => {
@@ -51,25 +51,15 @@ export class CourseDialogComponent implements OnInit {
             if (data == null) {
               this.err = "cái voucher này đã hết hạn";
             } else {
-              let cartItem: CartItem[] = data;
+              let cartItem: CartItem[] | number= data;
               this.dialogRef.close(cartItem);
             }
           }
         })
       
       });
-    } else {
-      //this.router.navigate(['/login']);
-      let CookieCart: any = localStorage.getItem("CookieCart");
-      if (CookieCart != null) {
-        let listCartItem: CartItem[] = JSON.parse(CookieCart) as CartItem[];
-
-      } else {
-        let listCartItem: CartItem[] = [];
-        localStorage.setItem("CookieCart", JSON.stringify(listCartItem));
-
-      }
+    } 
     }
   }
-}
+
   

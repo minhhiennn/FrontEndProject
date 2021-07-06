@@ -25,7 +25,7 @@ export class VoucherService {
    
     return false;
   }
-  checkCondition(voucher: Voucher, cartItems: CartItem[]): CartItem[] | null  {
+  checkCondition(voucher: Voucher, cartItems: CartItem[]): CartItem[] | null |number  {
     let cartItemsN: CartItem[] = [];
     for (let i = 0; i < cartItems.length; i++) {
       cartItemsN.push(cartItems[i]);
@@ -54,14 +54,8 @@ export class VoucherService {
       }
       // giảm giá theo giỏ hàng
       if (conditionArr.includes("null") && total >= contentPrice) {
-        total = this.discountWithType(total, contentPriceMax, 1, voucher.type, voucher.discount, 0, 0);
-        let minus = cartItemsN[0].price_total - total;
-        if (minus >= 0) cartItemsN[0].price_total = cartItemsN[0].price_total - minus;
-        for (let index = 0; index < cartItemsN.length; index++) {
-          if (minus <= 0)
-          cartItemsN[index].price_total = Math.abs(minus)
-          minus = cartItemsN[index].price_total - minus
-        }
+        return  this.discountWithType(total, contentPriceMax, 1, voucher.type, voucher.discount, 0, 0);
+      
       }
     
       return cartItemsN 
