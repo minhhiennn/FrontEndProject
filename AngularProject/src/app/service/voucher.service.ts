@@ -18,7 +18,7 @@ export class VoucherService {
   }
   checkCanUser(voucher: Voucher): boolean {
     let now = new Date();
-    if (voucher.dateEnd.getTime() < now.getTime() && voucher.dateEnd.getTime() > now.getTime()) {
+    if (voucher.dateBegin.getTime() < now.getTime() && voucher.dateEnd.getTime() > now.getTime()) {
       if (voucher.quantity == -1) {
         return true;
       } else if (voucher.quantity > 0) return true;
