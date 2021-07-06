@@ -18,7 +18,7 @@ export class CourseDialogComponent implements OnInit {
   err: string = "";
   currentUser: User | null = null;
 
-  constructor(private dialogRef: MatDialogRef<CourseDialogComponent>, @Inject(MAT_DIALOG_DATA) data: any, private voucherService: VoucherService, private cartService: CartService, private userService: UserService) {
+  constructor(private dialogRef: MatDialogRef<CourseDialogComponent>,private voucherService: VoucherService, private cartService: CartService, private userService: UserService) {
     
   }
 
@@ -56,19 +56,7 @@ export class CourseDialogComponent implements OnInit {
             }
           }
         })
-      
       });
-    } else {
-      //this.router.navigate(['/login']);
-      let CookieCart: any = localStorage.getItem("CookieCart");
-      if (CookieCart != null) {
-        let listCartItem: CartItem[] = JSON.parse(CookieCart) as CartItem[];
-
-      } else {
-        let listCartItem: CartItem[] = [];
-        localStorage.setItem("CookieCart", JSON.stringify(listCartItem));
-
-      }
     }
   }
 }

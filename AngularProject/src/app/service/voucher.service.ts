@@ -25,7 +25,7 @@ export class VoucherService {
    
     return false;
   }
-  checkCondition(voucher: Voucher, cartItems: CartItem[]): CartItem[] | null  {
+  checkCondition(voucher: Voucher, cartItems: CartItem[]): CartItem[] | null{
     let cartItemsN: CartItem[] = [];
     for (let i = 0; i < cartItems.length; i++) {
       cartItemsN.push(cartItems[i]);

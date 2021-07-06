@@ -230,9 +230,6 @@ export class CartComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-      
-    };
     this.dialog.open(CourseDialogComponent, dialogConfig).afterClosed().subscribe(
       (data: any) => {
         if (data !== undefined) {
@@ -242,6 +239,5 @@ export class CartComponent implements OnInit {
         }
       }
     );
-    
   }
 }
