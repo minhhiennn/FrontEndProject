@@ -227,7 +227,7 @@ export class CartComponent implements OnInit {
   // Đây là phương thức mở lớp dialog
   openDialog() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     // Chỗ .data này để đưa data vô cái component của cái dialog
     // Có thể truyền vào bất cứ gì
@@ -236,10 +236,12 @@ export class CartComponent implements OnInit {
       listCartItem: this.cartItems
     };
     this.dialog.open(CourseDialogComponent, dialogConfig).afterClosed().subscribe(
-      (data: CartItem[]) => {
-        let totalWhenGetVoucher: number = this.cartService.getTotal(data);
-        this.listCartItemsWhenVoucher = data;
-        this.cartTotalReal = totalWhenGetVoucher;
+      (data: any) => {
+        if (data !== undefined) {
+          let totalWhenGetVoucher: number = this.cartService.getTotal(data);
+          this.cartTotalReal = totalWhenGetVoucher;
+          console.log(data);
+        }
       }
     );
   }

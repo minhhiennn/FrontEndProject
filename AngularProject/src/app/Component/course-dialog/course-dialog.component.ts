@@ -15,6 +15,7 @@ export class CourseDialogComponent implements OnInit {
   err: string = "";
   constructor(private dialogRef: MatDialogRef<CourseDialogComponent>, @Inject(MAT_DIALOG_DATA) data: any, private voucherService: VoucherService) {
     this.cartItem = data.listCartItem;
+    console.log(this.cartItem);
   }
 
   ngOnInit(): void {
@@ -25,7 +26,6 @@ export class CourseDialogComponent implements OnInit {
   }
   test(code: HTMLInputElement) {
     this.voucherService.getByCode(code.value).pipe(map((data) => {
-      console.log(data);
       if (data.length == 0) {
         return "lỗi ko tìm thấy code voucher";
       } else {
@@ -43,8 +43,8 @@ export class CourseDialogComponent implements OnInit {
         if (data == null) {
           this.err = "cái voucher này đã hết hạn";
         } else {
-          let cartItem: CartItem[] = data;
-          this.dialogRef.close(cartItem);
+          let cartItemhihi: CartItem[] = data;
+          this.dialogRef.close(cartItemhihi);
         }
       }
     })
