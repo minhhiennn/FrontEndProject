@@ -238,7 +238,7 @@ export class CartComponent implements OnInit {
         if (data !== undefined) {
           let totalWhenGetVoucher: number = this.cartService.getTotal(data);
           this.cartTotalReal = totalWhenGetVoucher;
-          console.log(data);
+          this.listCartItemsWhenVoucher = data;
         }
       }
     );

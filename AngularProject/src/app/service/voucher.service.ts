@@ -63,12 +63,8 @@ export class VoucherService {
           minus = cartItemsN[index].price_total - minus
         }
       }
-<<<<<<< HEAD
-      return cartItems; 
-=======
     
       return cartItemsN 
->>>>>>> 8f9f90d82a8c873d629dbfd69d901faa6136441b
     }
    
     return null;
