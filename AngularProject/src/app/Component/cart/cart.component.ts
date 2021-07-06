@@ -230,10 +230,9 @@ export class CartComponent implements OnInit {
     // Chỗ .data này để đưa data vô cái component của cái dialog
     // Có thể truyền vào bất cứ gì
     // Giờ ko sài nên tui comment lại
-    //dialogConfig.data = {
-    //  id: 1,
-    //  title: 'Angular For Beginners'
-    //};
+    dialogConfig.data = {
+      listCartItem: this.cartItems
+    };
     this.dialog.open(CourseDialogComponent, dialogConfig).afterClosed().subscribe(
       data => console.log("Dialog output:", data)
     );
