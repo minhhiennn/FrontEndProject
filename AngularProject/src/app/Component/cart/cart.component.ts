@@ -3,7 +3,7 @@ import { CartService } from 'src/app/service/cart.service';
 import { CartItem } from '../../models/cart-item';
 import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/models/user';
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
 import { CourseDialogComponent } from 'src/app/component/course-dialog/course-dialog.component';
 import { Router } from '@angular/router';
 @Component({
@@ -226,14 +226,12 @@ export class CartComponent implements OnInit {
   }
   // Đây là phương thức mở lớp dialog
   openDialog() {
+    console.log(this.cartItems);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    // Chỗ .data này để đưa data vô cái component của cái dialog
-    // Có thể truyền vào bất cứ gì
-    // Giờ ko sài nên tui comment lại
     dialogConfig.data = {
-      listCartItem: this.cartItems
+      
     };
     this.dialog.open(CourseDialogComponent, dialogConfig).afterClosed().subscribe(
       (data: CartItem[]) => {
@@ -242,5 +240,6 @@ export class CartComponent implements OnInit {
         this.cartTotalReal = totalWhenGetVoucher;
       }
     );
+    
   }
 }

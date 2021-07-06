@@ -44,8 +44,8 @@
               </div>
             </td>
             <td class="cart_total">
-              <p class="cart_total_price" style="text-decoration: line-through;" *ngIf="listCartItemsWhenVoucher.length != 0">{{this.cartItems[i].price_total | currency: 'USD'}}</p>
               <p class="cart_total_price" *ngIf="listCartItemsWhenVoucher.length == 0">{{cartItem.price_total | currency: 'USD'}}</p>
+              <p class="cart_total_price" *ngIf="listCartItemsWhenVoucher.length != 0" style="text-decoration: line-through;" >{{this.cartItem.price_total | currency: 'USD'}}</p>
               <p class="cart_total_price" *ngIf="listCartItemsWhenVoucher.length != 0">{{this.listCartItemsWhenVoucher[i].price_total | currency: 'USD'}}</p>
             </td>
             <td class="cart_delete">

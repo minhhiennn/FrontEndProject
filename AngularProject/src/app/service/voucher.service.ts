@@ -31,7 +31,6 @@ export class VoucherService {
       //Condition
       let conditionArr: string[] = voucher.condition.split("-");
       //Content
-      
       let contentArr: string[] = voucher.content.split("-");
       //contentPrice và contentPriceMax chỉ có khi giảm giá theo giỏ hàng
       let contentPrice: number = parseInt(contentArr[0]); //lượng tiền 
@@ -63,8 +62,10 @@ export class VoucherService {
           minus = cartItemsN[index].price_total - minus
         }
       }
+    
       return cartItemsN 
     }
+   
     return null;
   }
 
