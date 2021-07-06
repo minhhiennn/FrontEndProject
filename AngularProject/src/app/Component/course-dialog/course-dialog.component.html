@@ -1,7 +1,7 @@
 <h2>Đây là chỗ cho bạn nhập voucher</h2>
 <label for="text1">Nhập voucher</label>
-<input type="text" name="text1" />
+<input type="text" name="text1" #code/>
 <div style="display:flex">
   <button (click)="close()">Close</button>
-  <button (click)="save()">Save</button>
+  <button (click)="test(code)">Save</button>
 </div>

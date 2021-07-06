@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CartItem } from '../models/cart-item';
-import { User } from '../models/user';
 import { Voucher } from '../models/voucher';
 
 @Injectable({
