@@ -9,7 +9,7 @@ import { Voucher } from '../models/voucher';
   providedIn: 'root'
 })
 export class VoucherService {
-  url = 'https://first-fucking-app-angular.herokuapp.com/users/';
+  url = 'https://first-fucking-app-angular.herokuapp.com/voucher/';
 
   constructor(private http: HttpClient) { }
 
@@ -27,7 +27,7 @@ export class VoucherService {
   }
   checkCondition(voucher: Voucher, cartItems: CartItem[]): CartItem[] | null {
     let cartItemsN: CartItem[] = cartItems;
-    if (this.checkCanUser(voucher)){
+    if (this.checkCanUser(voucher)) {
       //Condition
       let conditionArr: string[] = voucher.condition.split("-");
       //Content
@@ -42,7 +42,10 @@ export class VoucherService {
       // 2 thằng đầu null khi giảm giá theo tên mặt hàng và ngược lại
 
       let total: number = 0;
-    
+      // //1-9999999-0-0-0 : 1 là lượng tiền cần đạt để được giảm giá ---- 9999999 là lượng tiền tối đa được giảm giá
+      // let voucher: Voucher = new Voucher("codeTheoGio", 20, "%","1-9999999-0-0-0","null-", 10, new Date('August 19, 2020 23:15:30'), new Date('August 19, 2022 23:15:30'));
+      // //0-0-1-1-9999999 : 1 là số lượng cần đạt để được giảm giá - 1 là loại giảm giá theo số lượng - 9999999 là số lượng tối đa được giảm giá
+      // let voucher: Voucher = new Voucher("codeTheoTen", 20, "%", "0-0-1-1-9999999", "Easy Polo Black Edition ahihi-", 10, new Date('August 19, 2020 23:15:30'), new Date('August 19, 2022 23:15:30'));
       // giảm giá theo tên mặt hàng
       for (let index = 0; index < cartItems.length; index++) {
         if (conditionArr.includes(cartItems[index].product.name) && cartItems[index].quantity >= contentAmount) {
@@ -55,9 +58,9 @@ export class VoucherService {
         total = this.discountWithType(total, contentPriceMax, 1, voucher.type, voucher.discount, 0, 0);
         let minus = cartItemsN[0].price_total - total;
         for (let index = 0; index < cartItemsN.length; index++) {
-          if (minus <= 0) 
+          if (minus <= 0)
             cartItemsN[index].price_total = Math.abs(minus)
-            minus = cartItemsN[index].price_total - minus
+          minus = cartItemsN[index].price_total - minus
         }
       }
       return cartItemsN
@@ -73,16 +76,16 @@ export class VoucherService {
     switch (contentType) {
       case 1:
         //quantity > 0 la tk giảm giá theo mặt hàng còn = 0 là giảm giá theo giỏ hàng và giảm giá theo giỏ hàng thì contentType luôn là 1
-        if(quantity > 0 ){
-          if (quantity >= contentPriceMaxOrAmountMax) result = (total*quantity) - ((discount) * contentPriceMaxOrAmountMax);
+        if (quantity > 0) {
+          if (quantity >= contentPriceMaxOrAmountMax && contentPriceMaxOrAmountMax != 0) result = (total * quantity) - ((discount) * contentPriceMaxOrAmountMax);
           else result = (total - discount) * quantity;
-        }else{
+        } else {
           result = total - discount;
-          if (result >= contentPriceMaxOrAmountMax) result = contentPriceMaxOrAmountMax;
+          if (result >= contentPriceMaxOrAmountMax && contentPriceMaxOrAmountMax != 0) result = contentPriceMaxOrAmountMax;
         }
         break;
       case 2:
-        if (quantity >= contentPriceMaxOrAmountMax) result = (total * quantity)  - ((discount) * (contentPriceMaxOrAmountMax - contentAmount));
+        if (quantity >= contentPriceMaxOrAmountMax && contentPriceMaxOrAmountMax != 0) result = (total * quantity) - ((discount) * (contentPriceMaxOrAmountMax - contentAmount));
         else result = (total - discount) * (quantity - contentAmount);
         break;
       default:
