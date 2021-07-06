@@ -1,14 +1,8 @@
 <h2>Đây là chỗ cho bạn nhập voucher</h2>
 <label for="text1">Nhập voucher</label>
-<<<<<<< HEAD
 <input type="text" name="text1" #code/>
+<p style="color:red" *ngIf="err.length != 0">{{err}}</p>
 <div style="display:flex">
   <button (click)="close()">Close</button>
   <button (click)="test(code)">Save</button>
-=======
-<input type="text" name="text1" #text123123 />
-<div style="display:flex">
-  <button (click)="close()">Close</button>
-  <button (click)="save(text123123.value)">Save</button>
->>>>>>> c2182d9d7ee9fdfc3cbb3ce04fb0a2475beab6e0
 </div>
