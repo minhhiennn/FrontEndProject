@@ -13,8 +13,8 @@ export class VoucherService {
 
   constructor(private http: HttpClient) { }
 
-  getByCode(code: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}?code=${code}`);
+  getByCode(code: string): Observable<Voucher[]> {
+    return this.http.get<Voucher[]>(`${this.url}?code=${code}`);
   }
   checkCanUser(voucher: Voucher): boolean {
     let now = new Date();
