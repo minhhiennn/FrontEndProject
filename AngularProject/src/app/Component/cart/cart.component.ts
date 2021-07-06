@@ -17,6 +17,7 @@ export class CartComponent implements OnInit {
   cartTotal = 0;
   currentUser: User | null = null;
   showSpinner: boolean = true;
+  voucherCode: string | null = null;
   cartTotalReal: number = 0;
   constructor(private cartService: CartService, private userService: UserService, private router: Router, private dialog: MatDialog) { }
 
@@ -230,17 +231,25 @@ export class CartComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      voucherCode: this.voucherCode
+    };
     this.dialog.open(CourseDialogComponent, dialogConfig).afterClosed().subscribe(
       (data: any) => {
         if (data !== undefined) {
-          if (Number.isInteger(parseInt(data.toString()[0]))) {
-            console.log("cho tui đúng đi");
+          if (typeof data == "number") {
+            let voucherCode: any = localStorage.getItem("voucherCode");
+            this.voucherCode = voucherCode;
             let totalWhenGetVoucher: number = parseInt(data.toString());
             this.cartTotalReal = totalWhenGetVoucher;
+            localStorage.removeItem("voucherCode");
           } else {
+            let voucherCode: any = localStorage.getItem("voucherCode");
+            this.voucherCode = voucherCode;
             let totalWhenGetVoucher: number = this.cartService.getTotal(data);
             this.cartTotalReal = totalWhenGetVoucher;
             this.listCartItemsWhenVoucher = data;
+            localStorage.removeItem("voucherCode");
           }
         }
       }

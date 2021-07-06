@@ -16,10 +16,11 @@ export class CourseDialogComponent implements OnInit {
   
   data: any;
   err: string = "";
+  voucherCode: string | null = null;
   currentUser: User | null = null;
 
-  constructor(private dialogRef: MatDialogRef<CourseDialogComponent>,private voucherService: VoucherService, private cartService: CartService, private userService: UserService) {
-    
+  constructor(private dialogRef: MatDialogRef<CourseDialogComponent>, @Inject(MAT_DIALOG_DATA) data: any, private voucherService: VoucherService, private cartService: CartService, private userService: UserService) {
+    this.voucherCode = data.voucherCode;
   }
 
   ngOnInit(): void {
@@ -40,22 +41,22 @@ export class CourseDialogComponent implements OnInit {
             let date1: Date = new Date(data[0].dateBegin.toString());
             let date2: Date = new Date(data[0].dateEnd.toString());
             let voucher: Voucher = new Voucher(data[0].code, data[0].quantity, data[0].type, data[0].content, data[0].condition, data[0].discount, date1, date2);
+            localStorage.setItem("voucherCode", voucher.code);
             let data2: CartItem[] | null | number = this.voucherService.checkCondition(voucher, data1);
             return data2;
           }
         })).subscribe(data => {
           if (data == "lỗi ko tìm thấy code voucher") {
             this.err = "lỗi ko tìm thấy code voucher";
-            console.log("sai");
+            localStorage.removeItem("voucherCode");
           } else {
             if (data == null) {
               this.err = "cái voucher này đã hết hạn";
+              localStorage.removeItem("voucherCode");
             } else if (Number.isInteger(data.toString()[0])) {
-              console.log("data là number");
               let total: number = parseInt(data.toString());
               this.dialogRef.close(total);
             } else {
-              console.log(data);
               let cartItem: CartItem[] | number = data;
               this.dialogRef.close(cartItem);
             }
