@@ -25,9 +25,10 @@ export class VoucherService {
     }
     return false;
   }
-  checkCondition(voucher: Voucher, cartItems: CartItem[]): number {
-    //Condition
+  checkCondition(voucher: Voucher, cartItems: CartItem[]): CartItem[] | null {
+    let cartItemsN: CartItem[] = cartItems;
     if (this.checkCanUser(voucher)){
+      //Condition
       let conditionArr: string[] = voucher.condition.split("-");
       //Content
       let contentArr: string[] = voucher.content.split("-");
@@ -41,7 +42,7 @@ export class VoucherService {
       // 2 thằng đầu null khi giảm giá theo tên mặt hàng và ngược lại
 
       let total: number = 0;
-      let cartItemsN: CartItem[] = cartItems;
+    
       // giảm giá theo tên mặt hàng
       for (let index = 0; index < cartItems.length; index++) {
         if (conditionArr.includes(cartItems[index].product.name) && cartItems[index].quantity >= contentAmount) {
@@ -49,14 +50,19 @@ export class VoucherService {
         }
         total += cartItemsN[index].price_total;
       }
-
       // giảm giá theo giỏ hàng
       if (conditionArr.includes("null") && total >= contentPrice) {
         total = this.discountWithType(total, contentPriceMax, 1, voucher.type, voucher.discount, 0, 0);
+        let minus = cartItemsN[0].price_total - total;
+        for (let index = 0; index < cartItemsN.length; index++) {
+          if (minus <= 0) 
+            cartItemsN[index].price_total = Math.abs(minus)
+            minus = cartItemsN[index].price_total - minus
+        }
       }
-      return total;
+      return cartItemsN
     }
-    return 0;
+    return null;
   }
 
   discountWithType(total: number, contentPriceMaxOrAmountMax: number, contentType: number, type: string, discount: number, quantity: number, contentAmount: number): number {
