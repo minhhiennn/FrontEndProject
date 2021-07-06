@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/service/user.service';
-import { map, switchMap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -217,5 +216,12 @@ export class CartService {
   // xóa dữ liệu(phụ thuộc vào id cartItem)
   deleteData(id: number) {
     return this.http.delete(this.urlCart + "/" + id);
+  }
+  getTotal(cartItems: CartItem[]): number {
+    let total: number = 0;
+    for (let index = 0; index < cartItems.length; index++) {
+      total += cartItems[index].price_total;
+    }
+    return total;
   }
 }

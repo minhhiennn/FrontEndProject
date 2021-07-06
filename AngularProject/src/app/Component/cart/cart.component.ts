@@ -13,9 +13,11 @@ import { Router } from '@angular/router';
 })
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
+  listCartItemsWhenVoucher: CartItem[] = [];
   cartTotal = 0;
   currentUser: User | null = null;
   showSpinner: boolean = true;
+  cartTotalReal: number = 0;
   constructor(private cartService: CartService, private userService: UserService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -230,12 +232,15 @@ export class CartComponent implements OnInit {
     // Chỗ .data này để đưa data vô cái component của cái dialog
     // Có thể truyền vào bất cứ gì
     // Giờ ko sài nên tui comment lại
-    //dialogConfig.data = {
-    //  id: 1,
-    //  title: 'Angular For Beginners'
-    //};
+    dialogConfig.data = {
+      listCartItem: this.cartItems
+    };
     this.dialog.open(CourseDialogComponent, dialogConfig).afterClosed().subscribe(
-      data => console.log("Dialog output:", data)
+      (data: CartItem[]) => {
+        let totalWhenGetVoucher: number = this.cartService.getTotal(data);
+        this.listCartItemsWhenVoucher = data;
+        this.cartTotalReal = totalWhenGetVoucher;
+      }
     );
   }
 }
