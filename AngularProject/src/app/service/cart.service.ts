@@ -218,4 +218,11 @@ export class CartService {
   deleteData(id: number) {
     return this.http.delete(this.urlCart + "/" + id);
   }
+  getTotal(cartItems: CartItem[]): number {
+    let total: number = 0;
+    cartItems.forEach(element => {
+      total += element.price_total;
+    });
+    return total;
+  }
 }
