@@ -50,8 +50,8 @@ export class CourseDialogComponent implements OnInit {
           } else {
             if (data == null) {
               this.err = "cái voucher này đã hết hạn";
-            } else if (Number.isInteger(data)) {
-              console.log(isNaN(parseInt(data.toString())));
+            } else if (Number.isInteger(data.toString()[0])) {
+              console.log("data là number");
               let total: number = parseInt(data.toString());
               this.dialogRef.close(total);
             } else {

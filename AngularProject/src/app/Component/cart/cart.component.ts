@@ -233,9 +233,9 @@ export class CartComponent implements OnInit {
     this.dialog.open(CourseDialogComponent, dialogConfig).afterClosed().subscribe(
       (data: any) => {
         if (data !== undefined) {
-          if (isNaN(parseInt(data.toString()))) {
+          if (Number.isInteger(parseInt(data.toString()[0]))) {
+            console.log("cho tui đúng đi");
             let totalWhenGetVoucher: number = parseInt(data.toString());
-            console.log("bun");
             this.cartTotalReal = totalWhenGetVoucher;
           } else {
             let totalWhenGetVoucher: number = this.cartService.getTotal(data);
