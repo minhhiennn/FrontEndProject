@@ -2,15 +2,15 @@
 <app-header></app-header>
 <!--/header-->
 <ng-progress [meteor]="options.meteor" [color]="options.color" [minimum]="options.minimum" [speed]="options.speed"
-             [spinner]="options.spinner" [spinnerPosition]="options.spinnerPosition" [direction]="options.direction"
-             [thick]="options.thick" [trickleSpeed]="options.trickleSpeed" [ease]="options.ease" *ngIf="preventAbuse === true">
+  [spinner]="options.spinner" [spinnerPosition]="options.spinnerPosition" [direction]="options.direction"
+  [thick]="options.thick" [trickleSpeed]="options.trickleSpeed" [ease]="options.ease" *ngIf="preventAbuse === true">
 </ng-progress>
 <section>
   <div class="container">
-    <div class="row">
+    <div class="row" *ngIf="product">
       <app-left-sidebar></app-left-sidebar>
       <div class="col-sm-9 padding-right">
-        <div class="product-details">
+        <div class="product-details" *ngIf="product.id > 0 else elseBlock ">
           <!--product-details-->
           <div class="col-sm-5">
             <div class="view-product" *ngIf="product">
@@ -49,7 +49,7 @@
             </div>
 
           </div>
-          <div class="col-sm-7" *ngIf="product">
+          <div class="col-sm-7" *ngIf="product.id">
             <div class="product-information">
               <!--/product-information-->
               <img src="assets/images/product-details/new.jpg" class="newarrival" alt="" />
@@ -69,11 +69,111 @@
               <p><b>Condition:</b> New</p>
               <p><b>Brand:</b> E-SHOPPER</p>
               <a href=""><img src="assets/images/product-details/share.png" class="share img-responsive" alt="" /></a>
-            </div><!--/product-information-->
+            </div>
+            <!--/product-information-->
           </div>
-        </div><!--/product-details-->
 
-        <div class="category-tab shop-details-tab">
+        </div>
+        <ng-template #elseBlock>
+          <div class="col-sm-5">
+            <div class="view-product" *ngIf="product">
+              <img [src]="product.img.split('$')[0]" alt="" />
+              <h3>ZOOM</h3>
+            </div>
+            <div id="similar-product" class="carousel slide" data-ride="carousel">
+
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner">
+                <div class="item active">
+                  <a href=""><img src="assets/images/product-details/similar1.jpg" alt=""></a>
+                  <a href=""><img src="assets/images/product-details/similar2.jpg" alt=""></a>
+                  <a href=""><img src="assets/images/product-details/similar3.jpg" alt=""></a>
+                </div>
+                <div class="item">
+                  <a href=""><img src="assets/images/product-details/similar1.jpg" alt=""></a>
+                  <a href=""><img src="assets/images/product-details/similar2.jpg" alt=""></a>
+                  <a href=""><img src="assets/images/product-details/similar3.jpg" alt=""></a>
+                </div>
+                <div class="item">
+                  <a href=""><img src="assets/images/product-details/similar1.jpg" alt=""></a>
+                  <a href=""><img src="assets/images/product-details/similar2.jpg" alt=""></a>
+                  <a href=""><img src="assets/images/product-details/similar3.jpg" alt=""></a>
+                </div>
+
+              </div>
+
+              <!-- Controls -->
+              <a class="left item-control" href="#similar-product" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+              </a>
+              <a class="right item-control" href="#similar-product" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </div>
+
+          </div>
+          <div class="col-sm-7" *ngIf="product.id">
+            <div class="product-information">
+              <!--/product-information-->
+              <img src="assets/images/product-details/new.jpg" class="newarrival" alt="" />
+              <h2>{{product.name.split('$')[0]}}</h2>
+              <p>Web ID: 1089772</p>
+              <img src="assets/images/product-details/rating.png" alt="" />
+              <span>
+                <span>US {{product.price}}</span>
+              </span>
+              <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Measure
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      This is a summary of the content
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p *ngFor="let item of measure">{{item}}</p>
+                </mat-expansion-panel>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      iTailorObject
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      This is a summary of the content
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p *ngFor="let item of iTailorObject">{{item}}</p>
+                </mat-expansion-panel>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      VestObject
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      This is a summary of the content
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p *ngFor="let item of vestObject">{{item}}</p>
+                </mat-expansion-panel>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      PantObject
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      This is a summary of the content
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p *ngFor="let item of pantObject">{{item}}</p>
+                </mat-expansion-panel>
+
+              </mat-accordion>
+            </div>
+            <!--/product-information-->
+          </div>
+        </ng-template>
+        <div class="category-tab shop-details-tab" *ngIf="product.id > 0">
           <!--category-tab-->
           <div class="col-sm-12">
             <ul class="nav nav-tabs">
@@ -92,7 +192,8 @@
                       <img src="assets/images/home/gallery1.jpg" alt="" />
                       <h2>$56</h2>
                       <p>Easy Polo Black Edition</p>
-                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                        to cart</button>
                     </div>
                   </div>
                 </div>
@@ -104,7 +205,8 @@
                       <img src="assets/images/home/gallery2.jpg" alt="" />
                       <h2>$56</h2>
                       <p>Easy Polo Black Edition</p>
-                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                        to cart</button>
                     </div>
                   </div>
                 </div>
@@ -116,7 +218,8 @@
                       <img src="assets/images/home/gallery3.jpg" alt="" />
                       <h2>$56</h2>
                       <p>Easy Polo Black Edition</p>
-                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                        to cart</button>
                     </div>
                   </div>
                 </div>
@@ -128,7 +231,8 @@
                       <img src="assets/images/home/gallery4.jpg" alt="" />
                       <h2>$56</h2>
                       <p>Easy Polo Black Edition</p>
-                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                        to cart</button>
                     </div>
                   </div>
                 </div>
@@ -143,7 +247,8 @@
                       <img src="assets/images/home/gallery1.jpg" alt="" />
                       <h2>$56</h2>
                       <p>Easy Polo Black Edition</p>
-                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                        to cart</button>
                     </div>
                   </div>
                 </div>
@@ -155,7 +260,8 @@
                       <img src="assets/images/home/gallery3.jpg" alt="" />
                       <h2>$56</h2>
                       <p>Easy Polo Black Edition</p>
-                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                        to cart</button>
                     </div>
                   </div>
                 </div>
@@ -167,7 +273,8 @@
                       <img src="assets/images/home/gallery2.jpg" alt="" />
                       <h2>$56</h2>
                       <p>Easy Polo Black Edition</p>
-                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                        to cart</button>
                     </div>
                   </div>
                 </div>
@@ -179,7 +286,8 @@
                       <img src="assets/images/home/gallery4.jpg" alt="" />
                       <h2>$56</h2>
                       <p>Easy Polo Black Edition</p>
-                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                        to cart</button>
                     </div>
                   </div>
                 </div>
@@ -194,7 +302,8 @@
                       <img src="assets/images/home/gallery1.jpg" alt="" />
                       <h2>$56</h2>
                       <p>Easy Polo Black Edition</p>
-                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                        to cart</button>
                     </div>
                   </div>
                 </div>
@@ -206,7 +315,8 @@
                       <img src="assets/images/home/gallery2.jpg" alt="" />
                       <h2>$56</h2>
                       <p>Easy Polo Black Edition</p>
-                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                        to cart</button>
                     </div>
                   </div>
                 </div>
@@ -218,7 +328,8 @@
                       <img src="assets/images/home/gallery3.jpg" alt="" />
                       <h2>$56</h2>
                       <p>Easy Polo Black Edition</p>
-                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                        to cart</button>
                     </div>
                   </div>
                 </div>
@@ -230,7 +341,8 @@
                       <img src="assets/images/home/gallery4.jpg" alt="" />
                       <h2>$56</h2>
                       <p>Easy Polo Black Edition</p>
-                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                      <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                        to cart</button>
                     </div>
                   </div>
                 </div>
@@ -238,11 +350,12 @@
             </div>
 
             <div class="tab-pane fade active in" id="reviews">
-                 <app-product-list-comment  ></app-product-list-comment>
+              <app-product-list-comment></app-product-list-comment>
             </div>
 
           </div>
-        </div><!--/category-tab-->
+        </div>
+        <!--/category-tab-->
 
         <div class="recommended_items">
           <!--recommended_items-->
@@ -258,7 +371,8 @@
                         <img src="assets/images/home/recommend1.jpg" alt="" />
                         <h2>$56</h2>
                         <p>Easy Polo Black Edition</p>
-                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                          to cart</button>
                       </div>
                     </div>
                   </div>
@@ -270,7 +384,8 @@
                         <img src="assets/images/home/recommend2.jpg" alt="" />
                         <h2>$56</h2>
                         <p>Easy Polo Black Edition</p>
-                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                          to cart</button>
                       </div>
                     </div>
                   </div>
@@ -282,7 +397,8 @@
                         <img src="assets/images/home/recommend3.jpg" alt="" />
                         <h2>$56</h2>
                         <p>Easy Polo Black Edition</p>
-                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                          to cart</button>
                       </div>
                     </div>
                   </div>
@@ -296,7 +412,8 @@
                         <img src="assets/images/home/recommend1.jpg" alt="" />
                         <h2>$56</h2>
                         <p>Easy Polo Black Edition</p>
-                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                          to cart</button>
                       </div>
                     </div>
                   </div>
@@ -308,7 +425,8 @@
                         <img src="assets/images/home/recommend2.jpg" alt="" />
                         <h2>$56</h2>
                         <p>Easy Polo Black Edition</p>
-                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                          to cart</button>
                       </div>
                     </div>
                   </div>
@@ -320,7 +438,8 @@
                         <img src="assets/images/home/recommend3.jpg" alt="" />
                         <h2>$56</h2>
                         <p>Easy Polo Black Edition</p>
-                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                          to cart</button>
                       </div>
                     </div>
                   </div>
@@ -334,7 +453,8 @@
               <i class="fa fa-angle-right"></i>
             </a>
           </div>
-        </div><!--/recommended_items-->
+        </div>
+        <!--/recommended_items-->
 
       </div>
     </div>

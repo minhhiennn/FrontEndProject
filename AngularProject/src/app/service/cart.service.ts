@@ -35,6 +35,8 @@ export class CartService {
         } else {
           // nếu ko tìm thấy cartItem nào
           // lấy ra id lớn nhất của cartItem + 1
+          product.id = this.getLastIdProduct(data,product);
+          product.name = "vest tự thiết kế " + Math.abs(product.id) + '$' + product.name
           this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price, this.currentUser?.id)).subscribe(() => {
             this.getData().subscribe((data: CartItem[]) => {
               this.items = data;
@@ -57,6 +59,8 @@ export class CartService {
           localStorage.setItem("CookieCart", JSON.stringify(listCartItem));
           this.router.navigate(['/cart']);
         } else {
+          product.id = this.getLastIdProduct(listCartItem, product);
+          product.name ="vest tự thiết kế " + Math.abs(product.id) + '$'+ product.name
           listCartItem.push(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price));
           localStorage.setItem("CookieCart", JSON.stringify(listCartItem));
           this.router.navigate(['/cart']);
@@ -88,6 +92,8 @@ export class CartService {
         } else {
           // nếu ko tìm thấy cartItem nào
           // lấy ra id lớn nhất của cartItem + 1
+          this.getLastIdProduct(data, cartItems[i].product);
+          cartItems[i].product.name = "vest tự thiết kế " + Math.abs(cartItems[i].product.id) + '$' + cartItems[i].product.name
           this.postData(new CartItem(this.getMaxIndexCartItem() + 1, cartItems[i].product, cartItems[i].quantity, cartItems[i].price_total, this.currentUser?.id)).subscribe(() => {
             this.getData().subscribe((data: CartItem[]) => {
               this.items = data;
@@ -134,7 +140,6 @@ export class CartService {
   }
   getLastIndexInProductId(): Observable<CartItem[]> {
     return this.http.get<CartItem[]>(`${this.urlCart}?_sort=id&_order=desc`);
-
   }
   //////
   getProductAndQuantity(quantity: number, product: Product) {
@@ -223,5 +228,16 @@ export class CartService {
       total += cartItems[index].price_total;
     }
     return total;
+  }
+  getLastIdProduct(data : CartItem[],product : Product) : number{
+    if (product.id < 0) {
+      let listID: number[] = [];
+      data.forEach(element => {
+        listID.push(element.product.id);
+      });
+      listID.sort((one, two) => (one > two ? 1 : -1));
+      if (listID[0] == 1) return -1
+      return listID[0] -1 ;
+    } else return product.id;
   }
 }

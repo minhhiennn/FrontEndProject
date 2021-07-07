@@ -1,0 +1,30 @@
+<!--header-->
+<app-header></app-header>
+<!--/header-->
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Check out</li>
+            </ol>
+        </div>
+    
+      
+    
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <div id="editable-content" ng-controller="SimpleController" style="z-index: 1;">
+                    <iframe id="editfield" src="../../../assets/ita/phungvip/www.itailor.com/designsuits/index.html" width="1200px"
+                        height="800px" frameborder="0" scrolling="no"></iframe>
+                    <button id="clickable-zone" (click)="post()">ADD TO CART</button>
+                </div>
+            </table>
+        </div>
+    
+    </div>
+</section>
+<!--/#cart_items-->
+<!--Footer-->
+<app-footer></app-footer>
+<!--/Footer-->

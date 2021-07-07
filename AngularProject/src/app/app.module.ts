@@ -36,6 +36,8 @@ import { AccountComponent } from './component/account/account.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { CustomClothesComponent } from './component/custom-clothes/custom-clothes.component';
 import { CourseDialogComponent } from './component/course-dialog/course-dialog.component';
+import { CustomComponent } from './Component/custom/custom.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
@@ -60,8 +62,10 @@ import { CourseDialogComponent } from './component/course-dialog/course-dialog.c
     UserProfileComponent,
     CustomClothesComponent,
     CourseDialogComponent,
+    CustomComponent,
   ],
   imports: [
+    MatExpansionModule,
     NgProgressModule.forRoot(),
     NgProgressHttpClientModule,
     MatProgressBarModule,
@@ -98,7 +102,9 @@ import { CourseDialogComponent } from './component/course-dialog/course-dialog.c
       { path: 'user', component: UserProfileComponent },
       { path: 'custom-clothes', component: CustomClothesComponent },
       { path: 'testDialog', component: CourseDialogComponent },
+      { path: 'custom', component: CustomComponent },
       { path: '', component: HomeComponent }
+      
     ])
   ],
   providers: [],
