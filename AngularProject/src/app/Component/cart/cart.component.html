@@ -31,7 +31,7 @@
               <a href=""><img [src]="cartItem.product.img" alt="" style="width:110px;height:110px"></a>
             </td>
             <td class="cart_description">
-              <h4><a href="">{{cartItem.product.name}}</a></h4>
+              <h4><a [routerLink]="['/products']" [queryParams]="{productId:cartItem.product.id}">{{cartItem.product.name}}</a></h4>
               <p>Web ID: 1089772</p>
             </td>
             <td class="cart_price">

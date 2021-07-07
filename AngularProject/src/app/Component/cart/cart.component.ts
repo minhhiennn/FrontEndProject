@@ -242,6 +242,7 @@ export class CartComponent implements OnInit {
             this.voucherCode = voucherCode;
             let totalWhenGetVoucher: number = parseInt(data.toString());
             this.cartTotalReal = totalWhenGetVoucher;
+            this.listCartItemsWhenVoucher = [];
             localStorage.removeItem("voucherCode");
           } else {
             let voucherCode: any = localStorage.getItem("voucherCode");

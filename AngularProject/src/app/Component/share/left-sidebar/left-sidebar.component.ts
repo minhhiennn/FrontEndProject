@@ -11,7 +11,7 @@ export class LeftSidebarComponent implements OnInit {
   highValue: number = 60;
   options: Options = {
     floor: 0,
-    ceil: 100
+    ceil: 500
   };
   constructor(private router: Router) { }
 
