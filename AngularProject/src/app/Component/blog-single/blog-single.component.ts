@@ -1,4 +1,3 @@
-
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -87,7 +86,6 @@ export class BlogSingleComponent implements OnInit, AfterViewInit {
     //   this.content2 = this.sanitizer.bypassSecurityTrustHtml((classArray.toString()));
       
     // })
-   
     const routeParams = this.route.snapshot.queryParamMap;
     const productIdFromRoute = (routeParams.get('rssTitle'));
     this.httpClient.get(this.api + this.url).subscribe(data => {

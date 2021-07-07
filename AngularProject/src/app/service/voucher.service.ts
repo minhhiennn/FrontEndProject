@@ -25,13 +25,15 @@ export class VoucherService {
    
     return false;
   }
-  checkCondition(voucher: Voucher, cartItems: CartItem[]): CartItem[]| null  {
-    let cartItemsN: CartItem[] = cartItems;
+  checkCondition(voucher: Voucher, cartItems: CartItem[]): CartItem[] | null | number  {
+    let cartItemsN: CartItem[] = [];
+    for (let i = 0; i < cartItems.length; i++) {
+      cartItemsN.push(cartItems[i]);
+    }
     if (this.checkCanUser(voucher)) {
       //Condition
       let conditionArr: string[] = voucher.condition.split("-");
       //Content
-      
       let contentArr: string[] = voucher.content.split("-");
       //contentPrice và contentPriceMax chỉ có khi giảm giá theo giỏ hàng
       let contentPrice: number = parseInt(contentArr[0]); //lượng tiền 
@@ -43,25 +45,16 @@ export class VoucherService {
       // 2 thằng đầu null khi giảm giá theo tên mặt hàng và ngược lại
 
       let total: number = 0;
-     
-      for (let index = 0; index < cartItems.length; index++) {
+      for (let index = 0; index < cartItemsN.length; index++) {
        
-        if (conditionArr.includes(cartItems[index].product.name) && cartItems[index].quantity >= contentAmount) {
-          cartItemsN[index].price_total = this.discountWithType(cartItems[index].product.price, contentAmountMax, contentType, voucher.type, voucher.discount, cartItems[index].quantity, contentAmount);
+        if (conditionArr.includes(cartItemsN[index].product.name) && cartItemsN[index].quantity >= contentAmount) {
+          cartItemsN[index].price_total = this.discountWithType(cartItemsN[index].product.price, contentAmountMax, contentType, voucher.type, voucher.discount, cartItemsN[index].quantity, contentAmount);
         }
         total += cartItemsN[index].price_total;
       }
       // giảm giá theo giỏ hàng
       if (conditionArr.includes("null") && total >= contentPrice) {
-        
-        total = this.discountWithType(total, contentPriceMax, 1, voucher.type, voucher.discount, 0, 0);
-        let minus = cartItemsN[0].price_total - total;
-        if (minus >= 0) cartItemsN[0].price_total = cartItemsN[0].price_total - minus;
-        for (let index = 0; index < cartItemsN.length; index++) {
-          if (minus <= 0)
-          cartItemsN[index].price_total = Math.abs(minus)
-          minus = cartItemsN[index].price_total - minus
-        }
+        return this.discountWithType(total, contentPriceMax, 1, voucher.type, voucher.discount, 0, 0);
       }
       return cartItemsN 
     }

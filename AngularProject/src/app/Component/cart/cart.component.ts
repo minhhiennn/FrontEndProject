@@ -3,7 +3,7 @@ import { CartService } from 'src/app/service/cart.service';
 import { CartItem } from '../../models/cart-item';
 import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/models/user';
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
 import { CourseDialogComponent } from 'src/app/component/course-dialog/course-dialog.component';
 import { Router } from '@angular/router';
 @Component({
@@ -17,6 +17,7 @@ export class CartComponent implements OnInit {
   cartTotal = 0;
   currentUser: User | null = null;
   showSpinner: boolean = true;
+  voucherCode: string | null = null;
   cartTotalReal: number = 0;
   constructor(private cartService: CartService, private userService: UserService, private router: Router, private dialog: MatDialog) { }
 
@@ -226,20 +227,32 @@ export class CartComponent implements OnInit {
   }
   // Đây là phương thức mở lớp dialog
   openDialog() {
+    console.log(this.cartItems);
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    // Chỗ .data này để đưa data vô cái component của cái dialog
-    // Có thể truyền vào bất cứ gì
-    // Giờ ko sài nên tui comment lại
     dialogConfig.data = {
-      listCartItem: this.cartItems
+      voucherCode: this.voucherCode
     };
     this.dialog.open(CourseDialogComponent, dialogConfig).afterClosed().subscribe(
-      (data: CartItem[]) => {
-        let totalWhenGetVoucher: number = this.cartService.getTotal(data);
-        this.listCartItemsWhenVoucher = data;
-        this.cartTotalReal = totalWhenGetVoucher;
+      (data: any) => {
+        if (data !== undefined) {
+          if (typeof data == "number") {
+            let voucherCode: any = localStorage.getItem("voucherCode");
+            this.voucherCode = voucherCode;
+            let totalWhenGetVoucher: number = parseInt(data.toString());
+            this.cartTotalReal = totalWhenGetVoucher;
+            this.listCartItemsWhenVoucher = [];
+            localStorage.removeItem("voucherCode");
+          } else {
+            let voucherCode: any = localStorage.getItem("voucherCode");
+            this.voucherCode = voucherCode;
+            let totalWhenGetVoucher: number = this.cartService.getTotal(data);
+            this.cartTotalReal = totalWhenGetVoucher;
+            this.listCartItemsWhenVoucher = data;
+            localStorage.removeItem("voucherCode");
+          }
+        }
       }
     );
   }
