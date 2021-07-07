@@ -85,19 +85,20 @@
               <!-- Wrapper for slides -->
               <div class="carousel-inner">
                 <div class="item active">
-                  <a href=""><img src="assets/images/product-details/similar1.jpg" alt=""></a>
-                  <a href=""><img src="assets/images/product-details/similar2.jpg" alt=""></a>
-                  <a href=""><img src="assets/images/product-details/similar3.jpg" alt=""></a>
+                  <a href=""><img [src]="product.img.split('$')[0]" alt="" style="  width: 80px;"></a>
+                  <a href=""><img [src]="product.img.split('$')[1]" alt="" style="  width: 80px;"></a>
+                  <a href=""><img [src]="product.img.split('$')[2]" alt="" style="  width: 80px;"></a>
+                  
                 </div>
                 <div class="item">
-                  <a href=""><img src="assets/images/product-details/similar1.jpg" alt=""></a>
-                  <a href=""><img src="assets/images/product-details/similar2.jpg" alt=""></a>
-                  <a href=""><img src="assets/images/product-details/similar3.jpg" alt=""></a>
+                      <a href=""><img [src]="product.img.split('$')[3]" alt="" style="  width: 80px;"></a>
+                      <a href=""><img [src]="product.img.split('$')[0]" alt="" style="  width: 80px;"></a>
+                      <a href=""><img [src]="product.img.split('$')[1]" alt="" style="  width: 80px;"></a>
                 </div>
                 <div class="item">
-                  <a href=""><img src="assets/images/product-details/similar1.jpg" alt=""></a>
-                  <a href=""><img src="assets/images/product-details/similar2.jpg" alt=""></a>
-                  <a href=""><img src="assets/images/product-details/similar3.jpg" alt=""></a>
+              <a href=""><img [src]="product.img.split('$')[2]" alt="" style="  width: 80px;"></a>
+              <a href=""><img [src]="product.img.split('$')[3]" alt="" style="  width: 80px;"></a>
+              <a href=""><img [src]="product.img.split('$')[0]" alt="" style="  width: 80px;"></a>
                 </div>
 
               </div>

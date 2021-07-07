@@ -231,7 +231,7 @@ export class CartComponent implements OnInit {
   }
   // Đây là phương thức mở lớp dialog
   openDialog() {
-    console.log(this.cartItems);
+   
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;

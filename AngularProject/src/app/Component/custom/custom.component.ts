@@ -18,24 +18,24 @@ export class CustomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   
+
   }
   post() {
-    
+
     var measure: string = JSON.stringify(JSON.parse(localStorage.getItem("measure") as any))
     var iTailorObject: string = JSON.stringify(JSON.parse(localStorage.getItem("iTailorObject") as any))
     var vestObject: string = JSON.stringify(JSON.parse(localStorage.getItem("vestObject") as any))
     var pantObject: string = JSON.stringify(JSON.parse(localStorage.getItem("pantObject") as any))
-   
-  
+
+
     var imagePath1 = localStorage.getItem("#jacket-front") as string
     var imagePath2 = localStorage.getItem("#jacket-back") as string
-    var imagePath3= localStorage.getItem("#pant-front") as string
+    var imagePath3 = localStorage.getItem("#pant-front") as string
     var imagePath4 = localStorage.getItem("#pant-back") as string
-    var conc = imagePath1 + '$' + imagePath2 +'$'+ imagePath3 + '$' + imagePath4;
-    console.log(measure)
+    var conc = imagePath1 + '$' + imagePath2 + '$' + imagePath3 + '$' + imagePath4;
+    
     var nameConc = measure + '$' + (iTailorObject) + '$' + (vestObject) + '$' + (pantObject);
-    let product: Product = new Product(-2, JSON.parse(localStorage.getItem("sumExtra") as any),  nameConc, (conc));
+    let product: Product = new Product(-2, JSON.parse(localStorage.getItem("sumExtra") as any), nameConc, (conc));
     this.cartService.addToCart(product);
   }
 }

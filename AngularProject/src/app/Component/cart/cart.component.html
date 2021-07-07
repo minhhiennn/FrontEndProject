@@ -41,10 +41,10 @@
               <p>{{cartItem.product.price | currency: 'USD'}}</p>
             </td>
             <td class="cart_quantity">
-              <div class="cart_quantity_button">
-                <a class="cart_quantity_up" (click)="increaseByOne(cartItem)" style="cursor:pointer"> + </a>
+              <div class="cart_quantity_button" *ngIf="cartItem.product.id > 0">
+                <a class="cart_quantity_up"  (click)="increaseByOne(cartItem)" style="cursor:pointer"> + </a>
                 <input class="cart_quantity_input" type="text" [id]="cartItem.product.id" name="quantity" [value]="cartItem.quantity" autocomplete="off" size="2" (change)="change(cartItem)">
-                <a class="cart_quantity_down" (click)="decreaseByOne(cartItem)" style="cursor:pointer"> - </a>
+                <a class="cart_quantity_down"  (click)="decreaseByOne(cartItem)" style="cursor:pointer"> - </a>
               </div>
             </td>
             <td class="cart_total">

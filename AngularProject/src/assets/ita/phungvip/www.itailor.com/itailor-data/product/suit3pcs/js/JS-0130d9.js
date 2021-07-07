@@ -1142,9 +1142,7 @@ function encodeDesign() {
     }
     
     
-    localStorage.setItem('vest', JSON.stringify(base64['vest']));
-    
-    localStorage.setItem('pant', JSON.stringify(base64['pant']));
+   
 }
 function setFabric(data) {
     var fabricAll = designObject.fabric;
