@@ -2,6 +2,10 @@
 <app-header></app-header>
 <!--/header-->
 <section id="slider">
+  <ng-progress [meteor]="options.meteor" [color]="options.color" [minimum]="options.minimum" [speed]="options.speed"
+               [spinner]="options.spinner" [spinnerPosition]="options.spinnerPosition" [direction]="options.direction"
+               [thick]="options.thick" [trickleSpeed]="options.trickleSpeed" [ease]="options.ease" *ngIf="preventAbuse == true">
+  </ng-progress>
   <!--slider-->
   <div class="container">
     <div class="row">
@@ -12,7 +16,6 @@
             <li data-target="#slider-carousel" data-slide-to="1"></li>
             <li data-target="#slider-carousel" data-slide-to="2"></li>
           </ol>
-
           <div class="carousel-inner">
             <div class="item active">
               <div class="col-sm-6">
@@ -34,7 +37,7 @@
                 <button type="button" class="btn btn-default get">Get it now</button>
               </div>
               <div class="col-sm-6">
-                <img src="assets/images/home/vest2.png" class="girl img-responsive" alt=""style="height:450px;" />
+                <img src="assets/images/home/vest2.png" class="girl img-responsive" alt="" style="height:450px;" />
                 <img src="assets/images/home/pricing.png" class="pricing" alt="" />
               </div>
             </div>
@@ -47,7 +50,7 @@
                 <button type="button" class="btn btn-default get">Get it now</button>
               </div>
               <div class="col-sm-6">
-                <img src="assets/images/home/vest2.png" class="girl img-responsive" alt="" style="height:450px;"/>
+                <img src="assets/images/home/vest2.png" class="girl img-responsive" alt="" style="height:450px;" />
                 <img src="assets/images/home/pricing.png" class="pricing" alt="" />
               </div>
             </div>
@@ -82,13 +85,13 @@
                   <img [src]="product.img" alt="" style="height:250px"/>
                   <h2>{{product.price}}</h2>
                   <p>{{product.name}}</p>
-                  <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                  <a class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                 </div>
                 <div class="product-overlay">
                   <div class="overlay-content">
                     <h2>{{product.price}}</h2>
-                    <p [routerLink]="['/products',product.id]">{{product.name}}</p>
-                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                    <p [routerLink]="['/products']" [queryParams]="{productId:product.id}">{{product.name}}</p>
+                    <a class="btn btn-default add-to-cart" (click)="handleAddToCart(product)"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                   </div>
                 </div>
               </div>
@@ -119,12 +122,11 @@
                 <div class="product-image-wrapper">
                   <div class="single-products">
                     <div class="productinfo text-center">
-                      <img [src]="product.img" alt="" [routerLink]="['/products',product.id]" style="height:180px"/>
+                      <img [src]="product.img" alt="" [routerLink]="['/products']" [queryParams]="{productId:product.id}" style="height:180px"/>
                       <h2>{{product.price}}</h2>
                       <p>{{product.name}}</p>
-                      <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                      <a class="btn btn-default add-to-cart" (click)="handleAddToCart(product)"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -134,12 +136,11 @@
                 <div class="product-image-wrapper">
                   <div class="single-products">
                     <div class="productinfo text-center">
-                      <img [src]="product.img" alt="" [routerLink]="['/products',product.id]" style="height:180px" />
+                      <img [src]="product.img" alt="" [routerLink]="['/products']" [queryParams]="{productId:product.id}" style="height:180px" />
                       <h2>{{product.price}}</h2>
                       <p>{{product.name}}</p>
-                      <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                      <a class="btn btn-default add-to-cart" (click)="handleAddToCart(product)"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -149,10 +150,10 @@
                 <div class="product-image-wrapper">
                   <div class="single-products">
                     <div class="productinfo text-center">
-                      <img [src]="product.img" alt="" [routerLink]="['/products',product.id]" style="height:180px" />
+                      <img [src]="product.img" alt="" [routerLink]="['/products']" [queryParams]="{productId:product.id}" style="height:180px" />
                       <h2>{{product.price}}</h2>
                       <p>{{product.name}}</p>
-                      <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                      <a class="btn btn-default add-to-cart" (click)="handleAddToCart(product)"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
                   </div>
                 </div>
@@ -163,10 +164,10 @@
                 <div class="product-image-wrapper">
                   <div class="single-products">
                     <div class="productinfo text-center">
-                      <img [src]="product.img" alt="" [routerLink]="['/products',product.id]" style="height:180px" />
+                      <img [src]="product.img" alt="" [routerLink]="['/products']" [queryParams]="{productId:product.id}" style="height:180px" />
                       <h2>{{product.price}}</h2>
                       <p>{{product.name}}</p>
-                      <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                      <a class="btn btn-default add-to-cart" (click)="handleAddToCart(product)"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
                   </div>
                 </div>
@@ -177,10 +178,10 @@
                 <div class="product-image-wrapper">
                   <div class="single-products">
                     <div class="productinfo text-center">
-                      <img [src]="product.img" alt="" [routerLink]="['/products',product.id]" style="height:180px" />
+                      <img [src]="product.img" alt="" [routerLink]="['/products']" [queryParams]="{productId:product.id}" style="height:180px" />
                       <h2>{{product.price}}</h2>
                       <p>{{product.name}}</p>
-                      <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                      <a class="btn btn-default add-to-cart" (click)="handleAddToCart(product)"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
                   </div>
                 </div>
@@ -201,8 +202,8 @@
                       <div class="productinfo text-center">
                         <img [src]="product.img" alt="" style="height:250px" />
                         <h2>{{product.price}}</h2>
-                        <p>{{product.name}}</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        <p [routerLink]="['/products']" [queryParams]="{productId:product.id}">{{product.name}}</p>
+                        <a class="btn btn-default add-to-cart" (click)="handleAddToCart(product)"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                       </div>
                     </div>
                   </div>
@@ -214,9 +215,9 @@
                     <div class="single-products">
                       <div class="productinfo text-center">
                         <img [src]="product.img" alt="" style="height:250px" />
-                        <h2>$56</h2>
-                        <p>Easy Polo Black Edition</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        <h2>{{product.price}}</h2>
+                        <p [routerLink]="['/products']" [queryParams]="{productId:product.id}">{{product.name}}</p>
+                        <a class="btn btn-default add-to-cart" (click)="handleAddToCart(product)"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                       </div>
                     </div>
                   </div>

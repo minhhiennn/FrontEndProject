@@ -6,6 +6,7 @@ import { User } from 'src/app/models/user';
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
 import { CourseDialogComponent } from 'src/app/component/course-dialog/course-dialog.component';
 import { Router } from '@angular/router';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -19,7 +20,8 @@ export class CartComponent implements OnInit {
   showSpinner: boolean = true;
   voucherCode: string | null = null;
   cartTotalReal: number = 0;
-  constructor(private cartService: CartService, private userService: UserService, private router: Router, private dialog: MatDialog) { }
+  image : any ;
+  constructor(private cartService: CartService, private userService: UserService, private router: Router, private dialog: MatDialog, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.currentUser = this.userService.getCurrentUser();
@@ -27,6 +29,8 @@ export class CartComponent implements OnInit {
       this.cartService.getDataByUserId(this.currentUser.id).subscribe((data: CartItem[]) => {
         this.cartItems = data;
         this.caculateCartTotal();
+        
+
         this.showSpinner = false;
       });
     } else {
@@ -227,7 +231,7 @@ export class CartComponent implements OnInit {
   }
   // Đây là phương thức mở lớp dialog
   openDialog() {
-    console.log(this.cartItems);
+   
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -256,4 +260,5 @@ export class CartComponent implements OnInit {
       }
     );
   }
+ 
 }

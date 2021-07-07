@@ -21,7 +21,7 @@ export class CartService {
     if (this.currentUser != null) {
       this.getData().subscribe((data: CartItem[]) => {
         this.items = data;
-        if (this.checkExistProduct(product) === true) {
+        if (this.checkExistProduct(product) === true && product.id > 0) {
           let num = this.getIndexExistProduct(product);
           let id: number = this.items[num].id;
           let quantity: number = this.items[num].quantity + 1;
@@ -35,6 +35,8 @@ export class CartService {
         } else {
           // nếu ko tìm thấy cartItem nào
           // lấy ra id lớn nhất của cartItem + 1
+          product.id = this.getLastIdProduct(data,product);
+          if(product.id < 0) product.name = "vest tự thiết kế " + Math.abs(product.id) + '$' + product.name
           this.postData(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price, this.currentUser?.id)).subscribe(() => {
             this.getData().subscribe((data: CartItem[]) => {
               this.items = data;
@@ -48,7 +50,7 @@ export class CartService {
       if (CookieCart != null) {
         let listCartItem: CartItem[] = JSON.parse(CookieCart) as CartItem[];
         this.items = listCartItem;
-        if (this.checkExistProduct(product) === true) {
+        if (this.checkExistProduct(product) === true && product.id > 0) {
           let num = this.getIndexExistProduct(product);
           let quantity: number = this.items[num].quantity + 1;
           let price_total: number = this.items[num].price_total + product.price;
@@ -57,6 +59,8 @@ export class CartService {
           localStorage.setItem("CookieCart", JSON.stringify(listCartItem));
           this.router.navigate(['/cart']);
         } else {
+          product.id = this.getLastIdProduct(listCartItem, product);
+          if (product.id < 0)  product.name ="vest tự thiết kế " + Math.abs(product.id) + '$'+ product.name
           listCartItem.push(new CartItem(this.getMaxIndexCartItem() + 1, product, 1, product.price));
           localStorage.setItem("CookieCart", JSON.stringify(listCartItem));
           this.router.navigate(['/cart']);
@@ -74,7 +78,7 @@ export class CartService {
     if (i < cartItems.length) {
       this.getData().subscribe((data: CartItem[]) => {
         this.items = data;
-        if (this.checkExistProduct(cartItems[i].product) === true) {
+        if (this.checkExistProduct(cartItems[i].product) === true && cartItems[i].product.id > 0) {
           let num = this.getIndexExistProduct(cartItems[i].product);
           let id: number = this.items[num].id;
           let quantity: number = this.items[num].quantity + cartItems[i].quantity;
@@ -88,6 +92,8 @@ export class CartService {
         } else {
           // nếu ko tìm thấy cartItem nào
           // lấy ra id lớn nhất của cartItem + 1
+          if (cartItems[i].product.id < 0) this.getLastIdProduct(data, cartItems[i].product);
+          cartItems[i].product.name = "vest tự thiết kế " + Math.abs(cartItems[i].product.id) + '$' + cartItems[i].product.name
           this.postData(new CartItem(this.getMaxIndexCartItem() + 1, cartItems[i].product, cartItems[i].quantity, cartItems[i].price_total, this.currentUser?.id)).subscribe(() => {
             this.getData().subscribe((data: CartItem[]) => {
               this.items = data;
@@ -134,7 +140,6 @@ export class CartService {
   }
   getLastIndexInProductId(): Observable<CartItem[]> {
     return this.http.get<CartItem[]>(`${this.urlCart}?_sort=id&_order=desc`);
-
   }
   //////
   getProductAndQuantity(quantity: number, product: Product) {
@@ -223,5 +228,17 @@ export class CartService {
       total += cartItems[index].price_total;
     }
     return total;
+  }
+  getLastIdProduct(data : CartItem[],product : Product) : number{
+    if (product.id < 0) {
+      let listID: number[] = [];
+      data.forEach(element => {
+        listID.push(element.product.id);
+      });
+      listID.sort((one, two) => (one > two ? 1 : -1));
+      if(listID.length == 0) return -1
+      if (listID[0] != 1) return listID[0] - 1
+      return  -1 ;
+    }  return product.id;
   }
 }
