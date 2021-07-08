@@ -15,89 +15,59 @@
             <img [src]="localUrl" *ngIf="localUrl" class="avatar img-circle img-thumbnail" alt="avatar" id="lead-pic" (click)="selectFile.click()">
             <input type="file" (change)="showPreviewImage($event)" style="display: none" #selectFile>
           </ng-template>
-
+          <br>
+          <div *ngIf="this.check==false"
+          class="alert alert-danger" style="width: 200px;margin-left: 320px;">
+       xin hãy chọn ảnh nhỏ hơn 1mb!!!
+     </div>
         </div><br>
-        <form class="form" action="##" method="post" id="registrationForm">
+        <form class="form" action="##" method="post" id="registrationForm" [formGroup]="myForm3">
           <div class="form-group">
 
             <div class="col-xs-6">
               <label for="first_name">
-                <h4>First name</h4>
+                <h4>Name</h4>
               </label>
-              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+              <input  type="text" class="form-control" required name="first_name" id="first_name" placeholder={{currentUser.name}} value={{currentUser.name}} title="enter your first name if any."  formControlName="name">
+             
             </div>
           </div>
-          <div class="form-group">
+   
 
-            <div class="col-xs-6">
-              <label for="last_name">
-                <h4>Last name</h4>
-              </label>
-              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
-            </div>
-          </div>
-
-          <div class="form-group">
-
-            <div class="col-xs-6">
-              <label for="phone">
-                <h4>Phone</h4>
-              </label>
-              <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="col-xs-6">
-              <label for="mobile">
-                <h4>Mobile</h4>
-              </label>
-              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
-            </div>
-          </div>
+       
           <div class="form-group">
 
             <div class="col-xs-6">
               <label for="email">
                 <h4>Email</h4>
               </label>
-              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+              <input  type="email" class="form-control" required name="email" id="email"  placeholder={{currentUser.email}} value={{currentUser.email}} title="enter your email."  formControlName="email">
+              <div *ngIf="this.myForm3.get('email')?.invalid == true && this.myForm3.get('email')?.touched == true"
+              class="alert alert-danger">
+           Email invalid
+         </div>
             </div>
           </div>
-          <div class="form-group">
-
-            <div class="col-xs-6">
-              <label for="email">
-                <h4>Location</h4>
-              </label>
-              <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
-            </div>
-          </div>
+      
           <div class="form-group">
 
             <div class="col-xs-6">
               <label for="password">
                 <h4>Password</h4>
               </label>
-              <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
+              <input  type="text" class="form-control" required name="password" id="password" placeholder={{currentUser.password}} value={{currentUser.name}} title="enter your password." formControlName="password">
+              <div *ngIf="this.myForm3.get('password')?.invalid == true && this.myForm3.get('password')?.touched == true"
+              class="alert alert-danger">
+           Password must contain at least 9 characters
+         </div>
             </div>
           </div>
-          <div class="form-group">
-
-            <div class="col-xs-6">
-              <label for="password2">
-                <h4>Verify</h4>
-              </label>
-              <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
-            </div>
-          </div>
+       
           <div class="form-group">
             <div class="col-xs-12">
               <br>
-              <button class="btn btn-lg btn-success" type="submit" (click)="save()"  style="background-color: orangered;">Save</button>
-              <button class="btn btn-lg" type="reset" style="margin-left: 20px;">
-                Reset
-              </button>
+              <a (click)="save()"><button class="btn btn-lg btn-success" type="button"   style="background-color: orangered;">Save</button></a>
+             
             </div>
           </div>
         </form>

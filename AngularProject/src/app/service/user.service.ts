@@ -33,7 +33,7 @@ export class UserService {
   getUserByEmailAndPassword(email: string, password: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}?email=${email}&password=${password}`);
   }
-  updateUser(user: User) {
+  updateUser(user: User): Observable<any> {
     return this.http.put(this.url + user.id, user);
   }
   addNewUser(id:number,name: string, email: string, password: string): Observable<User[]> {
@@ -45,5 +45,8 @@ export class UserService {
    return this.http.post<User[]>(`${this.url}`, newUser);
     
     
+  }
+  updateUser2(user: User): Observable<any> {
+    return this.http.patch(this.url + user.id, user);
   }
 }
