@@ -29,7 +29,7 @@
         </li>
         <li class="single_field">
           <label>Tỉnh/Thành Phố:</label>
-          <select>
+          <select #city>
             <option *ngFor="let city of listCity" [value]="city.heckey">{{city.name}}</option>
           </select>
         </li>
@@ -39,6 +39,6 @@
         </li>
       </ul>
       <a class="btn btn-default update" (click)="close()">Hủy</a>
-      <a class="btn btn-default check_out" (click)="SaveShipping()">Đặt Ship</a>
+      <a class="btn btn-default check_out" (click)="SaveShipping(city)">Đặt Ship</a>
     </div>
 </div>

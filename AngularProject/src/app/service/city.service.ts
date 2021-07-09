@@ -54,24 +54,16 @@ export class CityService {
       case 79:
         cordinate = "";
         break;
-
       default:
         break;
     }
     return cordinate;
   }
   calDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
-<<<<<<< HEAD
-    let R = 6371; // Radius of the earth in km
-    let dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
-    let dLon = this.deg2rad(lon2 - lon1);
-    let a =
-=======
     var R = 6371; // Radius of the earth in km
     var dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
     var dLon = this.deg2rad(lon2 - lon1);
     var a =
->>>>>>> 001a8efd422252cbf55d088dfe7ae64e6579e1ec
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
       Math.sin(dLon / 2) * Math.sin(dLon / 2)
@@ -83,12 +75,8 @@ export class CityService {
   deg2rad(value: number) {
     return value * Math.PI / 180;
   }
-<<<<<<< HEAD
-  splitCor(cordinate: string) : number{
-=======
 
   splitCor(cordinate: string): number {
->>>>>>> 001a8efd422252cbf55d088dfe7ae64e6579e1ec
     let lat1: number = 10.826812714562069;
     let lon1: number = 106.68232851010757;
     let lat2: number = parseFloat(cordinate.split(",")[0]);
@@ -97,13 +85,13 @@ export class CityService {
   }
   getShipCost(hckey: number): number {
     if (hckey == 79) return 0
-    return Math.round(this.splitCor(this.getCordianate(hckey))) * 3000
+    return Math.round(this.splitCor(this.getCoordinate(hckey))) * 3000;
   }
   getTime(hckey: number): string {
     if (hckey == 79) return "Trong vòng 2 đến 3 ngày"
-    if (this.splitCor(this.getCordianate(hckey)) > 100) return "Trong 1 đến 2 ngày"
-    else if (this.splitCor(this.getCordianate(hckey)) > 500) return "Trong 3 đến 4 ngày"
-    else if (this.splitCor(this.getCordianate(hckey))) return "Trong 4 đến 5 ngày"
+    if (this.splitCor(this.getCoordinate(hckey)) > 100) return "Trong 1 đến 2 ngày"
+    else if (this.splitCor(this.getCoordinate(hckey)) > 500) return "Trong 3 đến 4 ngày"
+    else if (this.splitCor(this.getCoordinate(hckey))) return "Trong 4 đến 5 ngày"
     else return "Trong vòng 1 ngày"
   }
 }

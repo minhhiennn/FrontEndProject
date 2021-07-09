@@ -95,7 +95,10 @@ export class CourseDialogComponent implements OnInit {
       });
     }
   }
-  SaveShipping() {
+  SaveShipping(ele: any) {
+    let shipcost: number = this.cityService.getShipCost(parseInt(ele.value));
+    let timeship: string = this.cityService.getTime(parseInt(ele.value));
+    console.log(timeship);
   }
 }
   
