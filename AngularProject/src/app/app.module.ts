@@ -38,6 +38,10 @@ import { CustomClothesComponent } from './component/custom-clothes/custom-clothe
 import { CourseDialogComponent } from './component/course-dialog/course-dialog.component';
 import { CustomComponent } from './component/custom/custom.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { NgxChartsModule }from '@swimlane/ngx-charts';
+
+
+
 
 
 @NgModule({
@@ -77,6 +81,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     Ng5SliderModule,
+   
+    NgxChartsModule,
+  
     HttpClientModule, TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
