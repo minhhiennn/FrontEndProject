@@ -35,10 +35,11 @@
         </li>
         <li class="single_field zip-field">
           <label>Địa chỉ:</label>
-          <input type="text">
+          <input type="text" #address>
         </li>
       </ul>
+      <p *ngIf="errShipping.length != 0" style="color:red">Địa chỉ ko được để trống</p>
       <a class="btn btn-default update" (click)="close()">Hủy</a>
-      <a class="btn btn-default check_out" (click)="SaveShipping(city)">Đặt Ship</a>
+      <a class="btn btn-default check_out" (click)="SaveShipping(city,address)">Đặt Ship</a>
     </div>
 </div>

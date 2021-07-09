@@ -15,9 +15,10 @@ import { CityService } from 'src/app/service/city.service';
   styleUrls: ['./course-dialog.component.css']
 })
 export class CourseDialogComponent implements OnInit {
-  
+
   data: any;
   err: string = "";
+  errShipping: string = "";
   voucherCode: string | null = null;
   currentUser: User | null = null;
   dialogType: string = "";
@@ -95,10 +96,25 @@ export class CourseDialogComponent implements OnInit {
       });
     }
   }
-  SaveShipping(ele: any) {
-    let shipcost: number = this.cityService.getShipCost(parseInt(ele.value));
-    let timeship: string = this.cityService.getTime(parseInt(ele.value));
-    console.log(timeship);
+  SaveShipping(ele1: any, ele2: any) {
+    if (ele2.value != "") {
+      let x: number = parseInt(ele1.value);
+      let shipcost: number = this.cityService.getShipCost(x);
+      let timeship: string = this.cityService.getTime(x);
+      for (let ele of this.listCity) {
+        if (ele.heckey == x) {
+          if (ele.value > 1000) {
+            timeship = timeship + " (vì là covid nên sẽ giao trễ 1 2 ngày)";
+            break;
+          }
+        }
+      }
+      let data: string = shipcost + "-" + timeship;
+      localStorage.setItem("dialogType", "shipping");
+      this.dialogRef.close(data);
+    } else {
+      this.errShipping = "Địa chỉ ko được để null";
+    }
   }
 }
   

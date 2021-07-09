@@ -40,10 +40,6 @@ import { CustomComponent } from './component/custom/custom.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NgxChartsModule }from '@swimlane/ngx-charts';
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
