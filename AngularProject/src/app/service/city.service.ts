@@ -254,11 +254,12 @@ export class CityService {
     return this.calDistance(lat1, lon1, lat2, lon2);
   }
 
-  getShipCost(hckey: string): number {
+  getShipCost(hckey: string): number {  
     if (hckey == "79") return 0
     return Math.round(this.splitCor(this.getCordianate(hckey))) * 3000
   }
   getTime(hckey: string): string {
+
     if (hckey == "79") return "Từ 2 đến 3 tiếng"
     else if (this.splitCor(this.getCordianate(hckey)) > 1000) return "Trong 4 đến 5 ngày"
     else if (this.splitCor(this.getCordianate(hckey)) > 500) return "Trong 3 đến 4 ngày"
