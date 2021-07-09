@@ -86,9 +86,11 @@ export class CourseDialogComponent implements OnInit {
               localStorage.removeItem("voucherCode");
             } else if (Number.isInteger(data.toString()[0])) {
               let total: number = parseInt(data.toString());
+              localStorage.setItem("dialogType", "voucher");
               this.dialogRef.close(total);
             } else {
               let cartItem: CartItem[] | number = data;
+              localStorage.setItem("dialogType", "voucher");
               this.dialogRef.close(cartItem);
             }
           }

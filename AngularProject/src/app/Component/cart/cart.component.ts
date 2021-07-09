@@ -22,6 +22,8 @@ export class CartComponent implements OnInit {
   cartTotalReal: number = 0;
   image: any;
   dialogType: string = "";
+  shipcost: number = 0;
+  timeship: string = "";
   constructor(private cartService: CartService, private userService: UserService, private router: Router, private dialog: MatDialog, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
@@ -30,8 +32,6 @@ export class CartComponent implements OnInit {
       this.cartService.getDataByUserId(this.currentUser.id).subscribe((data: CartItem[]) => {
         this.cartItems = data;
         this.caculateCartTotal();
-
-
         this.showSpinner = false;
       });
     } else {
@@ -231,6 +231,14 @@ export class CartComponent implements OnInit {
       this.openDialog();
     }
   }
+  // đây là pt check vào mở diaglog shipping
+  getShipping(ele: HTMLInputElement) {
+    if (ele.checked == true) {
+      this.dialogType = "shipping";
+      ele.checked = false;
+      this.openDialog();
+    }
+  }
   // Đây là phương thức mở lớp dialog
   openDialog() {
     const dialogConfig = new MatDialogConfig();
@@ -246,31 +254,35 @@ export class CartComponent implements OnInit {
     this.dialog.open(CourseDialogComponent, dialogConfig).afterClosed().subscribe(
       (data: any) => {
         if (data !== undefined) {
-          if (typeof data == "number") {
-            let voucherCode: any = localStorage.getItem("voucherCode");
-            this.voucherCode = voucherCode;
-            let totalWhenGetVoucher: number = parseInt(data.toString());
-            this.cartTotalReal = totalWhenGetVoucher;
-            this.listCartItemsWhenVoucher = [];
-            localStorage.removeItem("voucherCode");
-          } else {
-            let voucherCode: any = localStorage.getItem("voucherCode");
-            this.voucherCode = voucherCode;
-            let totalWhenGetVoucher: number = this.cartService.getTotal(data);
-            this.cartTotalReal = totalWhenGetVoucher;
-            this.listCartItemsWhenVoucher = data;
-            localStorage.removeItem("voucherCode");
+          let dialogType: any = localStorage.getItem("dialogType");
+          if (dialogType == "voucher") {
+            if (typeof data == "number") {
+              let voucherCode: any = localStorage.getItem("voucherCode");
+              this.voucherCode = voucherCode;
+              let totalWhenGetVoucher: number = parseInt(data.toString());
+              this.cartTotalReal = totalWhenGetVoucher;
+              this.listCartItemsWhenVoucher = [];
+              localStorage.removeItem("voucherCode");
+            } else {
+              let voucherCode: any = localStorage.getItem("voucherCode");
+              this.voucherCode = voucherCode;
+              let totalWhenGetVoucher: number = this.cartService.getTotal(data);
+              this.cartTotalReal = totalWhenGetVoucher;
+              this.listCartItemsWhenVoucher = data;
+              localStorage.removeItem("voucherCode");
+            }
+            localStorage.removeItem("dialogType");
+          } else if (dialogType == "shipping") {
+            if (typeof data == "string") {
+              let shipcost = parseFloat(data.split('-')[0]);
+              let timeship: string = data.split('-')[1];
+              this.shipcost = shipcost;
+              this.timeship = timeship;
+            }
+            localStorage.removeItem("dialogType");
           }
         }
       }
     );
-  }
-  // đây là pt check vào mở diaglog shipping
-  getShipping(ele: HTMLInputElement) {
-    if (ele.checked == true) {
-      this.dialogType = "shipping";
-      ele.checked = false;
-      this.openDialog();
-    }
   }
 }
