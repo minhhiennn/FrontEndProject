@@ -40,6 +40,9 @@ export class CityService {
   getCordianate(hcKey: number): string {
     let cordinate: string = "";
     switch (hcKey) {
+      case 24:
+        cordinate = "21.302067651284702, 106.17949140796979";
+        break;
       case 79:
         cordinate = "10.826760025273845,106.6823606966149";
         break;
@@ -85,14 +88,88 @@ export class CityService {
         case 10:
         cordinate = "22.465081276319474, 103.98806683937451";
         break;
-       
+        case 2:
+        cordinate = "22.79424724564605, 104.98187279046168";
+        break;
+        case 8:
+        cordinate = "21.82260168132014, 105.16175223082817";
+        break;
+        case 12:
+        cordinate = "22.399630554854806, 103.43726575924691";
+        break;
+        case 14:
+          cordinate = "21.367293656643824, 103.88760460682506";
+          break;
+          case 52:
+            cordinate = "14.392838068725473, 108.61966876769002";
+            break;
+            case 68:
+              cordinate = "11.59527958613712, 107.52522870768796";
+              break;
+              case 70:
+                cordinate = "11.973622020945202, 106.56716684448499";
+                break;
+                case 93:
+                  cordinate = "10.808445894915405, 106.66219567492925";
+                  break;
+                  case 44:
+                    cordinate = "17.78181165280456, 105.75557662343996";
+                    break;
+                    case 67:
+                      cordinate = "12.456596934192778, 107.4985013731356";
+                      break;
+                      case 62:
+                        cordinate = "14.378777528603374, 107.89771263125483";
+                        break;
+
+                        case 4:
+                          cordinate = "22.667769729877488, 106.2383414869104";
+                          break;
+
+                          case 83:
+                            cordinate = "10.252595778308848, 106.35889952074201";
+                            break;
+
+                            case 82:
+                              cordinate = "10.370522332165955, 106.27205399909455";
+                              break;
+
+                              case 80:
+                                cordinate = "10.814107455203564, 105.91096580739524";
+                                break;
+
+                                case 54:
+                                  cordinate = "13.275510070710544, 108.95509773456196";
+                                  break;
+
+                                  case 64:
+                                    cordinate = "13.980260321688636, 108.12070947081207";
+                                    break;
+
+                                    case 66:
+                                      cordinate = "12.99082837036432, 108.31651306922694";
+                                      break;
+
+                                      case 58:
+                                        cordinate = "11.815899678695951, 108.80829863886574";
+                                        break;
+
+                                        case 56:
+                                          cordinate = "12.41740870150259, 109.25576237008224";
+                                          break;
+
+                                          case 60:
+                                            cordinate = "10.886979038058973, 107.63844834617815";
+                                            break;
+
+                                            
 
       default:
         break;
     }
     return cordinate;
   }
-  calDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  calDistance(lat1: number, lon1: number, lat2: number, lon2: number) : number {
     var R = 6371; // Radius of the earth in km
     var dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
     var dLon = this.deg2rad(lon2 - lon1);
@@ -109,23 +186,21 @@ export class CityService {
   deg2rad(value: number) {
     return value * Math.PI / 180;
   }
-
-  splitCor(cordinate: string): number {
+  
+  splitCor(cordinate: string) : number{
     let lat1: number = 10.826812714562069;
     let lon1: number = 106.68232851010757;
     let lat2: number = parseFloat(cordinate.split(",")[0]);
     let lon2: number = parseFloat(cordinate.split(",")[1]);
-    return this.calDistance(lat1, lon1, lat2, lon2);
+    return this.calDistance(lat1,lon1,lat2,lon2);
   }
-  getShipCost(hckey: number): number {
-    if (hckey == 79) return 0
-    return Math.round(this.splitCor(this.getCordianate(hckey))) * 3000
+  getShipCost(cordinate: string) : number{
+    return Math.round(this.splitCor(cordinate)) * 3000
   }
-  getTime(hckey: number): string {
-    if (hckey == 79) return "Trong vòng 2 đến 3 ngày"
-    if (this.splitCor(this.getCordianate(hckey)) > 100) return "Trong 1 đến 2 ngày"
-    else if (this.splitCor(this.getCordianate(hckey)) > 500) return "Trong 3 đến 4 ngày"
-    else if (this.splitCor(this.getCordianate(hckey))) return "Trong 4 đến 5 ngày"
+  getTime(cordinate: string) :string{
+    if (this.splitCor(cordinate) > 100) return "Trong 1 đến 2 ngày"
+    else if (this.splitCor(cordinate) > 500) return "Trong 3 đến 4 ngày"
+    else if (this.splitCor(cordinate) > 1000) return "Trong 4 đến 5 ngày"
     else return "Trong vòng 1 ngày"
   }
 }
