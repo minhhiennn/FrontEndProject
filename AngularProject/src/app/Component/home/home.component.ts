@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/service/product.service';
 import { CartService } from 'src/app/service/cart.service';
+import { CityService } from 'src/app/service/city.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -24,10 +25,12 @@ export class HomeComponent implements OnInit {
     thick: true
   };
   preventAbuse = false;
-  constructor(private productService: ProductService, private cartService: CartService) { }
+  constructor(private productService: ProductService, private cartService: CartService,private cityService:CityService) { }
 
   ngOnInit(): void {
     this.productService.getData().subscribe(data => this.products = data);
+    
+    console.log(this.cityService.splitCor("10.828972309568254,106.68173480324562"))
   }
   handleAddToCart(product: Product) {
     this.cartService.addToCart(product);
