@@ -15,6 +15,7 @@ export class UserProfileComponent implements OnInit {
   path: string = "";
   userProfileImg: any;
   storageRef: any;
+  edited : boolean = true;;
 
   currentUser: any  ;
   check: boolean = true;
@@ -90,6 +91,7 @@ export class UserProfileComponent implements OnInit {
       let email: string = this.myForm3.get('email')?.value;
       let password: string = this.myForm3.get('password')?.value;
       let user: User = new User(this.currentUser.id, this.currentUser.img, name, email, password);
+      this.isLoading = true;
       this.us.updateUser2(user).subscribe((data: User) => {
         this.myForm3.setValue({
           name: data.name,
@@ -97,8 +99,13 @@ export class UserProfileComponent implements OnInit {
           password: data.password
         })
         this.us.setCurrentUser(user);
-        alert('update thành công');
+        this.isLoading = false;
+        this.edited = false;
+        setTimeout( () => {
+          this.edited = true;
+        }, 3000);
       });
+
     } else {
       alert('dữ liệu ko hợp lệ');
     }
