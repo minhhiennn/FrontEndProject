@@ -20,7 +20,7 @@ export class CartComponent implements OnInit {
   showSpinner: boolean = true;
   voucherCode: string | null = null;
   cartTotalReal: number = 0;
-  image : any ;
+  image: any;
   constructor(private cartService: CartService, private userService: UserService, private router: Router, private dialog: MatDialog, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class CartComponent implements OnInit {
       this.cartService.getDataByUserId(this.currentUser.id).subscribe((data: CartItem[]) => {
         this.cartItems = data;
         this.caculateCartTotal();
-        
+
 
         this.showSpinner = false;
       });
@@ -231,7 +231,6 @@ export class CartComponent implements OnInit {
   }
   // Đây là phương thức mở lớp dialog
   openDialog() {
-   
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -260,5 +259,11 @@ export class CartComponent implements OnInit {
       }
     );
   }
- 
+  // đây là pt check vào mở diaglog shipping
+  getShipping(ele: HTMLInputElement) {
+    if (ele.checked == true) {
+      ele.checked = false;
+      this.openDialog();
+    }
+  }
 }

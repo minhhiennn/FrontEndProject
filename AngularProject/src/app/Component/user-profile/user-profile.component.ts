@@ -96,6 +96,8 @@ export class UserProfileComponent implements OnInit {
           email: data.email,
           password: data.password
         })
+        this.us.setCurrentUser(user);
+        alert('update thành công');
       });
     } else {
       alert('dữ liệu ko hợp lệ');

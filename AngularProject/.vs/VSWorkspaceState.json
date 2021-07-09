@@ -4,10 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\component",
-    "\\src\\app\\component\\course-dialog",
+    "\\src\\app\\component\\account",
     "\\src\\app\\component\\login",
-    "\\src\\app\\service"
+    "\\src\\app\\component\\share",
+    "\\src\\app\\component\\share\\footer",
+    "\\src\\app\\component\\share\\header",
+    "\\src\\app\\models"
   ],
-  "SelectedNode": "\\src\\app\\component\\course-dialog\\course-dialog.component.ts",
+  "SelectedNode": "\\src\\app\\component\\account\\account.component.ts",
   "PreviewInSolutionExplorer": false
 }

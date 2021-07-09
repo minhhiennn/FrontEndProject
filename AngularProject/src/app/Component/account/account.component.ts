@@ -1,4 +1,4 @@
-//import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-account',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
   soduong: number = 5;
-  constructor(/*private http: HttpClient*/) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     //this.http.get(this.url,
@@ -34,12 +34,6 @@ export class AccountComponent implements OnInit {
     //      console.log(description + " " + imgUrl);
     //    }
     //});
-    //let date: Date = new Date();
-    //let date2: Date = new Date("01/01/2021");
-    //if (date2 < date) {
-    //  console.log("true");
-    //} else {
-    //  console.log("false");
-    //}
+    this.http.get("https://api.apify.com/v2/key-value-stores/ZsOpZgeg7dFS1rgfM/records/LATEST?fbclid=IwAR1vv6NAlHWYcGnedKNa5JI_nWpLmj8r7hNIQa4u9c8Q8eSpXdAeVCWdtqA").subscribe(data => console.log(data));
   }
 }

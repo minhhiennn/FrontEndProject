@@ -86,7 +86,7 @@
               <label>Use Gift Voucher</label>
             </li>
             <li>
-              <input type="checkbox">
+              <input type="checkbox" #getShipping (change)="getShipping(getShipping)">
               <label>Estimate Shipping & Taxes</label>
             </li>
           </ul>
@@ -117,7 +117,6 @@
                 <option>Canada</option>
                 <option>Dubai</option>
               </select>
-
             </li>
             <li class="single_field zip-field">
               <label>Zip Code:</label>
