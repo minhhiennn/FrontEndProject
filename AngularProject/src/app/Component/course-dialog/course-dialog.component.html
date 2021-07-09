@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="dialogType == 'voucher'">
   <h2>Đây là chỗ cho bạn nhập voucher</h2>
   <label for="text1">Nhập voucher</label>
   <input type="text" name="text1" #code />
@@ -6,6 +6,39 @@
   <p style="color:red" *ngIf="voucherCode != null">Lưu ý: Cart bạn đã có 1 voucherCode là: {{voucherCode}}</p>
   <div style="display:flex">
     <button (click)="close()">Close</button>
-    <button (click)="test(code)">Save</button>
+    <button (click)="SaveVoucher(code)">Save</button>
   </div>
+</div>
+<div *ngIf="dialogType == 'shipping' && spinning == false">
+  <h2>Đây là chỗ bạn chọn shipping</h2>
+    <div>
+      <ul class="user_info">
+        <li class="single_field">
+          <label>Quốc Gia:</label>
+          <select>
+            <option>Việt Nam</option>
+            <option>Bangladesh</option>
+            <option>UK</option>
+            <option>India</option>
+            <option>Pakistan</option>
+            <option>Ucrane</option>
+            <option>Canada</option>
+            <option>Dubai</option>
+          </select>
+
+        </li>
+        <li class="single_field">
+          <label>Tỉnh/Thành Phố:</label>
+          <select>
+            <option *ngFor="let city of listCity" [value]="city.heckey">{{city.name}}</option>
+          </select>
+        </li>
+        <li class="single_field zip-field">
+          <label>Địa chỉ:</label>
+          <input type="text">
+        </li>
+      </ul>
+      <a class="btn btn-default update" (click)="close()">Hủy</a>
+      <a class="btn btn-default check_out" (click)="SaveShipping()">Đặt Ship</a>
+    </div>
 </div>

@@ -34,6 +34,5 @@ export class AccountComponent implements OnInit {
     //      console.log(description + " " + imgUrl);
     //    }
     //});
-    this.http.get("https://api.apify.com/v2/key-value-stores/ZsOpZgeg7dFS1rgfM/records/LATEST?fbclid=IwAR1vv6NAlHWYcGnedKNa5JI_nWpLmj8r7hNIQa4u9c8Q8eSpXdAeVCWdtqA").subscribe(data => console.log(data));
   }
 }

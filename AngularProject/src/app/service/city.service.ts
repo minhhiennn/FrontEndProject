@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { City } from '../models/city';
-import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +10,12 @@ export class CityService {
   covidLink: string = "https://api.apify.com/v2/key-value-stores/ZsOpZgeg7dFS1rgfM/records/LATEST?fbclid=IwAR2Mc_Nl7FMrvJ57kW_d92VtlEpuvIvBXpbZXF-APdiqcIcjEDjuNOqzuvo/"
   hecKeyLink: string = "https://api.apify.com/v2/key-value-stores/p3nS2Q9TUn6kUOriJ/records/LATEST?fbclid=IwAR0BhnrHNWbhHR7vqKs04AmaUAI1Dmi9gsGBbkCZJ2kiKLmFXn_dEnH7XYE"
   constructor(private httpClient: HttpClient) { }
-
+  getCovidLink() {
+    return this.httpClient.get(this.covidLink);
+  }
+  getHeckeyLink() {
+    return this.httpClient.get(this.hecKeyLink);
+  }
   getDataCovid(): any {
     this.httpClient.get(this.covidLink).subscribe(data => {
       this.httpClient.get(this.hecKeyLink).subscribe(data1 => {
@@ -35,7 +38,6 @@ export class CityService {
         console.log(cityArr)
       })
     });
-
   }
   getCordianate(hcKey: number): string {
     let cordinate: string = "";

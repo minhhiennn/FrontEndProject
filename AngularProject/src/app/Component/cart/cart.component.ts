@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
   voucherCode: string | null = null;
   cartTotalReal: number = 0;
   image: any;
+  dialogType: string = "";
   constructor(private cartService: CartService, private userService: UserService, private router: Router, private dialog: MatDialog, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
@@ -225,6 +226,7 @@ export class CartComponent implements OnInit {
   // Đây là pt khi click vào cái checkbox mở dialog
   checkVoucher(ele: HTMLInputElement) {
     if (ele.checked == true) {
+      this.dialogType = "voucher";
       ele.checked = false;
       this.openDialog();
     }
@@ -234,8 +236,12 @@ export class CartComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.maxHeight = '800px';
+    dialogConfig.maxWidth = '800px';
     dialogConfig.data = {
-      voucherCode: this.voucherCode
+      voucherCode: this.voucherCode,
+      dialogType: this.dialogType
     };
     this.dialog.open(CourseDialogComponent, dialogConfig).afterClosed().subscribe(
       (data: any) => {
@@ -262,6 +268,7 @@ export class CartComponent implements OnInit {
   // đây là pt check vào mở diaglog shipping
   getShipping(ele: HTMLInputElement) {
     if (ele.checked == true) {
+      this.dialogType = "shipping";
       ele.checked = false;
       this.openDialog();
     }

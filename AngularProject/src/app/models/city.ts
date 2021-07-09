@@ -7,7 +7,6 @@ export class City {
         this.name = name;
         this.value = value;
         this.heckey = heckey;
-        this.coordinate = coordinate;
-        
+        this.coordinate = coordinate;        
     }
 }
