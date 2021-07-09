@@ -37,38 +37,80 @@ export class CityService {
     });
 
   }
-  getCordianate(hcKey: number): string {
+  getCordianate(hcKey: String|number): string {
     let cordinate: string = "";
     switch (hcKey) {
-      case 24:
+      case 30:
+                                                               cordinate = "20.939225337630926, 106.31275473807591";
+                                                           break;
+                                                       case 1:
+                                               cordinate = "21.03443273235992, 105.82254345647135";
+                                            break;
+                                         case 48:
+                                 cordinate = "16.057723866798206, 108.17838121453185";
+                            break;
+                       case 77:
+                  cordinate = "10.28346637496381, 106.03150239673647";
+              break;
+           case 49:
+         cordinate = "15.677823173416828, 107.61436382449152";
+           break;
+               case 74:
+                 cordinate = "11.284423314418255, 106.3652993094015";
+                     break;
+                        case 26:
+                             cordinate = "21.457557333791172, 105.39551102583525";
+                               break;
+                                 case 20:
+                                   cordinate = "21.854594515782832, 106.71713318030874";
+                                     break;
+                                       case 42:
+                                         cordinate = "18.37998194796159, 105.85942924074982";
+                                      break;
+                                   case 22:
+                              cordinate = "21.34784813334017, 106.51270726269973";
+                           break;
+                         case 72:
+                   cordinate = "20.425913954821052, 106.50965885608406";
+                       break;
+                          case 33:
+                             cordinate = "20.677434589668074, 106.03413411525838";
+                                  break;
+                               case 91:
+                                  cordinate = "9.994011372733805, 104.16893714363025";
+                            break;
+                               case 34:
+                           cordinate = "20.46033624681186, 106.30705766832301";
+                     break;
+               case 24:
         cordinate = "21.302067651284702, 106.17949140796979";
         break;
-      case 79:
-        cordinate = "10.826760025273845,106.6823606966149";
+                       case 79:
+                 cordinate = "10.826760025273845,106.6823606966149";
         break;
-      case 36:
-        cordinate = "20.43448380422534, 106.08793192698147";
+                  case 36:
+                 cordinate = "20.43448380422534, 106.08793192698147";
         break;
-      case 89:
-        cordinate = "10.674590124286668, 105.01607942299779";
-        break;
-      case 94:
-        cordinate = "9.626460029135632, 105.94159052267136";
-        break;
-        case 86:
-        cordinate = "10.271819699230967, 105.90716365847219";
-        break;
-        case 45:
-        cordinate = "16.725182613065336, 107.09077493453262";
-        break;
-        case 31:
-        cordinate = "20.85395218342969, 106.69393949260603";
-        break;
-        case 84:
-        cordinate = "9.97173222073517, 106.34073321362116";
-        break;
-        case 19:
-        cordinate = "21.585663568200832, 105.7900973667736";
+                     case 89:
+                         cordinate = "10.674590124286668, 105.01607942299779";
+                           break;
+                             case 94:
+                          cordinate = "9.626460029135632, 105.94159052267136";
+    break;
+                             case 86:
+                                cordinate = "10.271819699230967, 105.90716365847219";
+                                     break;
+                                       case 45:
+                                              cordinate = "16.725182613065336, 107.09077493453262";
+                                                  break;
+                                                case 31:
+                                     cordinate = "20.85395218342969, 106.69393949260603";
+                                         break;
+                                   case 84:
+                                 cordinate = "9.97173222073517, 106.34073321362116";
+                           break;
+                         case 19:
+                   cordinate = "21.585663568200832, 105.7900973667736";
         break;
         case 96:
         cordinate = "9.200776642645451, 105.1682859785899";
