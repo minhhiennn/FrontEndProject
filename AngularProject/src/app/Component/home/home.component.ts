@@ -29,8 +29,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getData().subscribe(data => this.products = data);
-    
-    console.log(this.cityService.splitCor("10.828972309568254,106.68173480324562"))
+    console.log(this.cityService.splitCor("23.304900572999546,104.9936809905683"))
   }
   handleAddToCart(product: Product) {
     this.cartService.addToCart(product);
