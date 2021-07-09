@@ -19,18 +19,17 @@ export class UserProfileComponent implements OnInit {
   currentUser: any  ;
   check: boolean = true;
   public myForm3 = new FormGroup({
-    name:new FormControl(''),
+    name: new FormControl(''),
     email:new FormControl(''),
     password:new FormControl(''),
-
   });
   base64textString: string = "";
   isLoading = true;
   constructor(private us: UserService, private sanitizer: DomSanitizer, private router: Router,private formBuilder: FormBuilder) {
-    this.currentUser = us.getCurrentUser();
   }
 
   ngOnInit(): void {
+    this.currentUser = this.us.getCurrentUser();
     this.us.getData().subscribe(data => {
       data.forEach(element => {
         if (element.id == this.currentUser.id) {
@@ -38,8 +37,7 @@ export class UserProfileComponent implements OnInit {
             this.localUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png";
           }
           else {
-            this.localUrl = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + element.img);
-           
+            this.localUrl = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + element.img);          
           }
         }
       });
@@ -50,23 +48,20 @@ export class UserProfileComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(9)]]
     })
-
+    this.myForm3.setValue({
+      name: this.currentUser.name,
+      email: this.currentUser.email,
+      password: this.currentUser.password
+    })
   }
   showPreviewImage(event: any) {
     var files = event.target.files;
     var file = files[0];
-
     if (files && file) {
       var reader = new FileReader();
-
-
       reader.onload = this.handleReaderLoaded.bind(this);
-
-
       reader.readAsBinaryString(file);
     }
- 
-
 }
 
   handleReaderLoaded(readerEvt: any) {
@@ -84,123 +79,26 @@ export class UserProfileComponent implements OnInit {
   }
   }
   sizebase64kb(stringcaval:String):number {
-
     const stringLength = stringcaval.length 
-const sizeInBytes = 4 * Math.ceil(stringLength / 3) * 0.5624896334383812;
-const sizeInKb = sizeInBytes / 1000;
-return sizeInKb;
+    const sizeInBytes = 4 * Math.ceil(stringLength / 3) * 0.5624896334383812;
+    const sizeInKb = sizeInBytes / 1000;
+    return sizeInKb;
   }
   save() {
-    this.us.getData().subscribe(data => {
-      data.forEach(element => {
-      element.name = this.myForm3.controls.name.value;
-        element.email = this.myForm3.controls.email.value;
-      element.password = this.myForm3.controls.password.value;
-        if (element.id == this.currentUser.id) {
-          if (element.name!='' && element.email==''&& element.password=='') {
-            element.name = this.myForm3.controls.name.value;
-            element.email=this.currentUser.email;
-            element.password=this.currentUser.password;
-            this.us.updateUser(element).subscribe((data) => {
-              console.log("update", data);
-              this.isLoading = true;
-              this.us.setCurrentUser(data);
-              this.currentUser=data;
-                
-             
-        
-              });
-           
-          }
-          else  if (element.name=='' && element.email!=''&& element.password=='') {
-            element.email = this.myForm3.controls.email.value;
-            element.name=this.currentUser.name;
-            element.password=this.currentUser.password;
-            this.us.updateUser(element).subscribe((data) => {
-              console.log("update", data);
-              this.isLoading = true;
-              this.us.setCurrentUser(data);
-              this.currentUser=data;
-             
-        
-              });
-           
-          }  else  if (element.name=='' && element.email==''&& element.password!='') {
-            element.password = this.myForm3.controls.password.value;
-            element.name=this.currentUser.name;
-            element.email=this.currentUser.email;
-            this.us.updateUser(element).subscribe((data) => {
-              console.log("update", data);
-              this.isLoading = true;
-              this.us.setCurrentUser(data);
-              this.currentUser=data;
-             
-        
-              });
-           
-          }else  if (element.name!='' && element.email!=''&& element.password=='') {
-            element.name = this.myForm3.controls.name.value;
-            element.email= this.myForm3.controls.email.value;
-            element.password=this.currentUser.password;
-            this.us.updateUser(element).subscribe((data) => {
-              console.log("update", data);
-              this.isLoading = true;
-              this.us.setCurrentUser(data);
-              this.currentUser=data;
-             
-        
-              });
-           
-           
-          }else  if (element.name=='' && element.email!=''&& element.password!='') {
-            element.email = this.myForm3.controls.email.value;
-            element.password= this.myForm3.controls.password.value;
-            element.name=this.currentUser.name;
-            this.us.updateUser(element).subscribe((data) => {
-              console.log("update", data);
-              this.isLoading = true;
-              this.us.setCurrentUser(data);
-              this.currentUser=data;
-        
-              });
-           
-          }else  if (element.name!='' && element.email==''&& element.password!='') {
-            element.name = this.myForm3.controls.name.value;
-            element.password= this.myForm3.controls.password.value;
-            element.email=this.currentUser.email;
-            this.us.updateUser(element).subscribe((data) => {
-              console.log("update", data);
-              this.isLoading = true;
-              this.us.setCurrentUser(data);
-              this.currentUser=data;
-        
-              });
-           
-          }else  if (element.name!='' && element.email!=''&& element.password!='') {
-            element.name = this.myForm3.controls.name.value;
-            element.password= this.myForm3.controls.password.value;
-            element.email= this.myForm3.controls.email.value;
-            this.us.updateUser(element).subscribe((data) => {
-              console.log("update", data);
-              this.isLoading = true;
-              this.us.setCurrentUser(data);
-              this.currentUser=data;
-        
-              });
-           
-          }
-          else{
-
-            console.log("thong bao","ban muốn thay đổi j v")
-          }
-        }
+    if (this.myForm3.get('name')?.valid && this.myForm3.get('email')?.valid && this.myForm3.get('password')?.valid) {
+      let name: string = this.myForm3.get('name')?.value;
+      let email: string = this.myForm3.get('email')?.value;
+      let password: string = this.myForm3.get('password')?.value;
+      let user: User = new User(this.currentUser.id, this.currentUser.img, name, email, password);
+      this.us.updateUser2(user).subscribe((data: User) => {
+        this.myForm3.setValue({
+          name: data.name,
+          email: data.email,
+          password: data.password
+        })
       });
-    
-    })
-   
-    
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-    this.router.navigate(['/user']));
+    } else {
+      alert('dữ liệu ko hợp lệ');
+    }
   }
-
 }

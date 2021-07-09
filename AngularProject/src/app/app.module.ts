@@ -36,7 +36,7 @@ import { AccountComponent } from './component/account/account.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { CustomClothesComponent } from './component/custom-clothes/custom-clothes.component';
 import { CourseDialogComponent } from './component/course-dialog/course-dialog.component';
-import { CustomComponent } from './Component/custom/custom.component';
+import { CustomComponent } from './component/custom/custom.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 

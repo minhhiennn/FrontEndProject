@@ -38,15 +38,12 @@ export class UserService {
   }
   addNewUser(id:number,name: string, email: string, password: string): Observable<User[]> {
     // let id: number = this.getData1.length+1 ;
-    
     let newUser: User = new User(id,'', name, email, password);
     console.log(newUser);
     console.log(id);
-   return this.http.post<User[]>(`${this.url}`, newUser);
-    
-    
+    return this.http.post<User[]>(`${this.url}`, newUser);    
   }
-  updateUser2(user: User): Observable<any> {
-    return this.http.patch(this.url + user.id, user);
+  updateUser2(user: User): Observable<User> {
+    return this.http.patch<User>(this.url + "/" + user.id, user);
   }
 }

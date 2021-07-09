@@ -5,10 +5,7 @@
 
     <!--/col-3-->
     <div class="col-sm-9" style="margin-bottom: 200px;">
-
       <div class="tab-content">
-
-
         <div class="text-center">
           <mat-spinner *ngIf="isLoading;else asd"></mat-spinner>
           <ng-template #asd>
@@ -17,63 +14,52 @@
           </ng-template>
           <br>
           <div *ngIf="this.check==false"
-          class="alert alert-danger" style="width: 200px;margin-left: 320px;">
-       xin hãy chọn ảnh nhỏ hơn 1mb!!!
-     </div>
+               class="alert alert-danger" style="width: 200px;margin-left: 320px;">
+            xin hãy chọn ảnh nhỏ hơn 1mb!!!
+          </div>
         </div><br>
         <form class="form" action="##" method="post" id="registrationForm" [formGroup]="myForm3">
           <div class="form-group">
-
             <div class="col-xs-6">
               <label for="first_name">
-                <h4>Name</h4>
+                Name
               </label>
-              <input  type="text" class="form-control" required name="first_name" id="first_name" placeholder={{currentUser.name}} value={{currentUser.name}} title="enter your first name if any."  formControlName="name">
-             
+              <input type="text" class="form-control" required name="first_name" id="first_name" title="enter your first name if any." formControlName="name">
             </div>
           </div>
-   
-
-       
           <div class="form-group">
-
             <div class="col-xs-6">
               <label for="email">
-                <h4>Email</h4>
+                Email
               </label>
-              <input  type="email" class="form-control" required name="email" id="email"  placeholder={{currentUser.email}} value={{currentUser.email}} title="enter your email."  formControlName="email">
+              <input type="email" class="form-control" required name="email" id="email" title="enter your email." formControlName="email">
               <div *ngIf="this.myForm3.get('email')?.invalid == true && this.myForm3.get('email')?.touched == true"
-              class="alert alert-danger">
-           Email invalid
-         </div>
+                   class="alert alert-danger">
+                Email invalid
+              </div>
             </div>
           </div>
-      
           <div class="form-group">
-
             <div class="col-xs-6">
               <label for="password">
-                <h4>Password</h4>
+                Password
               </label>
-              <input  type="text" class="form-control" required name="password" id="password" placeholder={{currentUser.password}} value={{currentUser.name}} title="enter your password." formControlName="password">
+              <input type="text" class="form-control" required name="password" id="password" title="enter your password." formControlName="password">
               <div *ngIf="this.myForm3.get('password')?.invalid == true && this.myForm3.get('password')?.touched == true"
-              class="alert alert-danger">
-           Password must contain at least 9 characters
-         </div>
+                   class="alert alert-danger">
+                Password must contain at least 9 characters
+              </div>
             </div>
           </div>
-       
           <div class="form-group">
             <div class="col-xs-12">
               <br>
-              <a (click)="save()"><button class="btn btn-lg btn-success" type="button"   style="background-color: orangered;">Save</button></a>
-             
+              <button class="btn btn-lg btn-success" type="button" style="background-color: orangered;" (click)="save()">Save</button>
             </div>
           </div>
         </form>
         <br>
         <hr>
-
       </div>
       <!--/col-9-->
     </div>
