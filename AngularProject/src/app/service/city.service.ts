@@ -77,11 +77,21 @@ export class CityService {
   deg2rad(value: number) {
     return value * Math.PI / 180;
   }
+  
   splitCor(cordinate: string) : number{
     let lat1: number = 10.826812714562069;
     let lon1: number = 106.68232851010757;
     let lat2: number = parseFloat(cordinate.split(",")[0]);
     let lon2: number = parseFloat(cordinate.split(",")[1]);
     return this.calDistance(lat1,lon1,lat2,lon2);
+  }
+  getShipCost(cordinate: string) : number{
+    return Math.round(this.splitCor(cordinate)) * 3000
+  }
+  getTime(cordinate: string) :string{
+    if (this.splitCor(cordinate) > 100) return "Trong 1 đến 2 ngày"
+    else if (this.splitCor(cordinate) > 500) return "Trong 3 đến 4 ngày"
+    else if (this.splitCor(cordinate) > 1000) return "Trong 4 đến 5 ngày"
+    else return "Trong vòng 1 ngày"
   }
 }
