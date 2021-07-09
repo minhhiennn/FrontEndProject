@@ -31,7 +31,7 @@ export class CityService {
             let hckey: number = x1[index]['hc-key'];
             let heckey: number = x2[index1]['hec-key'];
             if (hckey == heckey) {
-              cityArr.push(new City(name, value, hckey, this.getCordianate(hckey)))
+              cityArr.push(new City(name, value, hckey, this.getCoordinate(hckey)))
             }
           }
         }
@@ -39,7 +39,7 @@ export class CityService {
       })
     });
   }
-  getCordianate(hcKey: number): string {
+  getCoordinate(hcKey: number): string {
     let cordinate: string = "";
     switch (hcKey) {
       case 79:
@@ -60,24 +60,22 @@ export class CityService {
     }
     return cordinate;
   }
-  calDistance(lat1: number, lon1: number, lat2: number, lon2: number) : number {
-    var R = 6371; // Radius of the earth in km
-    var dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
-    var dLon = this.deg2rad(lon2 - lon1);
-    var a =
+  calDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+    let R = 6371; // Radius of the earth in km
+    let dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
+    let dLon = this.deg2rad(lon2 - lon1);
+    let a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
       Math.sin(dLon / 2) * Math.sin(dLon / 2)
       ;
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c; // Distance in km
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    let d = R * c; // Distance in km
     return d;
-
   }
   deg2rad(value: number) {
     return value * Math.PI / 180;
   }
-  
   splitCor(cordinate: string) : number{
     let lat1: number = 10.826812714562069;
     let lon1: number = 106.68232851010757;

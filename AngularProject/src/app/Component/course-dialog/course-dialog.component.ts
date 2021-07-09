@@ -41,7 +41,7 @@ export class CourseDialogComponent implements OnInit {
               let hckey: number = x1[index]['hc-key'];
               let heckey: number = x2[index1]['hec-key'];
               if (hckey == heckey) {
-                cityArr.push(new City(name, value, hckey, this.cityService.getCordianate(hckey)))
+                cityArr.push(new City(name, value, hckey, this.cityService.getCoordinate(hckey)))
               }
             }
           }
@@ -96,7 +96,6 @@ export class CourseDialogComponent implements OnInit {
     }
   }
   SaveShipping() {
-
   }
 }
   
