@@ -58,7 +58,7 @@ export class CityService {
     }
     return cordinate;
   }
-  calDistance(lat1: number, lon1: number, lat2: number, lon2: number) : number {
+  calDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
     var R = 6371; // Radius of the earth in km
     var dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
     var dLon = this.deg2rad(lon2 - lon1);
@@ -75,21 +75,23 @@ export class CityService {
   deg2rad(value: number) {
     return value * Math.PI / 180;
   }
-  
-  splitCor(cordinate: string) : number{
+
+  splitCor(cordinate: string): number {
     let lat1: number = 10.826812714562069;
     let lon1: number = 106.68232851010757;
     let lat2: number = parseFloat(cordinate.split(",")[0]);
     let lon2: number = parseFloat(cordinate.split(",")[1]);
-    return this.calDistance(lat1,lon1,lat2,lon2);
+    return this.calDistance(lat1, lon1, lat2, lon2);
   }
-  getShipCost(cordinate: string) : number{
-    return Math.round(this.splitCor(cordinate)) * 3000
+  getShipCost(hckey: number): number {
+    if (hckey == 79) return 0
+    return Math.round(this.splitCor(this.getCordianate(hckey))) * 3000
   }
-  getTime(cordinate: string) :string{
-    if (this.splitCor(cordinate) > 100) return "Trong 1 đến 2 ngày"
-    else if (this.splitCor(cordinate) > 500) return "Trong 3 đến 4 ngày"
-    else if (this.splitCor(cordinate) > 1000) return "Trong 4 đến 5 ngày"
+  getTime(hckey: number): string {
+    if (hckey == 79) return "Trong vòng 2 đến 3 ngày"
+    if (this.splitCor(this.getCordianate(hckey)) > 100) return "Trong 1 đến 2 ngày"
+    else if (this.splitCor(this.getCordianate(hckey)) > 500) return "Trong 3 đến 4 ngày"
+    else if (this.splitCor(this.getCordianate(hckey))) return "Trong 4 đến 5 ngày"
     else return "Trong vòng 1 ngày"
   }
 }
