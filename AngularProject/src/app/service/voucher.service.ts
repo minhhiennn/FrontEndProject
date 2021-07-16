@@ -43,10 +43,8 @@ export class VoucherService {
       let contentType: number = parseInt(contentArr[3]);//loại giảm theo số lượng
       let contentAmountMax: number = parseInt(contentArr[4]);//Số lượng tối đa được giảm giá
       // 2 thằng đầu null khi giảm giá theo tên mặt hàng và ngược lại
-
       let total: number = 0;
-      for (let index = 0; index < cartItemsN.length; index++) {
-       
+      for (let index = 0; index < cartItemsN.length; index++) {       
         if (conditionArr.includes(cartItemsN[index].product.name) && cartItemsN[index].quantity >= contentAmount) {
           cartItemsN[index].price_total = this.discountWithType(cartItemsN[index].product.price, contentAmountMax, contentType, voucher.type, voucher.discount, cartItemsN[index].quantity, contentAmount);
         }
