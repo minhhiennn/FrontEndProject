@@ -275,6 +275,7 @@ export class CartComponent implements OnInit {
           } else if (dialogType == "shipping") {
             if (typeof data == "string") {
               let shipcost = parseFloat(data.split('-')[0]);
+              console.log(data)
               let timeship: string = data.split('-')[1];
               this.shipcost = shipcost;
               this.timeship = timeship;

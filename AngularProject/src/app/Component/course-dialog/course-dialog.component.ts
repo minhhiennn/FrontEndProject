@@ -39,10 +39,10 @@ export class CourseDialogComponent implements OnInit {
             for (let index1 = 0; index1 < x2.length; index1++) {
               let name: string = x2[index1]['name'];
               let value: number = x1[index]['value'];
-              let hckey: number = x1[index]['hc-key'];
-              let heckey: number = x2[index1]['hec-key'];
+              let hckey: string = x1[index]['hc-key'];
+              let heckey: string = x2[index1]['hec-key'];
               if (hckey == heckey) {
-                cityArr.push(new City(name, value, hckey, this.cityService.getCoordinate(hckey)))
+                cityArr.push(new City(name, value, hckey, this.cityService.getCordianate(hckey)))
               }
             }
           }
@@ -100,8 +100,9 @@ export class CourseDialogComponent implements OnInit {
   }
   SaveShipping(ele1: any, ele2: any) {
     if (ele2.value != "") {
-      let x: number = parseInt(ele1.value);
+      let x: string = (ele1.value);
       let shipcost: number = this.cityService.getShipCost(x);
+      console.log(shipcost)
       let timeship: string = this.cityService.getTime(x);
       for (let ele of this.listCity) {
         if (ele.heckey == x) {
