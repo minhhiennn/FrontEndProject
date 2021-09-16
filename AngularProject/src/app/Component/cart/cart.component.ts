@@ -4,7 +4,7 @@ import { CartItem } from '../../models/cart-item';
 import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/models/user';
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
-import { CourseDialogComponent } from 'src/app/component/course-dialog/course-dialog.component';
+import { CourseDialogComponent } from 'src/app/Component/course-dialog/course-dialog.component';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 @Component({

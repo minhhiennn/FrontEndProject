@@ -31,25 +31,18 @@ export class CourseDialogComponent implements OnInit {
       this.voucherCode = data.voucherCode;
     } else if (this.dialogType == "shipping") {
       this.cityService.getCovidLink().subscribe(data => {
-        this.cityService.getHeckeyLink().subscribe(data1 => {
-          let x1: any = Object.values(data)[9];
-          let cityArr: City[] = [];
-          let x2: any = (Object.values(data1)[5])
-          for (let index = 0; index < x1.length; index++) {
-            for (let index1 = 0; index1 < x2.length; index1++) {
-              let name: string = x2[index1]['name'];
-              let value: number = x1[index]['value'];
-              let hckey: string = x1[index]['hc-key'];
-              let heckey: string = x2[index1]['hec-key'];
-              if (hckey == heckey) {
-                cityArr.push(new City(name, value, hckey, this.cityService.getCordianate(hckey)))
-              }
-            }
-          }
-          this.listCity = cityArr;
-          this.spinning = false;
-          console.log(this.listCity);
-        })
+        let x1: any = Object.values(data)[9];
+        console.log(x1);
+        let cityArr: City[] = [];
+        for (let index = 0; index < x1.length; index++) {
+          let name: string = x1[index]['name'];
+          let value: number = x1[index]['cases'];
+          cityArr.push(new City(name, value,this.cityService.getCordianate(name)));
+          
+        }
+        this.listCity = cityArr;
+        this.spinning = false;
+        console.log(this.listCity);
       })
     }
   }
@@ -120,4 +113,4 @@ export class CourseDialogComponent implements OnInit {
     }
   }
 }
-  
+
