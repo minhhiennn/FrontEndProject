@@ -97,7 +97,7 @@
           <ul>
             <li>Cart Sub Total <span>{{cartTotal | currency: 'USD'}}</span></li>
             <li *ngIf="timeship.length != 0">TimeShip<span>{{timeship}}</span></li>
-            <li *ngIf="shipcost != 0">Shipping Cost <span>{{shipcost}}</span></li>
+            <li *ngIf="shipcost != 0">Shipping Cost <span>{{shipcost | currency: 'USD'}}</span></li>
             <li *ngIf="cartTotalReal == 0">Total <span>{{cartTotal | currency: 'USD'}}</span></li>
             <li *ngIf="cartTotalReal != 0">Total <span>{{cartTotalReal | currency: 'USD'}}</span></li>
           </ul>

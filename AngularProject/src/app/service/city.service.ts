@@ -38,184 +38,181 @@ export class CityService {
   //   });
   // }
 
-  getCordianate(hcKey: string): string {
+  getCordianate(nameCity: string): string {
     let cordinate: string = "";
-    switch (hcKey) {
-      case "79":
+    switch (nameCity) {
+      case "TP. Hồ Chí Minh":
         cordinate = "10.823512334224576,106.61446278562542";
         break;
-      case "36":
+      case "Nam Định":
         cordinate = "20.43834787202179,106.16174700901708";
         break;
-      case "94":
+      case "Sóc Trăng":
         cordinate = "9.603951563293295,105.97352026584757";
         break;
-      case "45":
+      case "Quảng Trị":
         cordinate = "16.740318537597823,107.18725145529353";
         break;
-      case "24":
+      case "Bắc Giang":
         cordinate = "21.281438448611333,106.19871816830488";
         break;
-      case "27":
+      case "Bắc Ninh":
         cordinate = "21.177219407714173,106.06355976798004";
         break;
-      case "30":
+      case "Hải Dương":
         cordinate = "20.938266957772193,106.3168752998917";
         break;
-      case "01":
+      case "Hà Nội":
         cordinate = "21.028187499645618,105.83713536136611";
         break;
-      case "48":
+      case "Đà Nẵng":
         cordinate = "16.055087272295676,108.19915294989171";
         break;
-      case "77":
+      case "Bà Rịa – Vũng Tàu":
         cordinate = "10.43118714317501,107.18587531544753";
         break;
-      case "74":
+      case "Bình Dương":
         cordinate = "11.129636724208261,106.61665872678057";
         break;
-      case "26":
+      case "Vĩnh Long":
         cordinate = "21.307506785915034,105.6166806160755";
         break;
-      case "20":
+      case "Lạng Sơn":
         cordinate = "21.85592254308607,106.7754793111749";
         break;
-      case "42":
+      case "Hà Tĩnh":
         cordinate = "18.35619948187832,105.89050064983759";
         break;
-      case "22":
+      case "Quảng Ninh":
         cordinate = "20.97238341588559,107.03433634532294";
         break;
-      case "72":
+      case "Tây Ninh":
         cordinate = "11.332875346182131,106.11214414065809";
         break;
-      case "33":
+      case "Hưng Yên":
         cordinate = "20.634725712230154,106.04347826849967";
         break;
-      case "91":
+      case "Kiên Giang":
         cordinate = "10.027000728010018,105.10575286351363";
         break;
-      case "34":
+      case "Thái Bình":
         cordinate = "20.457123076745482,106.34224894087464";
         break;
-      case "11":
+      case "Điện Biên":
         cordinate = "21.48515555103137,103.0803376711742";
         break;
-      case "35":
+      case "Hà Nam":
         cordinate = "20.532513505051835,105.91645434459818";
         break;
-      case "95":
+      case "Bạc Liêu":
         cordinate = "9.295488749047397,105.75210003180341";
         break;
-      case "37":
+      case "Ninh Bình":
         cordinate = "20.251561567365325,105.97287662938912";
         break;
-      case "17":
+      case "Hòa Bình":
         cordinate = "20.83749894607004,105.34636450000002";
         break;
-      case "40":
+      case "Nghệ An":
         cordinate = "18.76536363944038,105.80177870014425";
         break;
-      case "92":
+      case "Cần Thơ":
         cordinate = "10.055518877113279,105.73904991333711";
         break;
-      case "87":
+      case "Đồng Tháp":
         cordinate = "10.753241387475523,105.6759921207901";
         break;
-      case "38":
+      case "Thanh Hóa":
         cordinate = "19.82352442367533,105.79908546554098";
         break;
-      case "89":
+      case "An Giang":
         cordinate = "10.681333815618007,105.26730930444718";
         break;
-      case "86":
+      case "Vĩnh Long":
         cordinate = "10.237362030807514,105.95557289114532";
         break;
-      case "31":
+      case "Hải Phòng":
         cordinate = "20.847276831222473,106.68843933535854";
         break;
-      case "84":
+      case "Trà Vinh":
         cordinate = "9.95561953332926,106.3351833919193";
         break;
-      case "19":
+      case "Thái Nguyên":
         cordinate = "21.56466960182076,105.82871867050936";
         break;
-      case "96":
+      case "Cà Mau":
         cordinate = "9.152316568378048,105.19918794562679";
         break;
-      case "25":
+      case "Phú Thọ":
         cordinate = "21.421389018668293,105.23563230917952";
         break;
-      case "51":
+      case "Quảng Ngãi":
         cordinate = "15.122790636526764,108.79820973566663";
         break;
-      case "46":
+      case "Phú Thọ":
         cordinate = "16.516338819291615,107.80715310745907";
         break;
-      case "15":
+      case "Yên Bái":
         cordinate = "21.702102769257216,104.92738116149555";
         break;
-      case "10":
+      case "Lào Cai":
         cordinate = "22.479372725790707,103.98497966371512";
         break;
-      case "02":
+      case "Hà Giang":
         cordinate = "22.80502343453076,104.98874196803415";
         break;
-      case "08":
+      case "Tuyên Quang":
         cordinate = "21.776394577354854,105.23110616814246";
         break;
-      case "12":
+      case "Lai Châu":
         cordinate = "22.386619554991572,103.47674855507701";
         break;
-      case "14":
+      case "Sơn La":
         cordinate = "21.349216274556,103.97263737494829";
         break;
       case "52":
         cordinate = "13.917241925729401,109.31384955656371";
         break;
-      case "68":
+      case "Lâm Đồng":
         cordinate = "12.005064314910857,108.29698845501021";
         break;
-      case "93":
+      case "Hậu Giang":
         cordinate = "9.766620985953438,105.63148906904115";
         break;
-      case "44":
+      case "Quảng Bình":
         cordinate = "17.551167261502368,106.67393903070499";
         break;
-      case "67":
+      case "Đắk Nông":
         cordinate = "12.042599393281298,107.7153032915683";
         break;
-      case "83":
+      case "Bến Tre":
         cordinate = "10.285065007016481,106.37529807627469";
         break;
-      case "62":
+      case "Kon Tum":
         cordinate = "14.37346664669782,108.02302829622232";
         break;
-      case "04":
+      case "Cao Bằng":
         cordinate = "22.660486876365653,106.26306140464389";
         break;
-      case "82":
+      case "Tiền Giang":
         cordinate = "10.46280810355318,106.24797178621658";
         break;
-      case "80":
+      case "Long An":
         cordinate = "10.761251370707084,106.10652056149092";
         break;
-      case "54":
+      case "Phú Yên":
         cordinate = "13.113000977466402,109.11459037343597";
         break;
-      case "64":
+      case "Gia Lai":
         cordinate = "14.040579924935585,108.14669708120257";
         break;
-      case "66":
+      case "Đắk Lắk":
         cordinate = "12.757380741065708,108.08923812264851";
         break;
-      case "58":
+      case "Ninh Thuận":
         cordinate = "11.75957427136036,108.85915746770932";
         break;
-      case "56":
-        cordinate = "12.337497738852939,108.95383006198269";
-        break;
-      case "56":
+      case "Khánh Hòa":
         cordinate = "12.337497738852939,108.95383006198269";
         break;
       case "vn-307":
@@ -224,7 +221,7 @@ export class CityService {
       case "truongsa":
         cordinate = "10.725305757600497,115.82595051590171";
         break;
-      case "hs01":
+      case "Hoàng Sa":
         cordinate = "10.725474420122634,115.82663716136612";
         break;
       default:
@@ -256,15 +253,15 @@ export class CityService {
     return this.calDistance(lat1, lon1, lat2, lon2);
   }
 
-  getShipCost(hckey: string): number {  
-    if (hckey == "79") return 0
-    return Math.round(this.splitCor(this.getCordianate(hckey))) * 3000
+  getShipCost(nameCity: string): number {  
+    if (nameCity == "TP. Hồ Chí Minh") return 0
+    return Math.round(this.splitCor(this.getCordianate(nameCity))) * 0.05;
   }
-  getTime(hckey: string): string {
-    if (hckey == "79") return "Từ 2 đến 3 tiếng"
-    else if (this.splitCor(this.getCordianate(hckey)) > 1000) return "Trong 4 đến 5 ngày"
-    else if (this.splitCor(this.getCordianate(hckey)) > 500) return "Trong 3 đến 4 ngày"
-    else if (this.splitCor(this.getCordianate(hckey)) > 100) return "Trong 1 đến 2 ngày"
+  getTime(nameCity: string): string {
+    if (nameCity == "TP. Hồ Chí Minh") return "Từ 2 đến 3 tiếng"
+    else if (this.splitCor(this.getCordianate(nameCity)) > 1000) return "Trong 4 đến 5 ngày"
+    else if (this.splitCor(this.getCordianate(nameCity)) > 500) return "Trong 3 đến 4 ngày"
+    else if (this.splitCor(this.getCordianate(nameCity)) > 100) return "Trong 1 đến 2 ngày"
     else return "Trong vòng 1 ngày"
   }
 }
