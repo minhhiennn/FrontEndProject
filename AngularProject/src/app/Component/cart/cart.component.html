@@ -25,10 +25,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let cartItem of cartItems;let i=index;">
-            
-            <td class="cart_product">
-              
+          <tr *ngFor="let cartItem of cartItems;let i=index;">            
+            <td class="cart_product">              
               <a href="" *ngIf="cartItem.product.id < 0;else elseBlock"><img [src]="cartItem.product.img.split('$')[0]" alt="" style="width:110px;height:110px"></a>
               <ng-template #elseBlock><img [src]="cartItem.product.img" alt="" style="width:110px;height:110px"></ng-template>
             </td>
