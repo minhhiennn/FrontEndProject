@@ -1,12 +1,12 @@
 <div *ngIf="dialogType == 'voucher'">
   <h2>Đây là chỗ cho bạn nhập voucher</h2>
   <label for="text1">Nhập voucher</label>
-  <input type="text" name="text1" #code />
+  <input class="textVoucher" type="text" name="text1" #code />
   <p style="color:red" *ngIf="err.length != 0">{{err}}</p>
   <p style="color:red" *ngIf="voucherCode != null">Lưu ý: Cart bạn đã có 1 voucherCode là: {{voucherCode}}</p>
   <div style="display:flex">
-    <button (click)="close()">Close</button>
-    <button (click)="SaveVoucher(code)">Save</button>
+    <a class="btn btn-default update" (click)="close()">Close</a>
+    <a class="btn btn-default check_out" (click)="SaveVoucher(code)">Save</a>
   </div>
 </div>
 <div *ngIf="dialogType == 'shipping' && spinning == false">
