@@ -59,6 +59,7 @@ export class CourseDialogComponent implements OnInit {
           if (data.length == 0) {
             return "lỗi ko tìm thấy code voucher";
           } else {
+            
             this.currentUser = this.userService.getCurrentUser();
             let date1: Date = new Date(data[0].dateBegin.toString());
             let date2: Date = new Date(data[0].dateEnd.toString());
